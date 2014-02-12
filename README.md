@@ -1,4 +1,4 @@
 30JoursDeBD
 ===========
 
-Application Windows Phone 8 pour le site 30JoursDeBD
+Application Windows 8.1 pour le site 30JoursDeBD
