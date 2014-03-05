@@ -153,7 +153,8 @@ namespace _30JoursDeBD
             {
                 MenuPOR.Height = new GridLength(20, GridUnitType.Star);
                 CorpsPOR.Height = new GridLength(95, GridUnitType.Star);
-            }    
+            }
+            Frame.Navigate(typeof(Liste_Auteur_Page));
         }
 
         private void CacheMenuPOR()

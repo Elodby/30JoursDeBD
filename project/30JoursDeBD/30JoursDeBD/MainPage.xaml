@@ -125,6 +125,7 @@
 
 
     <Grid x:Name="General">
+        <!-- Vue par défaut -->
         <Grid x:Name="DefautlView">
             <Grid.RowDefinitions>
                 <RowDefinition Height="13*"/>
@@ -182,6 +183,7 @@
 
         </Grid>
 
+        <!-- Vue portrait ( height > width )-->
         <Grid x:Name="PortraitView" Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*"/>
@@ -236,7 +238,7 @@
 
         </Grid>
 
-
+        <!-- Vue pour les Width < 600px -->
         <Grid x:Name="NarrowView" Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition Height="8*"/>
@@ -279,6 +281,8 @@
 
         </Grid>
 
+        
+        <!-- Les Visual States -->
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState x:Name="DefaultLayout" >
