@@ -1,0 +1,19 @@
+﻿@model MvcApplication5.Models.LoginModel
+
+@{
+    ViewBag.Title = "Votre compte";
+}
+
+@section Header {
+    @Html.ActionLink("Back", "Index", "Home", null, new { data_icon = "arrow-l", data_rel = "back" })
+    <h1>@ViewBag.Title</h1>
+}
+
+<p>
+    Connecté en tant que <strong>@User.Identity.Name</strong>.
+</p>
+
+<ul data-role="listview" data-inset="true">
+    <li>@Html.ActionLink("Modifier le mot de passe", "ChangePassword")</li>
+    <li>@Html.ActionLink("Se déconnecter", "LogOff")</li>
+</ul>

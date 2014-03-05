@@ -118,7 +118,11 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\WPApi.cs" />
+    <Compile Include="Model\Attachment.cs" />
+    <Compile Include="Model\Author.cs" />
+    <Compile Include="Model\Category.cs" />
+    <Compile Include="Model\Comment.cs" />
+    <Compile Include="Model\Post.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
