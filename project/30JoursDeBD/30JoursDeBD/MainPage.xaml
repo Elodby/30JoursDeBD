@@ -120,6 +120,7 @@
             </Border>
 
         </DataTemplate>
+        
     </Page.Resources>
 
 
@@ -139,9 +140,13 @@
                 <Border x:Name="BR_DEF_Menu" BorderBrush="#FF544146" BorderThickness="0,0,3,0">
                     <Grid x:Name="GR_DEF_Menu" Background="#FFB2016E">
                         <StackPanel Orientation="Vertical" Margin="2,16,0,0">
+                            <Image Source="Assets/Menu/Menu-Favoris.png" VerticalAlignment="Center" HorizontalAlignment="Left" Stretch="UniformToFill" Margin="0,0,0,10" />
+                            <Image Source="Assets/Menu/Menu-Auteurs.png" VerticalAlignment="Center" HorizontalAlignment="Left" Stretch="UniformToFill" Margin="0,0,0,10"/>
+                            <Image Source="Assets/Menu/Menu-Albums.png" VerticalAlignment="Center" HorizontalAlignment="Left" Stretch="UniformToFill" Margin="0,0,0,10"/>
                             <Image Source="Assets/Menu/Menu-Favoris.png" VerticalAlignment="Center" HorizontalAlignment="Left" Stretch="UniformToFill" Margin="0,0,0,10"/>
                             <Image Source="Assets/Menu/Menu-Albums.png" VerticalAlignment="Center" HorizontalAlignment="Left" Stretch="UniformToFill" Margin="0,0,0,10"/>
-                            <Image Source="Assets/Menu/Menu-Auteurs.png" VerticalAlignment="Center" HorizontalAlignment="Left" Stretch="UniformToFill" Margin="0,0,0,10"/>
+                            <Image Source="Assets/Menu/Menu-Albums.png" VerticalAlignment="Center" HorizontalAlignment="Left" Stretch="UniformToFill" Margin="0,0,0,10"/>
+                            
                         </StackPanel>
                     </Grid>
                 </Border>
@@ -180,30 +185,47 @@
         <Grid x:Name="PortraitView" Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*"/>
-                <RowDefinition Height="115*"/>
+                <RowDefinition x:Name="MenuPOR" Height="0*"/>
+                <RowDefinition x:Name="CorpsPOR" Height="115*"/>
             </Grid.RowDefinitions>
 
-            <Grid x:Name="GR_POR_Body" Grid.Row="1">
+            <Grid Grid.Row="1" Background="#FFB2016E">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="Assets/Menu/Menu-Favoris.png" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <Image Source="Assets/Menu/Menu-Auteurs.png" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <Image Source="Assets/Menu/Menu-Albums.png" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" />
 
-                <Grid x:Name="GR_POR_Corps_Page" Background="#FFE9E7E8" >
-                    <ListView
-                        Padding="10,10,10,10"
-                        x:Name="itemListView"
-                        AutomationProperties.AutomationId="ItemsGridView"
-                        AutomationProperties.Name="Items"
-                        TabIndex="1"
-                        ItemsSource="{Binding Source={StaticResource SourceGridView}}"
-                        ItemTemplate="{StaticResource ListItemTemplate}"
-                        SelectionMode="None"
-                        IsSwipeEnabled="false" IsItemClickEnabled="True"/>
-                </Grid>
-
-
+                <Image Source="Assets/Menu/Menu-Favoris.png" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <Image Source="Assets/Menu/Menu-Albums.png" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <Image Source="Assets/Menu/Menu-Albums.png" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" />
             </Grid>
+
+            <Grid x:Name="GR_POR_Corps_Page" Background="#FFE9E7E8" Grid.Row="2">
+                <ListView
+                    Padding="10,10,10,10"
+                    x:Name="itemListView"
+                    AutomationProperties.AutomationId="ItemsGridView"
+                    AutomationProperties.Name="Items"
+                    TabIndex="1"
+                    ItemsSource="{Binding Source={StaticResource SourceGridView}}"
+                    ItemTemplate="{StaticResource ListItemTemplate}"
+                    SelectionMode="None"
+                    IsSwipeEnabled="false" IsItemClickEnabled="True"/>
+            </Grid>
+
+                
 
             <Border x:Name="BR_POR_Header" BorderBrush="#FFCECDCE" BorderThickness="0,0,0,2">
                 <Grid x:Name="GR_POR_Header" Background="#FFF9F9F9" >
-                    <Image Source="Assets/Header/HEADER_ToutIcone_ON.png" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,2,0,2"/>
+                    <Image Source="Assets/Header/HEADER_ToutIcone_ON.png" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,2,0,2" Tapped="Image_Tapped"/>
                     <Image Source="Assets/Header/Logo30J.png" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2,0,2"/>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,2,10,2">
                         <Image Source="Assets/Header/HEADER_StripsIcone.png" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,2,0,2"/>

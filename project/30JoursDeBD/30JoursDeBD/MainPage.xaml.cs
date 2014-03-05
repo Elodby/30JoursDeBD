@@ -79,8 +79,8 @@ namespace _30JoursDeBD
         {
             this.InitializeComponent();
             this.navigationHelper = new NavigationHelper(this);
-            // this.navigationHelper.LoadState += navigationHelper_LoadState;
-            // this.navigationHelper.SaveState += navigationHelper_SaveState;
+            //this.navigationHelper.LoadState += navigationHelper_LoadState;
+            //this.navigationHelper.SaveState += navigationHelper_SaveState;
             this.DataContext = this;
 
             Test.Titre = "La vie privée des extraterrestres #2La vie privée des extraterrestre";
@@ -124,6 +124,7 @@ namespace _30JoursDeBD
             if (e.NewSize.Width < 600)
             {
                 VisualStateManager.GoToState(this, "NarrowLayout", true);
+                CacheMenuPOR();
             }
             else if (e.NewSize.Height > e.NewSize.Width)
             {
@@ -132,11 +133,33 @@ namespace _30JoursDeBD
             else if (e.NewSize.Width > 2000)
             {
                 VisualStateManager.GoToState(this, "BigDefaultLayout", true);
+                CacheMenuPOR();
             }
             else
             {
                 VisualStateManager.GoToState(this, "DefaultLayout", true);
+                CacheMenuPOR();
             }
+        }
+
+        private void Image_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (MenuPOR.Height.Value > 0)
+            {
+                MenuPOR.Height = new GridLength(0, GridUnitType.Star);
+                CorpsPOR.Height = new GridLength(115, GridUnitType.Star);
+            }
+            else
+            {
+                MenuPOR.Height = new GridLength(20, GridUnitType.Star);
+                CorpsPOR.Height = new GridLength(95, GridUnitType.Star);
+            }    
+        }
+
+        private void CacheMenuPOR()
+        {
+            MenuPOR.Height = new GridLength(0, GridUnitType.Star);
+            CorpsPOR.Height = new GridLength(115, GridUnitType.Star);
         }
 
     }
