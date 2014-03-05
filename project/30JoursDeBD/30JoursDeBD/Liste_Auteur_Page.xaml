@@ -1,0 +1,331 @@
+﻿<Page
+    x:Class="_30JoursDeBD.Liste_Auteur_Page"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:_30JoursDeBD"
+    xmlns:common="using:_30JoursDeBD.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" SizeChanged="Page_SizeChanged">
+
+    <Page.Resources>
+
+        <!-- Collection -->
+        <CollectionViewSource
+            x:Name="SourceGridView"
+            Source="{Binding MyCollection}" />
+
+        <!-- Data Template : pour la GridView du Corps -->
+        <DataTemplate x:Key="GridItemTemplate">
+            <Border BorderBrush="#FFCECDCE" BorderThickness="2,0,0,2">
+                <Grid Background="#FFF9F9F9" Width="160" Height="180">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="9*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+                        <Image Source="{Binding Avatar}" Stretch="Fill" Margin="8,8,8,0"/>
+                        <TextBlock Text="{Binding Pseudo}" FontSize="20" Grid.Row="1" Foreground="#FFD62291" TextWrapping="WrapWholeWords" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                    </Grid>
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="BigGridItemTemplate">
+            <Border BorderBrush="#FFCECDCE" BorderThickness="2,0,0,2">
+                <Grid Background="#FFF9F9F9" Width="320" Height="360">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="9*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+                        <Image Source="{Binding Avatar}" Stretch="Fill" Margin="20,20,20,0"/>
+                        <TextBlock Text="{Binding Pseudo}" FontSize="32" Grid.Row="1" Foreground="#FFD62291" TextWrapping="WrapWholeWords" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                    </Grid>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ListItemTemplate">
+            <Border BorderBrush="#FFCECDCE" BorderThickness="2,0,0,2">
+                <Grid Background="#FFF9F9F9" Width="Auto" >
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="{Binding Image}" Stretch="Uniform" Margin="15,15,10,15"/>
+                        <Grid Grid.Column="1">
+                            <StackPanel VerticalAlignment="Center" Margin="20,0,20,0">
+                                <TextBlock Text="{Binding Titre}" Foreground="#FFD62291" FontSize="20" TextWrapping="WrapWholeWords"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Auteur}" Foreground="#FFD62291" TextWrapping="WrapWholeWords"/>
+                                    <TextBlock Text=" - rubrique ." Foreground="#FF818181" TextWrapping="WrapWholeWords"/>
+                                    <TextBlock Text="{Binding Rubrique}" Foreground="#FFD62291" TextWrapping="WrapWholeWords"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <Image Source="{Binding Note}" Height="12" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,5"/>
+                        </Grid>
+
+                    </Grid>
+                </Grid>
+            </Border>
+
+        </DataTemplate>
+
+        <DataTemplate x:Key="NarrowListItemTemplate">
+            <Border BorderBrush="#FFCECDCE" BorderThickness="2,0,0,2">
+                <Grid Background="#FFF9F9F9" Width="Auto" >
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="{Binding Image}" Stretch="Uniform" Margin="15,15,10,15"/>
+                        <Grid Grid.Column="1">
+                            <StackPanel VerticalAlignment="Center" Margin="20,0,20,0">
+                                <TextBlock Text="{Binding Titre}" Foreground="#FFD62291" FontSize="20" TextWrapping="WrapWholeWords"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Auteur}" Foreground="#FFD62291" TextWrapping="WrapWholeWords"/>
+                                    <TextBlock Text=" - rubrique ." Foreground="#FF818181" TextWrapping="WrapWholeWords"/>
+                                    <TextBlock Text="{Binding Rubrique}" Foreground="#FFD62291" TextWrapping="WrapWholeWords"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <Image Source="{Binding Note}" Height="12" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,5"/>
+                        </Grid>
+
+                    </Grid>
+                </Grid>
+            </Border>
+
+        </DataTemplate>
+
+    </Page.Resources>
+
+
+    <Grid x:Name="General">
+        <!-- Vue par défaut -->
+        <Grid x:Name="DefautlView">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="13*"/>
+                <RowDefinition Height="115*"/>
+            </Grid.RowDefinitions>
+
+            <Grid x:Name="GR_DEF_Body" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="146*" MinWidth="180"/>
+                    <ColumnDefinition Width="537*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border x:Name="BR_DEF_Menu" BorderBrush="#FF544146" BorderThickness="0,0,3,0">
+                    <Grid x:Name="GR_DEF_Menu" Background="#FFB2016E">
+                        <StackPanel Orientation="Vertical" Margin="2,16,0,0">
+                            <Image Source="Assets/Menu/Menu-Favoris.png" VerticalAlignment="Center" HorizontalAlignment="Left" Stretch="UniformToFill" Margin="0,0,0,10" />
+                            <Image Source="Assets/Menu/Menu-Auteurs.png" VerticalAlignment="Center" HorizontalAlignment="Left" Stretch="UniformToFill" Margin="0,0,0,10"/>
+                            <Image Source="Assets/Menu/Menu-Albums.png" VerticalAlignment="Center" HorizontalAlignment="Left" Stretch="UniformToFill" Margin="0,0,0,10"/>
+                            <Image Source="Assets/Menu/Menu-Favoris.png" VerticalAlignment="Center" HorizontalAlignment="Left" Stretch="UniformToFill" Margin="0,0,0,10"/>
+                            <Image Source="Assets/Menu/Menu-Albums.png" VerticalAlignment="Center" HorizontalAlignment="Left" Stretch="UniformToFill" Margin="0,0,0,10"/>
+                            <Image Source="Assets/Menu/Menu-Albums.png" VerticalAlignment="Center" HorizontalAlignment="Left" Stretch="UniformToFill" Margin="0,0,0,10"/>
+
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <Grid x:Name="GR_Corps_Page" Grid.Column="1" Background="#FFE9E7E8" >
+                    <GridView
+                        Padding="60,20,0,0"
+                        x:Name="itemGridView"
+                        AutomationProperties.AutomationId="ItemsGridView"
+                        AutomationProperties.Name="Items"
+                        TabIndex="1"
+                        ItemsSource="{Binding Source={StaticResource SourceGridView}}"
+                        ItemTemplate="{StaticResource GridItemTemplate}"
+                        SelectionMode="None"
+                        IsSwipeEnabled="false" IsItemClickEnabled="True"/>
+                </Grid>
+
+
+            </Grid>
+
+            <Border x:Name="BR_DEF_Header" BorderBrush="#FFCECDCE" BorderThickness="0,0,0,2">
+                <Grid x:Name="GR_DEF_Header" Background="#FFF9F9F9" >
+                    <Image Source="Assets/Header/Logo30J.png" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,2,0,2"/>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,2,10,2">
+                        <Image Source="Assets/Header/HEADER_ToutIcone_ON.png" x:Name="IMG_DEF_HEAD_TOUT"  VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,2,0,2"/>
+                        <Image Source="Assets/Header/HEADER_StripsIcone.png" x:Name="IMG_DEF_HEAD_STRIP" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,2,0,2"/>
+                        <Image Source="Assets/Header/HEADER_PlanchesIcone.png" x:Name="IMG_DEF_HEAD_PLANCHE" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,2,0,2"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+
+
+        </Grid>
+
+        <!-- Vue portrait ( height > width )-->
+        <Grid x:Name="PortraitView" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"/>
+                <RowDefinition x:Name="MenuPOR" Height="0*"/>
+                <RowDefinition x:Name="CorpsPOR" Height="115*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="1" Background="#FFB2016E">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="Assets/Menu/Menu-Favoris.png" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <Image Source="Assets/Menu/Menu-Auteurs.png" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <Image Source="Assets/Menu/Menu-Albums.png" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" />
+
+                <Image Source="Assets/Menu/Menu-Favoris.png" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <Image Source="Assets/Menu/Menu-Albums.png" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <Image Source="Assets/Menu/Menu-Albums.png" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            </Grid>
+
+            <Grid x:Name="GR_POR_Corps_Page" Background="#FFE9E7E8" Grid.Row="2">
+                <GridView
+                        Padding="10,10,10,10"
+                        x:Name="itemListView"
+                        AutomationProperties.AutomationId="ItemsGridView"
+                        AutomationProperties.Name="Items"
+                        TabIndex="1"
+                        ItemsSource="{Binding Source={StaticResource SourceGridView}}"
+                        ItemTemplate="{StaticResource GridItemTemplate}"
+                        SelectionMode="None"
+                        IsSwipeEnabled="false" IsItemClickEnabled="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+            </Grid>
+
+
+
+            <Border x:Name="BR_POR_Header" BorderBrush="#FFCECDCE" BorderThickness="0,0,0,2">
+                <Grid x:Name="GR_POR_Header" Background="#FFF9F9F9" >
+                    <Image Source="Assets/Header/HEADER_ToutIcone_ON.png" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,2,0,2" Tapped="Image_Tapped"/>
+                    <Image Source="Assets/Header/Logo30J.png" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2,0,2"/>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,2,10,2">
+                        <Image Source="Assets/Header/HEADER_StripsIcone.png" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,2,0,2"/>
+                        <Image Source="Assets/Header/HEADER_PlanchesIcone.png" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,2,0,2"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+        </Grid>
+
+        <!-- Vue pour les Width < 600px -->
+        <Grid x:Name="NarrowView" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="115*"/>
+            </Grid.RowDefinitions>
+
+            <Grid x:Name="GR_NAR_Body" Grid.Row="1">
+
+                <Grid x:Name="GR_NAR_Corps_Page" Background="#FFE9E7E8" >
+                    <ListView
+                        Padding="10,10,10,10"
+                        x:Name="itemNarrowListView"
+                        AutomationProperties.AutomationId="ItemsGridView"
+                        AutomationProperties.Name="Items"
+                        TabIndex="1"
+                        ItemsSource="{Binding Source={StaticResource SourceGridView}}"
+                        ItemTemplate="{StaticResource NarrowListItemTemplate}"
+                        SelectionMode="None"
+                        IsSwipeEnabled="false" IsItemClickEnabled="True"/>
+                </Grid>
+
+
+            </Grid>
+
+            <Border x:Name="BR_NAR_Header" BorderBrush="#FFCECDCE" BorderThickness="0,0,0,2">
+                <Grid x:Name="GR_NAR_Header" Background="#FFF9F9F9" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="Assets/Header/HEADER_ToutIcone_ON.png" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,2,0,2"/>
+                    <Image Source="Assets/Header/Logo30J.png" VerticalAlignment="Center" Margin="0,2,0,2" Grid.Column="1"/>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,2,10,2" Grid.Column="2">
+                        <Image Source="Assets/Header/HEADER_StripsIcone.png"  Margin="15,2,0,2"/>
+                        <Image Source="Assets/Header/HEADER_PlanchesIcone.png" Margin="15,2,0,2"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+        </Grid>
+
+
+        <!-- Les Visual States -->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="DefaultLayout" >
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NarrowView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DefautlView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="itemGridView" Storyboard.TargetProperty="ItemTemplate">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource GridItemTemplate}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PortraitView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="BigDefaultLayout" >
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NarrowView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DefautlView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="itemGridView" Storyboard.TargetProperty="ItemTemplate">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BigGridItemTemplate}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PortraitView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+
+                <VisualState x:Name="NarrowLayout">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NarrowView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DefautlView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PortraitView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="PortraitLayout">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PortraitView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DefautlView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NarrowView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+    </Grid>
+</Page>
