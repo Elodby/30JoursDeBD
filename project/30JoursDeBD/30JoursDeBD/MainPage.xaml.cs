@@ -13,6 +13,12 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Newtonsoft.Json;
+using System.Net.Http;
+using _30JoursDeBD.testmodel;
+using System.Net;
+using System.Threading.Tasks;
+using Windows.Storage;
 
 // Pour en savoir plus sur le modèle d'élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -47,74 +53,19 @@ namespace _30JoursDeBD
         }
         #endregion
 
-        private List<Item> _myCollection = new List<Item>();
-        public List<Item> MyCollection { get { return _myCollection; } }
+        private List<BD> _listeBD = new List<BD>();
 
-        public Item Test = new Item();
-        public Item Test2 = new Item();
-        public Item Test3 = new Item();
-        public Item Test4 = new Item();
-        public Item Test5 = new Item();
-        public Item Test6 = new Item();
-        public Item Test7 = new Item();
-        public Item Test8 = new Item();
-        public Item Test9 = new Item();
-        public Item Test10 = new Item();
-        public Item Test11 = new Item();
-        public Item Test12 = new Item();
-        public Item Test13 = new Item();
-
-        public class Item
-        {
-            public string Titre { get; set; }
-            public string Auteur { get; set; }
-            public string Rubrique { get; set; }
-            public string Note { get; set; }
-            public string Image { get; set; }
-            public Uri Link { get; set; }
-        }
-
+        public List<BD> ListeBD { get { return _listeBD; } }
 
         public MainPage()
         {
             this.InitializeComponent();
             this.navigationHelper = new NavigationHelper(this);
-            //this.navigationHelper.LoadState += navigationHelper_LoadState;
+            // this.navigationHelper.LoadState += navigationHelper_LoadState;
             //this.navigationHelper.SaveState += navigationHelper_SaveState;
-            this.DataContext = this;
-
-            Test.Titre = "La vie privée des extraterrestres #2La vie privée des extraterrestre";
-            Test.Auteur = "Kix";
-            Test.Rubrique = "Planches";
-            Test.Note = "Assets/Star.png";
-            Test.Image = "Assets/Img_Strip.png";
-            Test2 = Test;
-            Test3 = Test;
-            Test4 = Test;
-            Test5 = Test;
-            Test6 = Test;
-            Test7 = Test;
-            Test8 = Test;
-            Test9 = Test;
-            Test10 = Test;
-            Test11 = Test;
-            Test12 = Test;
-            Test13 = Test;
-            _myCollection.Add(Test);
-            _myCollection.Add(Test2);
-            _myCollection.Add(Test3);
-            _myCollection.Add(Test4);
-            _myCollection.Add(Test5);
-            _myCollection.Add(Test6);
-            _myCollection.Add(Test7);
-            _myCollection.Add(Test8);
-            _myCollection.Add(Test9);
-            _myCollection.Add(Test10);
-            _myCollection.Add(Test11);
-            _myCollection.Add(Test12);
-            _myCollection.Add(Test13);
-
+            
             this.SizeChanged += Page_SizeChanged;
+
         }
 
 
@@ -160,6 +111,44 @@ namespace _30JoursDeBD
         {
             MenuPOR.Height = new GridLength(0, GridUnitType.Star);
             CorpsPOR.Height = new GridLength(115, GridUnitType.Star);
+        }
+
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            HttpClient client = new HttpClient();
+            var jsonString = await client.GetStringAsync(new Uri("http://30joursdebd.com/?json=get_recent_post&count=30"));
+            var httpresponse = JsonConvert.DeserializeObject<RootObject>(jsonString.ToString());
+            foreach(Post post in httpresponse.posts)
+            {
+                try
+                {
+                    if (post.categories.Where(c => c.slug == "news").Count() == 0)
+                    {
+                        _listeBD.Add(new BD()
+                        {
+                            Titre = post.title,
+                            Auteur = post.author.name,
+                            Rubrique = post.categories.Single(c => c.slug == "strips" || c.slug == "planches").title,
+                            Image = post.attachments.Single(c => c.slug.ToUpper().Contains("PREVIEW")).url,
+                            Note = "Assets/Star.png"
+                        });
+                    }
+                        
+                }
+                catch
+                {
+                    _listeBD.Add(new BD()
+                    {
+                        Titre = post.title,
+                        Auteur = post.author.name,
+                        Rubrique = post.categories.Single(c => c.slug == "strips" || c.slug == "planches").title,
+                        Image = post.attachments.First().url,
+                        Note = "Assets/Star.png"
+                    });
+                }
+            }
+            
+            this.DataContext = this;
         }
 
     }

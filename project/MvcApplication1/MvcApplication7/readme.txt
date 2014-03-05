@@ -1,1 +1,0 @@
-﻿Découvrez comment configurer et utiliser ce modèle ici : http://go.microsoft.com/fwlink/?LinkId=269921 (contenu en anglais) 
