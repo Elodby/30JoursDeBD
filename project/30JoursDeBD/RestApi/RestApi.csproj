@@ -4,20 +4,20 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AACBE1B2-24D8-4C95-8C0C-D469555DC0E0}</ProjectGuid>
-    <OutputType>AppContainerExe</OutputType>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{c94e91e8-9769-4ce2-993a-2be10b40d01d}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>_30JoursDeBD</RootNamespace>
-    <AssemblyName>30JoursDeBD</AssemblyName>
+    <RootNamespace>RestApi</RootNamespace>
+    <AssemblyName>RestApi</AssemblyName>
     <DefaultLanguage>fr-FR</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>30JoursDeBD_TemporaryKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -27,7 +27,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -102,79 +101,11 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="BasicPage1.xaml.cs">
-      <DependentUpon>BasicPage1.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Common\NavigationHelper.cs" />
-    <Compile Include="Common\ObservableDictionary.cs" />
-    <Compile Include="Common\RelayCommand.cs" />
-    <Compile Include="Common\SuspensionManager.cs" />
-    <Compile Include="Liste_Auteur_Page.xaml.cs">
-      <DependentUpon>Liste_Auteur_Page.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="testmodel\BD.cs" />
+    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="testmodel\model.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <AppxManifest Include="Package.appxmanifest">
-      <SubType>Designer</SubType>
-    </AppxManifest>
-    <None Include="30JoursDeBD_TemporaryKey.pfx" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Assets\Header\HEADER_PlanchesIcone.png" />
-    <Content Include="Assets\Header\HEADER_PlanchesIcone_ON.png" />
-    <Content Include="Assets\Header\HEADER_StripsIcone.png" />
-    <Content Include="Assets\Header\HEADER_StripsIcone_ON.png" />
-    <Content Include="Assets\Header\HEADER_ToutIcone.png" />
-    <Content Include="Assets\Header\HEADER_ToutIcone_ON.png" />
-    <Content Include="Assets\Header\Logo30J.png" />
-    <Content Include="Assets\Img_Strip.png" />
-    <Content Include="Assets\Logo.scale-100.png" />
-    <Content Include="Assets\Menu\Menu-Albums.png" />
-    <Content Include="Assets\Menu\Menu-Auteurs.png" />
-    <Content Include="Assets\Menu\Menu-Favoris.png" />
-    <Content Include="Assets\Paysage.png" />
-    <Content Include="Assets\SmallLogo.scale-100.png" />
-    <Content Include="Assets\SplashScreen.scale-100.png" />
-    <Content Include="Assets\Star.png" />
-    <Content Include="Assets\StoreLogo.scale-100.png" />
-    <Content Include="Common\ReadMe.txt" />
-    <Content Include="Assets\Logo.scale-100.png" />
-    <Content Include="Assets\SmallLogo.scale-100.png" />
-    <Content Include="Assets\SplashScreen.scale-100.png" />
-    <Content Include="Assets\StoreLogo.scale-100.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Page Include="BasicPage1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Liste_Auteur_Page.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\netcore45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
@@ -187,4 +118,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+
 </Project>

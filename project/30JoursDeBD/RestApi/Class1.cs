@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _30JoursDeBD.Model
+namespace RestApi
 {
-    public class WPApi
+    public class Class1
     {
-        
     }
 }
