@@ -19,6 +19,7 @@ using _30JoursDeBD.testmodel;
 using System.Net;
 using System.Threading.Tasks;
 using Windows.Storage;
+using Windows.UI.Xaml.Media.Imaging;
 
 // Pour en savoir plus sur le modèle d'élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -75,7 +76,6 @@ namespace _30JoursDeBD
             if (e.NewSize.Width < 600)
             {
                 VisualStateManager.GoToState(this, "NarrowLayout", true);
-                CacheMenuPOR();
             }
             else if (e.NewSize.Height > e.NewSize.Width)
             {
@@ -84,35 +84,15 @@ namespace _30JoursDeBD
             else if (e.NewSize.Width > 2000)
             {
                 VisualStateManager.GoToState(this, "BigDefaultLayout", true);
-                CacheMenuPOR();
             }
             else
             {
                 VisualStateManager.GoToState(this, "DefaultLayout", true);
-                CacheMenuPOR();
             }
         }
 
-        private void Image_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            if (MenuPOR.Height.Value > 0)
-            {
-                MenuPOR.Height = new GridLength(0, GridUnitType.Star);
-                CorpsPOR.Height = new GridLength(115, GridUnitType.Star);
-            }
-            else
-            {
-                MenuPOR.Height = new GridLength(20, GridUnitType.Star);
-                CorpsPOR.Height = new GridLength(95, GridUnitType.Star);
-            }
-            Frame.Navigate(typeof(Liste_Auteur_Page));
-        }
 
-        private void CacheMenuPOR()
-        {
-            MenuPOR.Height = new GridLength(0, GridUnitType.Star);
-            CorpsPOR.Height = new GridLength(115, GridUnitType.Star);
-        }
+  
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -148,8 +128,50 @@ namespace _30JoursDeBD
                     });
                 }
             }
-            
+
+            TrouvePremierStrip();
+            TrouvePremierePlanche();
+            POR_Grid_Load.Visibility = Visibility.Collapsed;
             this.DataContext = this;
+
+        }
+
+        private void TrouvePremierStrip(){
+            foreach (var bd in ListeBD)
+	        {
+		        if ( bd.Rubrique == "Strips")
+                {
+                    IMG_POR_Corps_Strip.Source = new BitmapImage(new Uri(bd.Image, UriKind.RelativeOrAbsolute));
+                    break;
+                }       
+	        }
+            return;
+        }
+
+        private void TrouvePremierePlanche()
+        {
+            foreach (var bd in ListeBD)
+            {
+                if (bd.Rubrique == "Planches")
+                {
+                    IMG_POR_Corps_Planche.Source = new BitmapImage(new Uri(bd.Image, UriKind.RelativeOrAbsolute));
+                    break;
+                }
+            }
+            return;
+        }
+
+        private void Image_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            /*
+            if ( (BD)sender.DataContext.Rubrique == "Planches" )
+            {
+
+            }
+            else if ( base.Tag == "Strips" )
+            {
+
+            }*/
         }
 
     }
