@@ -20,6 +20,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.UI.Xaml.Media.Imaging;
+using Windows.UI.Xaml.Media.Animation;
 
 // Pour en savoir plus sur le modèle d'élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -96,6 +97,8 @@ namespace _30JoursDeBD
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            Engrenage_Load.Begin();
+            Engrenage_Load.RepeatBehavior = RepeatBehavior.Forever;
             HttpClient client = new HttpClient();
             var jsonString = await client.GetStringAsync(new Uri("http://30joursdebd.com/?json=get_recent_post&count=30"));
             var httpresponse = JsonConvert.DeserializeObject<RootObject>(jsonString.ToString());
@@ -132,6 +135,7 @@ namespace _30JoursDeBD
             TrouvePremierStrip();
             TrouvePremierePlanche();
             POR_Grid_Load.Visibility = Visibility.Collapsed;
+            Engrenage_Load.Stop();
             this.DataContext = this;
 
         }

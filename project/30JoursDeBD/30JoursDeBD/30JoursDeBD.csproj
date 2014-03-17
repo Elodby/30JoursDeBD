@@ -130,6 +130,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Engrenage.png" />
     <Content Include="Assets\Header\HEADER_MenuIcone.png" />
     <Content Include="Assets\Header\HEADER_PlanchesIcone.png" />
     <Content Include="Assets\Header\HEADER_PlanchesIcone_ON.png" />
