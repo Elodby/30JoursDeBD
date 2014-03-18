@@ -130,6 +130,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\BigLogo.scale-100.png" />
     <Content Include="Assets\Engrenage.png" />
     <Content Include="Assets\Header\HEADER_MenuIcone.png" />
     <Content Include="Assets\Header\HEADER_PlanchesIcone.png" />
@@ -155,10 +156,6 @@
     <Content Include="Assets\TEST_planche.png" />
     <Content Include="Assets\TEST_strip.png" />
     <Content Include="Common\ReadMe.txt" />
-    <Content Include="Assets\Logo.scale-100.png" />
-    <Content Include="Assets\SmallLogo.scale-100.png" />
-    <Content Include="Assets\SplashScreen.scale-100.png" />
-    <Content Include="Assets\StoreLogo.scale-100.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

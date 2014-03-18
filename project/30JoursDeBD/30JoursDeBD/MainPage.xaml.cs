@@ -154,14 +154,15 @@ namespace _30JoursDeBD
 
         private void TrouvePremierePlanche()
         {
-            foreach (var bd in ListeBD)
+           /* foreach (var bd in ListeBD)
             {
                 if (bd.Rubrique == "Planches")
                 {
                     IMG_POR_Corps_Planche.Source = new BitmapImage(new Uri(bd.Image, UriKind.RelativeOrAbsolute));
                     break;
                 }
-            }
+            }*/
+            IMG_POR_Corps_Planche.Source = new BitmapImage(new Uri(ListeBD[9].Image, UriKind.RelativeOrAbsolute));
             return;
         }
 
