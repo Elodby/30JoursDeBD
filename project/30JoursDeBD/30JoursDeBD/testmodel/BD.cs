@@ -10,6 +10,7 @@ namespace _30JoursDeBD.testmodel
     {
         public string Titre { get; set; }
         public string Image { get; set; }
+        public List<string> ImagesAttachees { get; set; }
         public string Auteur { get; set; }
         public string Rubrique { get; set; }
         public string Note { get; set; }
