@@ -159,7 +159,7 @@ namespace _30JoursDeBD
             {
                 if (bd.Rubrique == "Planches")
                 {
-                    IMG_POR_Corps_Planche.Source = new BitmapImage(new Uri(bd.Image, UriKind.RelativeOrAbsolute));
+                    IMG_POR_Corps_Planche.Source = new BitmapImage(new Uri(bd.ImagesAttachees.First(), UriKind.RelativeOrAbsolute));
                     break;
                 }
             }
@@ -172,11 +172,17 @@ namespace _30JoursDeBD
             
             if ( laBDSelectionnee.Rubrique == "Planches" )
             {
-                IMG_POR_Corps_Planche.Source = new BitmapImage(new Uri(laBDSelectionnee.ImagesAttachees.First(), UriKind.RelativeOrAbsolute));
+                if (laBDSelectionnee.ImagesAttachees != null)
+                    IMG_POR_Corps_Planche.Source = new BitmapImage(new Uri(laBDSelectionnee.ImagesAttachees.First(), UriKind.RelativeOrAbsolute));
+                else
+                    IMG_POR_Corps_Planche.Source = new BitmapImage(new Uri(laBDSelectionnee.Image, UriKind.RelativeOrAbsolute));
             }
             else if (laBDSelectionnee.Rubrique == "Strips" )
             {
-                IMG_POR_Corps_Strip.Source = new BitmapImage(new Uri(laBDSelectionnee.Image, UriKind.RelativeOrAbsolute));
+                //if (laBDSelectionnee.ImagesAttachees != null)
+                   // IMG_POR_Corps_Strip.Source = new BitmapImage(new Uri(laBDSelectionnee.ImagesAttachees.First(), UriKind.RelativeOrAbsolute));
+                //else
+                    IMG_POR_Corps_Strip.Source = new BitmapImage(new Uri(laBDSelectionnee.Image, UriKind.RelativeOrAbsolute));
             }
         }
     }
