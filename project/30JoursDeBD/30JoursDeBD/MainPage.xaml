@@ -102,6 +102,7 @@
             </Border>
 
         </DataTemplate>
+<<<<<<< HEAD
         
         
         <Storyboard x:Name="Engrenage_Load">
@@ -111,14 +112,36 @@
         		<EasingDoubleKeyFrame KeyTime="0:0:1.6" Value="270"/>
         		<EasingDoubleKeyFrame KeyTime="0:0:2.3" Value="360"/>
         	</DoubleAnimationUsingKeyFrames>
+=======
+
+
+        <Storyboard x:Name="POR_Engrenage_Load">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="POR_IMG_Load_Engrenage">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="90"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="180"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.6" Value="270"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2.3" Value="360"/>
+            </DoubleAnimationUsingKeyFrames>
+>>>>>>> 4f74ae57e3b8720146ae875426c06a802e9dffab
         </Storyboard>
+
+
+        <Storyboard x:Name="DEF_Engrenage_Load">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="DEF_IMG_Load_Engrenage">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="90"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="180"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.6" Value="270"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2.3" Value="360"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
 
     </Page.Resources>
 
 
     <Grid x:Name="General">
         <!-- Vue par défaut -->
-        
+
         <Grid x:Name="DefautlView" Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition Height="13*"/>
@@ -156,6 +179,18 @@
                         ItemTemplate="{StaticResource GridItemTemplate}"
                         SelectionMode="None"
                         IsSwipeEnabled="false" IsItemClickEnabled="True"/>
+
+                    <Grid x:Name="DEF_Grid_Load" >
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <Image x:Name="DEF_IMG_Load_Engrenage" Source="Assets/Engrenage2.png" Stretch="None" Margin="20" RenderTransformOrigin="0.5,0.5">
+                                <Image.RenderTransform>
+                                    <CompositeTransform/>
+                                </Image.RenderTransform>
+                            </Image>
+                            <TextBlock  Text="Chargement..." FontSize="64" FontFamily="SketchFlow Print" Foreground="#FFB2016E" FontWeight="Bold" />
+                        </StackPanel>
+                       
+                    </Grid>
                 </Grid>
 
 
@@ -193,10 +228,10 @@
                     <ColumnDefinition Width="11*"/>
                     <ColumnDefinition Width="9*"/>
                 </Grid.ColumnDefinitions>
-                
+
                 <Grid x:Name="POR_Corps_Planche" Grid.ColumnSpan="2">
-                    <Border Background="White" Margin="20,12,16,12">
-                        <Image x:Name="IMG_POR_Corps_Planche" Margin="10" Source="Assets/TEST_planche.png" />
+                    <Border Background="White" Margin="30,12,26,12">
+                        <Image x:Name="IMG_POR_Corps_Planche" Margin="10" Source="Assets/POR_PlancheVide.jpg" />
                     </Border>
                 </Grid>
                 <Grid x:Name="POR_Liste_Planche" Grid.Column="2">
@@ -214,30 +249,37 @@
                 </Grid>
 
                 <Grid x:Name="POR_Corps_Auteur" Grid.Row="1" >
-                    <Border Background="White" Margin="20,2,16,8">
-                        <Image Margin="10" Source="Assets/TEST_auteur.png" x:Name="IMG_POR_Corps_Auteur" />
+                    <Border Background="White" Margin="30,2,16,8">
+                        <Image Margin="10" Source="Assets/POR_AuteurVide.jpg" x:Name="IMG_POR_Corps_Auteur" />
                     </Border>
                 </Grid>
                 <Grid x:Name="POR_Corps_Strip" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" >
                     <Border Background="White" Margin="20,2,16,8">
-                        <Image x:Name="IMG_POR_Corps_Strip" Margin="10" Source="Assets/TEST_strip.png" />
+                        <Image x:Name="IMG_POR_Corps_Strip" Margin="10" Source="Assets/POR_StripVide.jpg" />
                     </Border>
                 </Grid>
 
-                <Grid x:Name="POR_Grid_Load" Grid.RowSpan="2" Grid.ColumnSpan="3" Background="#D31F1E1E" >
+                <Grid x:Name="POR_Grid_Load" Grid.RowSpan="2" Grid.ColumnSpan="3" >
                     <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" >
+<<<<<<< HEAD
                         <Image x:Name="POR_IMG_Load_Engrenage" Source="Assets/Engrenage.png" Stretch="None" Margin="20" RenderTransformOrigin="0.5,0.5" >
                         	<Image.RenderTransform>
                         		<CompositeTransform/>
                         	</Image.RenderTransform>
+=======
+                        <Image x:Name="POR_IMG_Load_Engrenage" Source="Assets/Engrenage2.png" Stretch="None" Margin="20" RenderTransformOrigin="0.5,0.5" >
+                            <Image.RenderTransform>
+                                <CompositeTransform/>
+                            </Image.RenderTransform>
+>>>>>>> 4f74ae57e3b8720146ae875426c06a802e9dffab
                         </Image>
-                        <TextBlock Text="Chargement..." FontSize="64" FontFamily="SketchFlow Print" FontWeight="Bold" />
+                        <TextBlock Text="Chargement..." FontSize="64" FontFamily="SketchFlow Print" Foreground="#FFB2016E" FontWeight="Bold" />
                     </StackPanel>
                 </Grid>
 
             </Grid>
-            
-           
+
+
 
 
             <Border x:Name="BR_POR_Header" BorderBrush="#FFCECDCE" BorderThickness="0,0,0,2">
