@@ -114,6 +114,7 @@ namespace _30JoursDeBD
                             Auteur = post.author.name,
                             Rubrique = post.categories.Single(c => c.slug == "strips" || c.slug == "planches").title,
                             Image = post.attachments.Single(c => c.slug.ToUpper().Contains("PREVIEW")).url,
+                            ImagesAttachees = post.attachments.Select(a => a.url).ToList(),
                             Note = "Assets/Star.png"
                         });
                     }
@@ -154,31 +155,30 @@ namespace _30JoursDeBD
 
         private void TrouvePremierePlanche()
         {
-           /* foreach (var bd in ListeBD)
+            foreach (var bd in ListeBD)
             {
                 if (bd.Rubrique == "Planches")
                 {
                     IMG_POR_Corps_Planche.Source = new BitmapImage(new Uri(bd.Image, UriKind.RelativeOrAbsolute));
                     break;
                 }
-            }*/
-            IMG_POR_Corps_Planche.Source = new BitmapImage(new Uri(ListeBD[9].Image, UriKind.RelativeOrAbsolute));
+            }
             return;
         }
 
         private void Image_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            /*
-            if ( (BD)sender.DataContext.Rubrique == "Planches" )
+            BD laBDSelectionnee = ((Image)sender).DataContext as BD;
+            
+            if ( laBDSelectionnee.Rubrique == "Planches" )
             {
-
+                IMG_POR_Corps_Planche.Source = new BitmapImage(new Uri(laBDSelectionnee.ImagesAttachees.First(), UriKind.RelativeOrAbsolute));
             }
-            else if ( base.Tag == "Strips" )
+            else if (laBDSelectionnee.Rubrique == "Strips" )
             {
-
-            }*/
+                IMG_POR_Corps_Strip.Source = new BitmapImage(new Uri(laBDSelectionnee.Image, UriKind.RelativeOrAbsolute));
+            }
         }
-
     }
 }
 

@@ -212,7 +212,7 @@
 
                 <Grid x:Name="POR_Corps_Auteur" Grid.Row="1" >
                     <Border Background="White" Margin="20,2,16,8">
-                        <Image Margin="10" Source="Assets/TEST_auteur.png" />
+                        <Image Margin="10" Source="Assets/TEST_auteur.png" x:Name="IMG_POR_Corps_Auteur" />
                     </Border>
                 </Grid>
                 <Grid x:Name="POR_Corps_Strip" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" >
