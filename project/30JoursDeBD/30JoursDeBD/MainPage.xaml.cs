@@ -162,7 +162,7 @@ namespace _30JoursDeBD
                     break;
                 }
             }*/
-            IMG_POR_Corps_Planche.Source = new BitmapImage(new Uri(ListeBD[9].Image, UriKind.RelativeOrAbsolute));
+            IMG_POR_Corps_Planche.Source = new BitmapImage(new Uri(ListeBD[10].Image, UriKind.RelativeOrAbsolute));
             return;
         }
 
