@@ -101,41 +101,26 @@
                 </Grid>
             </Border>
 
-        </DataTemplate>
-<<<<<<< HEAD
+        </DataTemplate>    
         
-        
-        <Storyboard x:Name="Engrenage_Load">
-        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="POR_IMG_Load_Engrenage">
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="90"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="180"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:1.6" Value="270"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:2.3" Value="360"/>
-        	</DoubleAnimationUsingKeyFrames>
-=======
+            <Storyboard x:Name="POR_Engrenage_Load">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="POR_IMG_Load_Engrenage">
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="90"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="180"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:1.6" Value="270"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:2.3" Value="360"/>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
 
-
-        <Storyboard x:Name="POR_Engrenage_Load">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="POR_IMG_Load_Engrenage">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="90"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="180"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.6" Value="270"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2.3" Value="360"/>
-            </DoubleAnimationUsingKeyFrames>
->>>>>>> 4f74ae57e3b8720146ae875426c06a802e9dffab
-        </Storyboard>
-
-
-        <Storyboard x:Name="DEF_Engrenage_Load">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="DEF_IMG_Load_Engrenage">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="90"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="180"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.6" Value="270"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2.3" Value="360"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-
-
+            <Storyboard x:Name="DEF_Engrenage_Load">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="DEF_IMG_Load_Engrenage">
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="90"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="180"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:1.6" Value="270"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:2.3" Value="360"/>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+            
     </Page.Resources>
 
 
@@ -261,17 +246,10 @@
 
                 <Grid x:Name="POR_Grid_Load" Grid.RowSpan="2" Grid.ColumnSpan="3" >
                     <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" >
-<<<<<<< HEAD
-                        <Image x:Name="POR_IMG_Load_Engrenage" Source="Assets/Engrenage.png" Stretch="None" Margin="20" RenderTransformOrigin="0.5,0.5" >
-                        	<Image.RenderTransform>
-                        		<CompositeTransform/>
-                        	</Image.RenderTransform>
-=======
                         <Image x:Name="POR_IMG_Load_Engrenage" Source="Assets/Engrenage2.png" Stretch="None" Margin="20" RenderTransformOrigin="0.5,0.5" >
                             <Image.RenderTransform>
                                 <CompositeTransform/>
                             </Image.RenderTransform>
->>>>>>> 4f74ae57e3b8720146ae875426c06a802e9dffab
                         </Image>
                         <TextBlock Text="Chargement..." FontSize="64" FontFamily="SketchFlow Print" Foreground="#FFB2016E" FontWeight="Bold" />
                     </StackPanel>
