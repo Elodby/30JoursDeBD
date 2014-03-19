@@ -102,6 +102,8 @@
             </Border>
 
         </DataTemplate>
+        
+        
         <Storyboard x:Name="Engrenage_Load">
         	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="image">
         		<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="90"/>
@@ -116,6 +118,7 @@
 
     <Grid x:Name="General">
         <!-- Vue par défaut -->
+        
         <Grid x:Name="DefautlView" Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition Height="13*"/>
@@ -221,7 +224,7 @@
                     </Border>
                 </Grid>
 
-                <Grid x:Name="POR_Grid_Load" Grid.RowSpan="3" Grid.ColumnSpan="3" Background="#D31F1E1E" >
+                <Grid x:Name="POR_Grid_Load" Grid.RowSpan="2" Grid.ColumnSpan="3" Background="#D31F1E1E" >
                     <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" >
                         <Image x:Name="image" Source="Assets/Engrenage.png" Stretch="None" Margin="20" RenderTransformOrigin="0.5,0.5" >
                         	<Image.RenderTransform>
@@ -230,7 +233,7 @@
                         </Image>
                         <TextBlock Text="Chargement..." FontSize="64" FontFamily="SketchFlow Print" FontWeight="Bold" />
                     </StackPanel>
-                    </Grid>
+                </Grid>
 
             </Grid>
             
