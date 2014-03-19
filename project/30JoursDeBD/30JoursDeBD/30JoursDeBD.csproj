@@ -130,12 +130,16 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\BigLogo.scale-100.png" />
+    <Content Include="Assets\Engrenage.png" />
+    <Content Include="Assets\Header\HEADER_MenuIcone.png" />
     <Content Include="Assets\Header\HEADER_PlanchesIcone.png" />
     <Content Include="Assets\Header\HEADER_PlanchesIcone_ON.png" />
     <Content Include="Assets\Header\HEADER_StripsIcone.png" />
     <Content Include="Assets\Header\HEADER_StripsIcone_ON.png" />
     <Content Include="Assets\Header\HEADER_ToutIcone.png" />
     <Content Include="Assets\Header\HEADER_ToutIcone_ON.png" />
+    <Content Include="Assets\Header\HEADER_Tuto.png" />
     <Content Include="Assets\Header\Logo30J.png" />
     <Content Include="Assets\Img_Strip.png" />
     <Content Include="Assets\Logo.scale-100.png" />
@@ -147,11 +151,11 @@
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\Star.png" />
     <Content Include="Assets\StoreLogo.scale-100.png" />
+    <Content Include="Assets\Template.png" />
+    <Content Include="Assets\TEST_auteur.png" />
+    <Content Include="Assets\TEST_planche.png" />
+    <Content Include="Assets\TEST_strip.png" />
     <Content Include="Common\ReadMe.txt" />
-    <Content Include="Assets\Logo.scale-100.png" />
-    <Content Include="Assets\SmallLogo.scale-100.png" />
-    <Content Include="Assets\SplashScreen.scale-100.png" />
-    <Content Include="Assets\StoreLogo.scale-100.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
