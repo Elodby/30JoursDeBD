@@ -88,9 +88,10 @@ namespace _30JoursDeBD
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             //Storyboard de chargement
-            Engrenage_Load.Begin();
-            Engrenage_Load.RepeatBehavior = RepeatBehavior.Forever;
-
+            POR_Engrenage_Load.Begin();
+            POR_Engrenage_Load.RepeatBehavior = RepeatBehavior.Forever;
+            DEF_Engrenage_Load.Begin();
+            DEF_Engrenage_Load.RepeatBehavior = RepeatBehavior.Forever;
 
             HttpClient client = new HttpClient();
             var jsonString = await client.GetStringAsync(new Uri("http://30joursdebd.com/?json=get_recent_post&count=30"));
@@ -129,9 +130,10 @@ namespace _30JoursDeBD
             TrouvePremierStrip();
             TrouvePremierePlanche();
             POR_Grid_Load.Visibility = Visibility.Collapsed;
-            Engrenage_Load.Stop();
+            POR_Engrenage_Load.Stop();
+            DEF_Grid_Load.Visibility = Visibility.Collapsed;
+            DEF_Engrenage_Load.Stop();
             this.DataContext = this;
-
         }
 
         private void TrouvePremierStrip(){
@@ -178,6 +180,7 @@ namespace _30JoursDeBD
                     IMG_POR_Corps_Strip.Source = new BitmapImage(new Uri(laBDSelectionnee.Image, UriKind.RelativeOrAbsolute));
             }
         }
+
     }
 }
 
