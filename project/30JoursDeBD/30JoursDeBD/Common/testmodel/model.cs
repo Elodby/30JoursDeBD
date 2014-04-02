@@ -104,4 +104,11 @@ namespace _30JoursDeBD.testmodel
         public int pages { get; set; }
         public List<Post> posts { get; set; }
     }
+
+    public class AuthorIndex
+    {
+        public string status { get; set; }
+        public int count { get; set; }
+        public List<Author> authors { get; set; }
+    }
 }
