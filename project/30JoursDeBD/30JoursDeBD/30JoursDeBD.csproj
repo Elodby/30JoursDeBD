@@ -144,9 +144,12 @@
     <Content Include="Assets\Header\Logo30J.png" />
     <Content Include="Assets\Img_Strip.png" />
     <Content Include="Assets\Logo.scale-100.png" />
-    <Content Include="Assets\Menu\Menu-Albums.png" />
-    <Content Include="Assets\Menu\Menu-Auteurs.png" />
-    <Content Include="Assets\Menu\Menu-Favoris.png" />
+    <Content Include="Assets\Menu\Menu_Accueil.png" />
+    <Content Include="Assets\Menu\Menu_Album.png" />
+    <Content Include="Assets\Menu\Menu_Auteurs.png" />
+    <Content Include="Assets\Menu\Menu_AVousDeJouer.png" />
+    <Content Include="Assets\Menu\Menu_BD.png" />
+    <Content Include="Assets\Menu\Menu_BestOf.png" />
     <Content Include="Assets\Paysage.png" />
     <Content Include="Assets\POR_AuteurVide.jpg" />
     <Content Include="Assets\POR_PlancheVide.jpg" />

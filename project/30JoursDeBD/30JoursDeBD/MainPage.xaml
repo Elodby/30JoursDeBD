@@ -130,53 +130,319 @@
     <Page.TopAppBar>
         <AppBar Padding="10,0,10,0" x:Name="AppBarTop" Background="#FFB2016E" BorderBrush="White" Height="160">
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="9*"/>
-                    <RowDefinition Height="55*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-
-                <Grid x:Name="Test" Grid.Row="1" Margin="15,10,10,20" Background="#FF8B0457" >
+                <Grid x:Name="DEF_AppBar" Visibility="Collapsed">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="35*"/>
-                        <RowDefinition Height="21*"/>
+                        <RowDefinition Height="9*"/>
+                        <RowDefinition Height="55*"/>
                     </Grid.RowDefinitions>
-                    <Image Source="Assets/Engrenage.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Left"/>
-                    <TextBlock Text="Paramètres" FontSize="20" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
 
-                </Grid>
-                
-                <Grid x:Name="Test2" Grid.Column="1" Margin="15,10,10,20" Grid.Row="1"  >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="35*"/>
-                        <RowDefinition Height="21*"/>
-                    </Grid.RowDefinitions>
-                    <Image Source="Assets/Engrenage.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Left"/>
-                    <TextBlock Text="Paramètres" FontSize="20" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
-                </Grid>
+                    <Border Grid.Row="1" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
+                        <Grid  x:Name="DEF_HEAD_Accueil" Background="#FF8B0457">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="35*"/>
+                                <RowDefinition Height="21*"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="Assets/Menu/Menu_Accueil.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Left"/>
+                            <TextBlock Text="Accueil" FontSize="20" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
 
-                <Border  Grid.Column="2" Margin="15,10,10,20" Grid.Row="1" BorderBrush="White" BorderThickness="1">
-                <Grid x:Name="Test3"  >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="35*"/>
-                        <RowDefinition Height="21*"/>
-                    </Grid.RowDefinitions>
-                    <Image Source="Assets/Engrenage.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Left"/>
-                    <TextBlock Text="Paramètres" FontSize="20" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                    <Border  Grid.Row="1" Grid.Column="1" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
+                        <Grid x:Name="DEF_HEAD_BD" Background="#FF8B0457" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="35*"/>
+                                <RowDefinition Height="21*"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="Assets/Menu/Menu_BD.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Left"/>
+                            <TextBlock Text="BD" FontSize="20" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <Border  Grid.Row="1" Grid.Column="2" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
+                        <Grid x:Name="DEF_HEAD_Albums" Background="#FF8B0457" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="35*"/>
+                                <RowDefinition Height="21*"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="Assets/Menu/Menu_Album.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Left"/>
+                            <TextBlock Text="Albums" FontSize="20" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <Border  Grid.Row="1" Grid.Column="3" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
+                        <Grid x:Name="DEF_HEAD_BestOf" Background="#FF8B0457" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="35*"/>
+                                <RowDefinition Height="21*"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="Assets/Menu/Menu_BestOf.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Left"/>
+                            <TextBlock Text="Best-of" FontSize="20" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <Border  Grid.Row="1" Grid.Column="4" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
+                        <Grid x:Name="DEF_HEAD_Auteurs" Background="#FF8B0457" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="35*"/>
+                                <RowDefinition Height="21*"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="Assets/Menu/Menu_Auteurs.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Left"/>
+                            <TextBlock Text="Auteurs" FontSize="20" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <Border  Grid.Row="1" Grid.Column="5" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
+                        <Grid x:Name="DEF_HEAD_Participer"  Background="#FF8B0457" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="35*"/>
+                                <RowDefinition Height="21*"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="Assets/Menu/Menu_AVousDeJouer.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Left"/>
+                            <TextBlock Text="Participer" FontSize="20" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <!--
+                    <Grid x:Name="Test2" Grid.Column="7" Margin="15,10,10,20" Grid.Row="1"  >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35*"/>
+                            <RowDefinition Height="21*"/>
+                        </Grid.RowDefinitions>
+                        <Image Source="Assets/Engrenage.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Paramètres" FontSize="20" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
                     </Grid>
-                </Border>
 
+                    <Border  Grid.Column="6" Margin="15,10,10,20" Grid.Row="1" BorderBrush="White" BorderThickness="1">
+                    <Grid x:Name="Test3"  >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35*"/>
+                            <RowDefinition Height="21*"/>
+                        </Grid.RowDefinitions>
+                        <Image Source="Assets/Engrenage.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Paramètres" FontSize="20" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+-->
+                </Grid>
+
+                <Grid x:Name="POR_AppBar" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="6*"/>
+                        <RowDefinition Height="55*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.Row="1" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
+                        <Grid  x:Name="POR_HEAD_Accueil" Background="#FF8B0457">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="76*"/>
+                                <RowDefinition Height="33*"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="Assets/Menu/Menu_Accueil.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Accueil" FontSize="14" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <Border  Grid.Row="1" Grid.Column="1" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
+                        <Grid x:Name="POR_HEAD_BD" Background="#FF8B0457" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="76*"/>
+                                <RowDefinition Height="33*"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="Assets/Menu/Menu_BD.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Center"/>
+                            <TextBlock Text="BD" FontSize="14" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <Border  Grid.Row="1" Grid.Column="2" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
+                        <Grid x:Name="POR_HEAD_Albums" Background="#FF8B0457" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="76*"/>
+                                <RowDefinition Height="33*"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="Assets/Menu/Menu_Album.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Albums" FontSize="14" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <Border  Grid.Row="1" Grid.Column="3" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
+                        <Grid x:Name="POR_HEAD_BestOf" Background="#FF8B0457" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="76*"/>
+                                <RowDefinition Height="33*"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="Assets/Menu/Menu_BestOf.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Best-of" FontSize="14" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <Border  Grid.Row="1" Grid.Column="4" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
+                        <Grid x:Name="POR_HEAD_Auteurs" Background="#FF8B0457" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="76*"/>
+                                <RowDefinition Height="33*"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="Assets/Menu/Menu_Auteurs.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Auteurs" FontSize="14" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <Border  Grid.Row="1" Grid.Column="5" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
+                        <Grid x:Name="POR_HEAD_Participer"  Background="#FF8B0457" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="76*"/>
+                                <RowDefinition Height="33*"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="Assets/Menu/Menu_AVousDeJouer.png" Stretch="Uniform" Margin="10,7" HorizontalAlignment="Center" Width="63"/>
+                            <TextBlock Text="Participer" FontSize="14" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <!--
+                    <Grid x:Name="Test2" Grid.Column="7" Margin="15,10,10,20" Grid.Row="1"  >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35*"/>
+                            <RowDefinition Height="21*"/>
+                        </Grid.RowDefinitions>
+                        <Image Source="Assets/Engrenage.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Paramètres" FontSize="20" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                    </Grid>
+
+                    <Border  Grid.Column="6" Margin="15,10,10,20" Grid.Row="1" BorderBrush="White" BorderThickness="1">
+                    <Grid x:Name="Test3"  >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35*"/>
+                            <RowDefinition Height="21*"/>
+                        </Grid.RowDefinitions>
+                        <Image Source="Assets/Engrenage.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Paramètres" FontSize="20" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+-->
+                </Grid>
+
+                <Grid x:Name="NAR_AppBar" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="55*"/>
+                        <RowDefinition Height="55*"/>
+                        <RowDefinition Height="55*"/>
+                        <RowDefinition Height="5*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30*"/>
+                        <ColumnDefinition Width="30*"/>
+
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.Row="1" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="5,5,5,5" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
+                        <Grid  x:Name="NAR_HEAD_Accueil" Background="#FF8B0457">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="Assets/Menu/Menu_Accueil.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Accueil" Grid.Column="1" FontSize="22" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <Border  Grid.Row="1" Grid.Column="1" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="5,5,5,5" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
+                        <Grid x:Name="NAR_HEAD_BD" Background="#FF8B0457" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="Assets/Menu/Menu_BD.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Center"/>
+                            <TextBlock Text="BD"  Grid.Column="1" FontSize="22" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <Border  Grid.Row="2" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="5,5,5,5" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
+                        <Grid x:Name="NAR_HEAD_Albums" Background="#FF8B0457" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="Assets/Menu/Menu_Album.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Albums"  Grid.Column="1" FontSize="22" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <Border  Grid.Row="2" Grid.Column="1" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="5,5,5,5" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
+                        <Grid x:Name="NAR_HEAD_BestOf" Background="#FF8B0457" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="Assets/Menu/Menu_BestOf.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Best-Of" Grid.Column="1" FontSize="22" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <Border  Grid.Row="3" Grid.Column="0" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="5,5,5,5" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
+                        <Grid x:Name="NAR_HEAD_Auteurs" Background="#FF8B0457" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="Assets/Menu/Menu_Auteurs.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Auteurs"  Grid.Column="1" FontSize="22" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <Border  Grid.Row="3" Grid.Column="1" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="5,5,5,5" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
+                        <Grid x:Name="NAR_HEAD_Participer"  Background="#FF8B0457" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="Assets/Menu/Menu_AVousDeJouer.png" Stretch="Uniform" Margin="10,7" HorizontalAlignment="Center" Width="63"/>
+                            <TextBlock Text="Participer"  Grid.Column="1" FontSize="22" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <!--
+                    <Grid x:Name="Test2" Grid.Column="7" Margin="15,10,10,20" Grid.Row="1"  >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35*"/>
+                            <RowDefinition Height="21*"/>
+                        </Grid.RowDefinitions>
+                        <Image Source="Assets/Engrenage.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Paramètres" FontSize="20" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                    </Grid>
+
+                    <Border  Grid.Column="6" Margin="15,10,10,20" Grid.Row="1" BorderBrush="White" BorderThickness="1">
+                    <Grid x:Name="Test3"  >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35*"/>
+                            <RowDefinition Height="21*"/>
+                        </Grid.RowDefinitions>
+                        <Image Source="Assets/Engrenage.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Paramètres" FontSize="20" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+-->
+                </Grid>
 
             </Grid>
+
         </AppBar>
     </Page.TopAppBar>
 
@@ -192,23 +458,8 @@
 
             <Grid x:Name="GR_DEF_Body" Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="146*" MinWidth="180"/>
-                    <ColumnDefinition Width="537*"/>
+                    <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-
-                <Border x:Name="BR_DEF_Menu" BorderBrush="#FF544146" BorderThickness="0,0,3,0">
-                    <Grid x:Name="GR_DEF_Menu" Background="#FFB2016E">
-                        <StackPanel Orientation="Vertical" Margin="2,16,0,0">
-                            <Image Source="Assets/Menu/Menu-Favoris.png" VerticalAlignment="Center" HorizontalAlignment="Left" Stretch="UniformToFill" Margin="0,0,0,10" />
-                            <Image Source="Assets/Menu/Menu-Auteurs.png" VerticalAlignment="Center" HorizontalAlignment="Left" Stretch="UniformToFill" Margin="0,0,0,10"/>
-                            <Image Source="Assets/Menu/Menu-Albums.png" VerticalAlignment="Center" HorizontalAlignment="Left" Stretch="UniformToFill" Margin="0,0,0,10"/>
-                            <Image Source="Assets/Menu/Menu-Favoris.png" VerticalAlignment="Center" HorizontalAlignment="Left" Stretch="UniformToFill" Margin="0,0,0,10"/>
-                            <Image Source="Assets/Menu/Menu-Albums.png" VerticalAlignment="Center" HorizontalAlignment="Left" Stretch="UniformToFill" Margin="0,0,0,10"/>
-                            <Image Source="Assets/Menu/Menu-Albums.png" VerticalAlignment="Center" HorizontalAlignment="Left" Stretch="UniformToFill" Margin="0,0,0,10"/>
-
-                        </StackPanel>
-                    </Grid>
-                </Border>
 
                 <Grid x:Name="GR_Corps_Page" Grid.Column="1" Background="#FFE9E7E8" >
                     <GridView
@@ -231,7 +482,6 @@
                             </Image>
                             <TextBlock  Text="Chargement..." FontSize="64" FontFamily="SketchFlow Print" Foreground="#FFB2016E" FontWeight="Bold" />
                         </StackPanel>
-
                     </Grid>
                 </Grid>
 
@@ -388,6 +638,17 @@
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PortraitView" Storyboard.TargetProperty="Visibility">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
                         </ObjectAnimationUsingKeyFrames>
+                        <!-- App Bar -->
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DEF_AppBar" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="POR_AppBar" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NAR_AppBar" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <!-- App Bar -->
                     </Storyboard>
                 </VisualState>
                 <VisualState x:Name="BigDefaultLayout" >
@@ -404,6 +665,17 @@
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PortraitView" Storyboard.TargetProperty="Visibility">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
                         </ObjectAnimationUsingKeyFrames>
+                        <!-- App Bar -->
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DEF_AppBar" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="POR_AppBar" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NAR_AppBar" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <!-- App Bar -->
                     </Storyboard>
                 </VisualState>
 
@@ -418,6 +690,17 @@
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PortraitView" Storyboard.TargetProperty="Visibility">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
                         </ObjectAnimationUsingKeyFrames>
+                        <!-- App Bar -->
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DEF_AppBar" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="POR_AppBar" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NAR_AppBar" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <!-- App Bar -->
                     </Storyboard>
                 </VisualState>
                 <VisualState x:Name="PortraitLayout">
@@ -431,6 +714,17 @@
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NarrowView" Storyboard.TargetProperty="Visibility">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
                         </ObjectAnimationUsingKeyFrames>
+                        <!-- App Bar -->
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DEF_AppBar" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="POR_AppBar" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NAR_AppBar" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <!-- App Bar -->
                     </Storyboard>
                 </VisualState>
             </VisualStateGroup>
