@@ -101,27 +101,84 @@
                 </Grid>
             </Border>
 
-        </DataTemplate>    
-        
-            <Storyboard x:Name="POR_Engrenage_Load">
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="POR_IMG_Load_Engrenage">
-                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="90"/>
-                    <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="180"/>
-                    <EasingDoubleKeyFrame KeyTime="0:0:1.6" Value="270"/>
-                    <EasingDoubleKeyFrame KeyTime="0:0:2.3" Value="360"/>
-                </DoubleAnimationUsingKeyFrames>
-            </Storyboard>
+        </DataTemplate>
 
-            <Storyboard x:Name="DEF_Engrenage_Load">
-                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="DEF_IMG_Load_Engrenage">
-                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="90"/>
-                    <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="180"/>
-                    <EasingDoubleKeyFrame KeyTime="0:0:1.6" Value="270"/>
-                    <EasingDoubleKeyFrame KeyTime="0:0:2.3" Value="360"/>
-                </DoubleAnimationUsingKeyFrames>
-            </Storyboard>
-            
+        <Storyboard x:Name="POR_Engrenage_Load">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="POR_IMG_Load_Engrenage">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="90"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="180"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.6" Value="270"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2.3" Value="360"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Name="DEF_Engrenage_Load">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="DEF_IMG_Load_Engrenage">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="90"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="180"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.6" Value="270"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2.3" Value="360"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
     </Page.Resources>
+
+    <!--
+        Barre d'application. Contient un bouton :
+        - Un bouton pour mettre en plein écran la vidéo;
+    -->
+    <Page.TopAppBar>
+        <AppBar Padding="10,0,10,0" x:Name="AppBarTop" Background="#FFB2016E" BorderBrush="White" Height="160">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="9*"/>
+                    <RowDefinition Height="55*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid x:Name="Test" Grid.Row="1" Margin="15,10,10,20" Background="#FF8B0457" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="35*"/>
+                        <RowDefinition Height="21*"/>
+                    </Grid.RowDefinitions>
+                    <Image Source="Assets/Engrenage.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Left"/>
+                    <TextBlock Text="Paramètres" FontSize="20" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+
+                </Grid>
+                
+                <Grid x:Name="Test2" Grid.Column="1" Margin="15,10,10,20" Grid.Row="1"  >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="35*"/>
+                        <RowDefinition Height="21*"/>
+                    </Grid.RowDefinitions>
+                    <Image Source="Assets/Engrenage.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Left"/>
+                    <TextBlock Text="Paramètres" FontSize="20" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                </Grid>
+
+                <Border  Grid.Column="2" Margin="15,10,10,20" Grid.Row="1" BorderBrush="White" BorderThickness="1">
+                <Grid x:Name="Test3"  >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="35*"/>
+                        <RowDefinition Height="21*"/>
+                    </Grid.RowDefinitions>
+                    <Image Source="Assets/Engrenage.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Left"/>
+                    <TextBlock Text="Paramètres" FontSize="20" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                    </Grid>
+                </Border>
+
+
+            </Grid>
+        </AppBar>
+    </Page.TopAppBar>
 
 
     <Grid x:Name="General">
@@ -174,7 +231,7 @@
                             </Image>
                             <TextBlock  Text="Chargement..." FontSize="64" FontFamily="SketchFlow Print" Foreground="#FFB2016E" FontWeight="Bold" />
                         </StackPanel>
-                       
+
                     </Grid>
                 </Grid>
 

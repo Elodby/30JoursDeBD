@@ -55,6 +55,7 @@ namespace _30JoursDeBD
             this.navigationHelper = new NavigationHelper(this);
             // this.navigationHelper.LoadState += navigationHelper_LoadState;
             //this.navigationHelper.SaveState += navigationHelper_SaveState;
+
             
             this.SizeChanged += Page_SizeChanged;
 
@@ -87,6 +88,9 @@ namespace _30JoursDeBD
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            AppBarTop.Height = this.ActualHeight / 5;
+            //AppBarTop.IsOpen = true;
+
             //Storyboard de chargement
             POR_Engrenage_Load.Begin();
             POR_Engrenage_Load.RepeatBehavior = RepeatBehavior.Forever;
@@ -129,10 +133,12 @@ namespace _30JoursDeBD
 
             TrouvePremierStrip();
             TrouvePremierePlanche();
+            //Storyboard de chargement ( fin )
             POR_Grid_Load.Visibility = Visibility.Collapsed;
             POR_Engrenage_Load.Stop();
             DEF_Grid_Load.Visibility = Visibility.Collapsed;
             DEF_Engrenage_Load.Stop();
+
             this.DataContext = this;
         }
 
