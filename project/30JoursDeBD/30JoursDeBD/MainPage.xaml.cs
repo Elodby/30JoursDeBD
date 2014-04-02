@@ -189,14 +189,49 @@ namespace _30JoursDeBD
             }
         }
 
-        private void DEF_HEAD_PointerEntered(object sender, PointerRoutedEventArgs e)
+
+        //Gestion AppBar
+        private void AppBar_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
             (sender as Border).BorderBrush = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
         }
 
-        private void DEF_HEAD_PointerExited(object sender, PointerRoutedEventArgs e)
+        private void AppBar_PointerExited(object sender, PointerRoutedEventArgs e)
         {
             (sender as Border).BorderBrush = new SolidColorBrush(Color.FromArgb(255, 139, 4, 87));
+        }
+
+        private void AppBar_Tapped(object sender, TappedRoutedEventArgs e) // Navigation
+        {
+            string leNom = (sender as Border).Name;
+            string[] tabNom = {"Accueil","BD","Albums","BestOf","Auteurs","Participer"};
+            int i;
+            for ( i=0; i < tabNom.Length; i++)
+            {
+                if ( leNom.Contains(tabNom[i]))
+                    break;
+            }
+            switch(i)
+            {
+                case 0:
+                    
+                    break;
+                case 1:
+                    
+                    break;
+                case 2:
+                    
+                    break;
+                case 3:
+                    
+                    break;
+                case 4:
+                    
+                    break;
+                case 5:
+                   
+                    break;
+            }
         }
 
     }
