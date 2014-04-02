@@ -14,5 +14,6 @@ namespace _30JoursDeBD.testmodel
         public string Auteur { get; set; }
         public string Rubrique { get; set; }
         public string Note { get; set; }
+        public string Excerpt { get; set; }
     }
 }

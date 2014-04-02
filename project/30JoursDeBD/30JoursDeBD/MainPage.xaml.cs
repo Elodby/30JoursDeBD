@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.IO;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -12,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Imaging;
+using Windows.Data.Html;
 
 // Pour en savoir plus sur le modèle d'élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -57,10 +59,7 @@ namespace _30JoursDeBD
             this.navigationHelper = new NavigationHelper(this);
             // this.navigationHelper.LoadState += navigationHelper_LoadState;
             //this.navigationHelper.SaveState += navigationHelper_SaveState;
-
-            
             this.SizeChanged += Page_SizeChanged;
-
         }
 
 
@@ -108,13 +107,15 @@ namespace _30JoursDeBD
                 {
                     if (post.categories.Where(c => c.slug == "news").Count() == 0)
                     {
+                        
                         _listeBD.Add(new BD()
                         {
-                            Titre = post.title,
-                            Auteur = post.author.name,
+                            Titre = HtmlUtilities.ConvertToText(post.title),
+                            Auteur = HtmlUtilities.ConvertToText(post.author.name),
                             Rubrique = post.categories.Single(c => c.slug == "strips" || c.slug == "planches").title,
                             Image = post.attachments.Single(c => c.slug.ToUpper().Contains("PREVIEW")).url,
                             ImagesAttachees = post.attachments.Select(a => a.url).ToList(),
+                            Excerpt = HtmlUtilities.ConvertToText(post.excerpt),
                             Note = "Assets/Star.png"
                         });
                     }
@@ -124,10 +125,12 @@ namespace _30JoursDeBD
                 {
                     _listeBD.Add(new BD()
                     {
-                        Titre = post.title,
-                        Auteur = post.author.name,
+                        Titre = HtmlUtilities.ConvertToText(post.title),
+                        Auteur = HtmlUtilities.ConvertToText(post.author.name),
                         Rubrique = post.categories.Single(c => c.slug == "strips" || c.slug == "planches").title,
-                        Image = post.attachments.First().url,
+                        Image = post.attachments.Last().url,
+                        ImagesAttachees = post.attachments.Select(a => a.url).ToList(),
+                        Excerpt = HtmlUtilities.ConvertToText(post.excerpt),
                         Note = "Assets/Star.png"
                     });
                 }
@@ -187,6 +190,7 @@ namespace _30JoursDeBD
                 //else
                     IMG_POR_Corps_Strip.Source = new BitmapImage(new Uri(laBDSelectionnee.Image, UriKind.RelativeOrAbsolute));
             }
+            Frame.Navigate(typeof(pageArticle), laBDSelectionnee);
         }
 
 
@@ -214,7 +218,7 @@ namespace _30JoursDeBD
             switch(i)
             {
                 case 0:
-                    
+                    Frame.Navigate(typeof(MainPage));
                     break;
                 case 1:
                     

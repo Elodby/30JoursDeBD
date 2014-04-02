@@ -12,115 +12,14 @@
 
         <!-- Collection -->
         <CollectionViewSource
-            x:Name="SourceGridView"
-            Source="{Binding ListeBD}" />
+            x:Name="SourceListView"
+            Source="{Binding LesImages}" />
 
         <!-- Data Template : pour la GridView du Corps -->
-        <DataTemplate x:Key="GridItemTemplate">
-            <Border BorderBrush="#FFCECDCE" BorderThickness="2,0,0,2">
-                <Grid Background="#FFF9F9F9" Width="660" Height="140">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*"/>
-                        </Grid.ColumnDefinitions>
-                        <Image Source="{Binding Image}" Stretch="Uniform" Margin="15,15,10,15"/>
-                        <Grid Grid.Column="1">
-                            <StackPanel VerticalAlignment="Center" Margin="20,0,20,0">
-                                <TextBlock Text="{Binding Titre}" Foreground="#FFD62291" FontSize="24" TextWrapping="WrapWholeWords"/>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Auteur}" Foreground="#FFD62291" TextWrapping="WrapWholeWords"/>
-                                    <TextBlock Text=" - rubrique ." Foreground="#FF818181" TextWrapping="WrapWholeWords"/>
-                                    <TextBlock Text="{Binding Rubrique}" Foreground="#FFD62291" TextWrapping="WrapWholeWords"/>
-                                </StackPanel>
-                            </StackPanel>
-                            <Image Source="{Binding Note}" Height="16" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,5"/>
-                        </Grid>
-
-                    </Grid>
-                </Grid>
-            </Border>
+        <DataTemplate x:Key="PlanchesTemplate">
+            <Image Source="{Binding}" />
         </DataTemplate>
-        <DataTemplate x:Key="BigGridItemTemplate">
-            <Border BorderBrush="#FFCECDCE" BorderThickness="2,0,0,2" Margin="0,10,10,10">
-                <Grid Background="#FFF9F9F9" Width="1060" Height="260">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*"/>
-                        </Grid.ColumnDefinitions>
-                        <Image Source="{Binding Image}" Stretch="Uniform" Margin="15,15,10,15"/>
-                        <Grid Grid.Column="1">
-                            <StackPanel VerticalAlignment="Center" Margin="20,0,20,0">
-                                <TextBlock Text="{Binding Titre}" Foreground="#FFD62291" FontSize="40" TextWrapping="WrapWholeWords"/>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Auteur}"  FontSize="28" Foreground="#FFD62291" TextWrapping="WrapWholeWords"/>
-                                    <TextBlock Text=" - rubrique ."  FontSize="28" Foreground="#FF818181" TextWrapping="WrapWholeWords"/>
-                                    <TextBlock Text="{Binding Rubrique}"  FontSize="28" Foreground="#FFD62291" TextWrapping="WrapWholeWords"/>
-                                </StackPanel>
-                            </StackPanel>
-                            <Image Source="{Binding Note}" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,5"/>
-                        </Grid>
-
-                    </Grid>
-                </Grid>
-            </Border>
-        </DataTemplate>
-
-        <DataTemplate x:Key="ListItemTemplate" >
-            <Grid Background="#FFF9F9F9" Width="Auto" >
-                <Grid>
-                    <Image Source="{Binding Image}" Stretch="Uniform" Margin="4,4,4,4" Tapped="Image_Tapped"/>
-                </Grid>
-            </Grid>
-
-        </DataTemplate>
-
-        <DataTemplate x:Key="NarrowListItemTemplate">
-            <Border BorderBrush="#FFCECDCE" BorderThickness="2,0,0,2">
-                <Grid Background="#FFF9F9F9" Width="Auto" >
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*"/>
-                        </Grid.ColumnDefinitions>
-                        <Image Source="{Binding Image}" Stretch="Uniform" Margin="15,15,10,15"/>
-                        <Grid Grid.Column="1">
-                            <StackPanel VerticalAlignment="Center" Margin="20,0,20,0">
-                                <TextBlock Text="{Binding Titre}" Foreground="#FFD62291" FontSize="20" TextWrapping="WrapWholeWords"/>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Auteur}" Foreground="#FFD62291" TextWrapping="WrapWholeWords"/>
-                                    <TextBlock Text=" - rubrique ." Foreground="#FF818181" TextWrapping="WrapWholeWords"/>
-                                    <TextBlock Text="{Binding Rubrique}" Foreground="#FFD62291" TextWrapping="WrapWholeWords"/>
-                                </StackPanel>
-                            </StackPanel>
-                            <Image Source="{Binding Note}" Height="12" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,5"/>
-                        </Grid>
-
-                    </Grid>
-                </Grid>
-            </Border>
-
-        </DataTemplate>
-
-        <Storyboard x:Name="POR_Engrenage_Load">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="POR_IMG_Load_Engrenage">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="90"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="180"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.6" Value="270"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2.3" Value="360"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-
-        <Storyboard x:Name="DEF_Engrenage_Load">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="DEF_IMG_Load_Engrenage">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="90"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="180"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.6" Value="270"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:2.3" Value="360"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-
+        
     </Page.Resources>
 
     <!--
@@ -146,8 +45,8 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Border Grid.Row="1" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
-                        <Grid  x:Name="DEF_HEAD_Accueil" Background="#FF8B0457">
+                    <Border x:Name="DEF_HEAD_Accueil" Grid.Row="1" BorderBrush="#FF8B0457" Tag="DefaultAppBar" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped"  >
+                        <Grid Background="#FF8B0457">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="35*"/>
                                 <RowDefinition Height="21*"/>
@@ -157,8 +56,8 @@
                         </Grid>
                     </Border>
 
-                    <Border  Grid.Row="1" Grid.Column="1" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
-                        <Grid x:Name="DEF_HEAD_BD" Background="#FF8B0457" >
+                    <Border  x:Name="DEF_HEAD_BD" Grid.Row="1" Grid.Column="1" BorderBrush="#FF8B0457" Tag="DefaultAppBar" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped" >
+                        <Grid Background="#FF8B0457" >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="35*"/>
                                 <RowDefinition Height="21*"/>
@@ -168,8 +67,8 @@
                         </Grid>
                     </Border>
 
-                    <Border  Grid.Row="1" Grid.Column="2" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
-                        <Grid x:Name="DEF_HEAD_Albums" Background="#FF8B0457" >
+                    <Border x:Name="DEF_HEAD_Albums" Grid.Row="1" Grid.Column="2" BorderBrush="#FF8B0457" Tag="DefaultAppBar" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped" >
+                        <Grid  Background="#FF8B0457" >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="35*"/>
                                 <RowDefinition Height="21*"/>
@@ -179,8 +78,8 @@
                         </Grid>
                     </Border>
 
-                    <Border  Grid.Row="1" Grid.Column="3" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
-                        <Grid x:Name="DEF_HEAD_BestOf" Background="#FF8B0457" >
+                    <Border x:Name="DEF_HEAD_BestOf" Grid.Row="1" Grid.Column="3" BorderBrush="#FF8B0457" Tag="DefaultAppBar" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped" >
+                        <Grid Background="#FF8B0457" >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="35*"/>
                                 <RowDefinition Height="21*"/>
@@ -190,8 +89,8 @@
                         </Grid>
                     </Border>
 
-                    <Border  Grid.Row="1" Grid.Column="4" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
-                        <Grid x:Name="DEF_HEAD_Auteurs" Background="#FF8B0457" >
+                    <Border x:Name="DEF_HEAD_Auteurs" Grid.Row="1" Grid.Column="4" BorderBrush="#FF8B0457" Tag="DefaultAppBar" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped" >
+                        <Grid Background="#FF8B0457" >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="35*"/>
                                 <RowDefinition Height="21*"/>
@@ -201,8 +100,8 @@
                         </Grid>
                     </Border>
 
-                    <Border  Grid.Row="1" Grid.Column="5" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
-                        <Grid x:Name="DEF_HEAD_Participer"  Background="#FF8B0457" >
+                    <Border x:Name="DEF_HEAD_Participer" Grid.Row="1" Grid.Column="5" BorderBrush="#FF8B0457" Tag="DefaultAppBar" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped" >
+                        <Grid Background="#FF8B0457" >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="35*"/>
                                 <RowDefinition Height="21*"/>
@@ -212,7 +111,7 @@
                         </Grid>
                     </Border>
 
-                    <!--
+                    <!--                    
                     <Grid x:Name="Test2" Grid.Column="7" Margin="15,10,10,20" Grid.Row="1"  >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="35*"/>
@@ -249,8 +148,8 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Border Grid.Row="1" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
-                        <Grid  x:Name="POR_HEAD_Accueil" Background="#FF8B0457">
+                    <Border x:Name="POR_HEAD_Accueil" Grid.Row="1" BorderBrush="#FF8B0457" BorderThickness="1" Tag="PortraitAppBar"  Margin="15,10,10,20" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped"  >
+                        <Grid Background="#FF8B0457">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="76*"/>
                                 <RowDefinition Height="33*"/>
@@ -260,8 +159,8 @@
                         </Grid>
                     </Border>
 
-                    <Border  Grid.Row="1" Grid.Column="1" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
-                        <Grid x:Name="POR_HEAD_BD" Background="#FF8B0457" >
+                    <Border x:Name="POR_HEAD_BD" Grid.Row="1" Grid.Column="1" BorderBrush="#FF8B0457" Tag="PortraitAppBar" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped" >
+                        <Grid Background="#FF8B0457" >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="76*"/>
                                 <RowDefinition Height="33*"/>
@@ -271,8 +170,8 @@
                         </Grid>
                     </Border>
 
-                    <Border  Grid.Row="1" Grid.Column="2" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
-                        <Grid x:Name="POR_HEAD_Albums" Background="#FF8B0457" >
+                    <Border x:Name="POR_HEAD_Albums" Grid.Row="1" Grid.Column="2" BorderBrush="#FF8B0457" Tag="PortraitAppBar" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped" >
+                        <Grid Background="#FF8B0457" >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="76*"/>
                                 <RowDefinition Height="33*"/>
@@ -282,8 +181,8 @@
                         </Grid>
                     </Border>
 
-                    <Border  Grid.Row="1" Grid.Column="3" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
-                        <Grid x:Name="POR_HEAD_BestOf" Background="#FF8B0457" >
+                    <Border x:Name="POR_HEAD_BestOf" Grid.Row="1" Grid.Column="3" BorderBrush="#FF8B0457" Tag="PortraitAppBar" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped" >
+                        <Grid Background="#FF8B0457" >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="76*"/>
                                 <RowDefinition Height="33*"/>
@@ -293,8 +192,8 @@
                         </Grid>
                     </Border>
 
-                    <Border  Grid.Row="1" Grid.Column="4" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
-                        <Grid x:Name="POR_HEAD_Auteurs" Background="#FF8B0457" >
+                    <Border x:Name="POR_HEAD_Auteurs" Grid.Row="1" Grid.Column="4" BorderBrush="#FF8B0457" Tag="PortraitAppBar" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped" >
+                        <Grid Background="#FF8B0457" >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="76*"/>
                                 <RowDefinition Height="33*"/>
@@ -304,8 +203,8 @@
                         </Grid>
                     </Border>
 
-                    <Border  Grid.Row="1" Grid.Column="5" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
-                        <Grid x:Name="POR_HEAD_Participer"  Background="#FF8B0457" >
+                    <Border x:Name="POR_HEAD_Participer" Grid.Row="1" Grid.Column="5" BorderBrush="#FF8B0457" Tag="PortraitAppBar" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped" >
+                        <Grid Background="#FF8B0457" >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="76*"/>
                                 <RowDefinition Height="33*"/>
@@ -352,8 +251,8 @@
 
                     </Grid.ColumnDefinitions>
 
-                    <Border Grid.Row="1" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="5,5,5,5" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
-                        <Grid  x:Name="NAR_HEAD_Accueil" Background="#FF8B0457">
+                    <Border x:Name="NAR_HEAD_Accueil" Grid.Row="1" BorderBrush="#FF8B0457" BorderThickness="1" Tag="NarrowAppBar"  Margin="5,5,5,5" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped"  >
+                        <Grid Background="#FF8B0457">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="5*"/>
@@ -363,8 +262,8 @@
                         </Grid>
                     </Border>
 
-                    <Border  Grid.Row="1" Grid.Column="1" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="5,5,5,5" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
-                        <Grid x:Name="NAR_HEAD_BD" Background="#FF8B0457" >
+                    <Border x:Name="NAR_HEAD_BD" Grid.Row="1" Grid.Column="1" BorderBrush="#FF8B0457" Tag="NarrowAppBar" BorderThickness="1"  Margin="5,5,5,5" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped"  >
+                        <Grid Background="#FF8B0457" >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="5*"/>
@@ -374,8 +273,8 @@
                         </Grid>
                     </Border>
 
-                    <Border  Grid.Row="2" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="5,5,5,5" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
-                        <Grid x:Name="NAR_HEAD_Albums" Background="#FF8B0457" >
+                    <Border x:Name="NAR_HEAD_Albums" Grid.Row="2" BorderBrush="#FF8B0457" BorderThickness="1" Tag="NarrowAppBar"  Margin="5,5,5,5" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped"  >
+                        <Grid Background="#FF8B0457" >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="5*"/>
@@ -385,8 +284,8 @@
                         </Grid>
                     </Border>
 
-                    <Border  Grid.Row="2" Grid.Column="1" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="5,5,5,5" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
-                        <Grid x:Name="NAR_HEAD_BestOf" Background="#FF8B0457" >
+                    <Border x:Name="NAR_HEAD_BestOf" Grid.Row="2" Grid.Column="1" BorderBrush="#FF8B0457" Tag="NarrowAppBar" BorderThickness="1"  Margin="5,5,5,5" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped" >
+                        <Grid Background="#FF8B0457" >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="5*"/>
@@ -396,8 +295,8 @@
                         </Grid>
                     </Border>
 
-                    <Border  Grid.Row="3" Grid.Column="0" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="5,5,5,5" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
-                        <Grid x:Name="NAR_HEAD_Auteurs" Background="#FF8B0457" >
+                    <Border x:Name="NAR_HEAD_Auteurs" Grid.Row="3" Grid.Column="0" BorderBrush="#FF8B0457" Tag="NarrowAppBar" BorderThickness="1"  Margin="5,5,5,5" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped"  >
+                        <Grid Background="#FF8B0457" >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="5*"/>
@@ -407,8 +306,8 @@
                         </Grid>
                     </Border>
 
-                    <Border  Grid.Row="3" Grid.Column="1" BorderBrush="#FF8B0457" BorderThickness="1"  Margin="5,5,5,5" PointerEntered="DEF_HEAD_PointerEntered" PointerExited="DEF_HEAD_PointerExited"  >
-                        <Grid x:Name="NAR_HEAD_Participer"  Background="#FF8B0457" >
+                    <Border x:Name="NAR_HEAD_Participer" Grid.Row="3" Grid.Column="1" BorderBrush="#FF8B0457" Tag="NarrowAppBar" BorderThickness="1"  Margin="5,5,5,5" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped" >
+                        <Grid Background="#FF8B0457" >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="5*"/>
@@ -440,9 +339,7 @@
                     </Border>
 -->
                 </Grid>
-
             </Grid>
-
         </AppBar>
     </Page.TopAppBar>
 
@@ -462,7 +359,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid x:Name="GR_Corps_Page" Grid.Column="1" Background="#FFE9E7E8" >
-                    <GridView
+                    <!--<GridView
                         Padding="60,20,0,0"
                         x:Name="itemGridView"
                         AutomationProperties.AutomationId="ItemsGridView"
@@ -471,7 +368,7 @@
                         ItemsSource="{Binding Source={StaticResource SourceGridView}}"
                         ItemTemplate="{StaticResource GridItemTemplate}"
                         SelectionMode="None"
-                        IsSwipeEnabled="false" IsItemClickEnabled="True"/>
+                        IsSwipeEnabled="false" IsItemClickEnabled="True"/>-->
 
                     <Grid x:Name="DEF_Grid_Load" >
                         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -509,38 +406,56 @@
                 <RowDefinition Height="10*"/>
                 <RowDefinition Height="115*"/>
             </Grid.RowDefinitions>
-            
+
             <!--<ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible">-->
-                <Grid Grid.Row="1" x:Name="GR_POR_Corps_Page" Background="White" Margin="100, 10,100,5" >
+            <Grid Grid.Row="1" x:Name="GR_POR_Corps_Page" Background="White" Margin="30,10,30,5" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="60*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid x:Name="POR_Titre_Planche">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="13*"/>
-                        <RowDefinition Height="40*"/>
-                        <RowDefinition Height="20*"/>
+                        <RowDefinition Height="29*"/>
+                        <RowDefinition Height="70*"/>
                     </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
 
-                    <Grid x:Name="POR_Titre_Planche" Grid.Row="0">
-                        <StackPanel Orientation="Vertical">
-                            <StackPanel Orientation="Horizontal" Background="#FFF3F0F1">
-                                <TextBlock Text="Auteur(s): " Foreground="#FFA9A3A6" FontSize="16" Height="20" Margin="10,10,0,10" />
-                                <TextBlock Text="gggggg" Foreground="#FFB80170" FontSize="16" Height="20" Margin="5,5,0,10" />
-                            </StackPanel>
-                            <TextBlock Text="Titre" Foreground="Black" FontSize="24" Margin="35,35,0,0"/>
-                            <TextBlock Text="Excerpt" Foreground="Black" FontSize="12" Margin="35,0,0,0"/>
-                        </StackPanel>
-
+                    <StackPanel Orientation="Horizontal" Background="#FFF3F0F1">
+                        <TextBlock Text="Auteur(s): " Foreground="#FFA9A3A6" FontSize="16" Margin="10,0,5,0" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="POR_Auteur" Text="gggggg" Foreground="#FFB80170" FontSize="16" Margin="0,0,10,0" VerticalAlignment="Center" />
+                    </StackPanel>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="18*"/>
+                            <ColumnDefinition Width="283*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="4*"/>
+                            <RowDefinition Height="3*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock x:Name="POR_Titre" Grid.ColumnSpan="2" Foreground="Black" FontSize="24" Margin="10,6,0,5" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="POR_Excerpt" TextWrapping="WrapWholeWords" Grid.Row="1" Foreground="Black" FontSize="12" Grid.Column="1" Margin="0,5,0,0"/>
                     </Grid>
+                </Grid>
 
-                    <Grid x:Name="POR_Corps_Planche" Grid.Row="1">
-                        <Border Margin="30,0,26,0">
-                            <Image x:Name="IMG_POR_Corps_Planche" Source="Assets/POR_PlancheVide.jpg" />
-                        </Border>
-                    </Grid>
-                    <Grid x:Name="POR_Commentaire_Planche" Grid.Row="2">
-                        <Border Background="White" Margin="2,12,16,12">
-                            <ListView
+                <Grid x:Name="POR_Corps_Planche" Grid.Row="1">
+                    <ListView
+                            Padding="2,2,2,2"
+                            x:Name="listePlanches"
+                            AutomationProperties.AutomationId="ItemsListView"
+                            AutomationProperties.Name="Items"
+                            ItemsSource="{Binding Source={StaticResource SourceListView}}"
+                            ItemTemplate="{StaticResource PlanchesTemplate}"
+                            SelectionMode="None"
+                            IsSwipeEnabled="false" IsItemClickEnabled="False"/>
+                </Grid>
+                <!--
+                <Grid x:Name="POR_Commentaire_Planche" Grid.Row="1">
+                    <Border Background="White" Margin="2,12,16,12">
+                        <ListView
                             Padding="2,2,2,2"
                             x:Name="itemListView"
                             AutomationProperties.AutomationId="ItemsGridView"
@@ -549,10 +464,10 @@
                             ItemTemplate="{StaticResource ListItemTemplate}"
                             SelectionMode="None"
                             IsSwipeEnabled="false" IsItemClickEnabled="True"/>
-                        </Border>
-                    </Grid>
+                    </Border>
+                </Grid>-->
 
-                </Grid>
+            </Grid>
             <!--</ScrollViewer>-->
 
 
@@ -563,9 +478,9 @@
                     <Image Source="Assets/Header/HEADER_Tuto.png" Margin="10,2,5,0" HorizontalAlignment="Right"  VerticalAlignment="Center"/>
                 </Grid>
             </Border>
-   
+
         </Grid>
-        
+
 
         <!-- Vue pour les Width < 600px -->
         <Grid x:Name="NarrowView" Visibility="Collapsed">
@@ -577,7 +492,7 @@
             <Grid x:Name="GR_NAR_Body" Grid.Row="1">
 
                 <Grid x:Name="GR_NAR_Corps_Page" Background="#FFE9E7E8" >
-                    <ListView
+                    <!--<ListView
                         Padding="10,10,10,10"
                         x:Name="itemNarrowListView"
                         AutomationProperties.AutomationId="ItemsGridView"
@@ -586,7 +501,7 @@
                         ItemsSource="{Binding Source={StaticResource SourceGridView}}"
                         ItemTemplate="{StaticResource NarrowListItemTemplate}"
                         SelectionMode="None"
-                        IsSwipeEnabled="false" IsItemClickEnabled="True"/>
+                        IsSwipeEnabled="false" IsItemClickEnabled="True"/>-->
                 </Grid>
 
 
@@ -622,9 +537,6 @@
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DefautlView" Storyboard.TargetProperty="Visibility">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
                         </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="itemGridView" Storyboard.TargetProperty="ItemTemplate">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource GridItemTemplate}"/>
-                        </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PortraitView" Storyboard.TargetProperty="Visibility">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
                         </ObjectAnimationUsingKeyFrames>
@@ -649,9 +561,7 @@
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DefautlView" Storyboard.TargetProperty="Visibility">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
                         </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="itemGridView" Storyboard.TargetProperty="ItemTemplate">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BigGridItemTemplate}"/>
-                        </ObjectAnimationUsingKeyFrames>
+                        
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PortraitView" Storyboard.TargetProperty="Visibility">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
                         </ObjectAnimationUsingKeyFrames>

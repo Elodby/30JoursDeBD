@@ -1,17 +1,17 @@
 ﻿using _30JoursDeBD.Common;
+using _30JoursDeBD.testmodel;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using System.Net.Http;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
@@ -26,7 +26,12 @@ namespace _30JoursDeBD
 
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
+        private BD maBD;
+        public BD MaBD { get { return maBD; } }
+        private List<string> lesImages;
+        public List<string> LesImages { get { return lesImages; } }
 
+        #region MyRegion
         /// <summary>
         /// This can be changed to a strongly typed view model.
         /// </summary>
@@ -43,16 +48,6 @@ namespace _30JoursDeBD
         {
             get { return this.navigationHelper; }
         }
-
-
-        public pageArticle()
-        {
-            this.InitializeComponent();
-            this.navigationHelper = new NavigationHelper(this);
-            this.navigationHelper.LoadState += navigationHelper_LoadState;
-            this.navigationHelper.SaveState += navigationHelper_SaveState;
-        }
-
         /// <summary>
         /// Populates the page with content passed during navigation. Any saved state is also
         /// provided when recreating a page from a prior session.
@@ -80,7 +75,7 @@ namespace _30JoursDeBD
         {
         }
 
-        #region NavigationHelper registration
+        
 
         /// The methods provided in this section are simply used to allow
         /// NavigationHelper to respond to the page's navigation methods.
@@ -89,19 +84,29 @@ namespace _30JoursDeBD
         /// <see cref="GridCS.Common.NavigationHelper.LoadState"/>
         /// and <see cref="GridCS.Common.NavigationHelper.SaveState"/>.
         /// The navigation parameter is available in the LoadState method 
-        /// in addition to page state preserved during an earlier session.
+        /// in addition to page state preserved during an earlier session. 
+        #endregion
+
+
+        public pageArticle()
+        {
+            this.InitializeComponent();
+            this.navigationHelper = new NavigationHelper(this);
+            //this.navigationHelper.LoadState += navigationHelper_LoadState;
+            //this.navigationHelper.SaveState += navigationHelper_SaveState;
+
+            this.SizeChanged += Page_SizeChanged;
+        }
+
+       
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            navigationHelper.OnNavigatedTo(e);
+            maBD = e.Parameter as BD;
+            lesImages = maBD.ImagesAttachees;
         }
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            navigationHelper.OnNavigatedFrom(e);
-        }
 
-        #endregion
 
         private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
         {
@@ -122,5 +127,66 @@ namespace _30JoursDeBD
                 VisualStateManager.GoToState(this, "DefaultLayout", true);
             }
         }
+
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            AppBarTop.Height = this.ActualHeight / 5;
+            POR_Auteur.Text = maBD.Auteur;
+            POR_Excerpt.Text = maBD.Excerpt;
+            POR_Titre.Text = maBD.Titre;
+            if (POR_Titre.Text.Length > 50)
+            { POR_Titre.FontSize = 20; }
+
+            this.DataContext = this;
+        }
+      
+
+
+
+        //Gestion AppBar
+        private void AppBar_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            (sender as Border).BorderBrush = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
+        }
+
+        private void AppBar_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            (sender as Border).BorderBrush = new SolidColorBrush(Color.FromArgb(255, 139, 4, 87));
+        }
+
+        private void AppBar_Tapped(object sender, TappedRoutedEventArgs e) // Navigation
+        {
+            string leNom = (sender as Border).Name;
+            string[] tabNom = { "Accueil", "BD", "Albums", "BestOf", "Auteurs", "Participer" };
+            int i;
+            for (i = 0; i < tabNom.Length; i++)
+            {
+                if (leNom.Contains(tabNom[i]))
+                    break;
+            }
+            switch (i)
+            {
+                case 0:
+                    Frame.Navigate(typeof(MainPage));
+                    break;
+                case 1:
+
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+
+                    break;
+                case 4:
+
+                    break;
+                case 5:
+
+                    break;
+            }
+        }
+
     }
 }
