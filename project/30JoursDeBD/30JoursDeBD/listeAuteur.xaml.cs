@@ -176,7 +176,7 @@ namespace _30JoursDeBD
             switch(i)
             {
                 case 0:
-                    
+                    Frame.Navigate(typeof(MainPage));
                     break;
                 case 1:
                     

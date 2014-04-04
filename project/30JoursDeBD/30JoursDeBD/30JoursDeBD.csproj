@@ -112,6 +112,10 @@
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="Common\testmodel\Auteur.cs" />
+    <Compile Include="listeAuteur.xaml.cs">
+      <DependentUpon>listeAuteur.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Liste_Auteur_Page.xaml.cs">
       <DependentUpon>Liste_Auteur_Page.xaml</DependentUpon>
     </Compile>
@@ -175,6 +179,10 @@
     <Page Include="BasicPage1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="listeAuteur.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Liste_Auteur_Page.xaml">
       <SubType>Designer</SubType>
