@@ -104,6 +104,16 @@ namespace _30JoursDeBD
         {
             maBD = e.Parameter as BD;
             lesImages = maBD.ImagesAttachees;
+            foreach(string nom in lesImages)
+            {
+                if(nom.ToUpper().Contains("PREVIEW")
+                    || nom.ToUpper().Contains("BANNIERE")
+                    || nom.ToUpper().Contains("BANDEAU"))
+                {
+                    lesImages.Remove(nom);
+                    break;
+                }
+            }
         }
 
 

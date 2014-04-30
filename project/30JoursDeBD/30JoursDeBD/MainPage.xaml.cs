@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.Data.Html;
+using _30JoursDeBD.Common.testmodel;
 
 // Pour en savoir plus sur le modèle d'élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -113,7 +114,9 @@ namespace _30JoursDeBD
                             Titre = HtmlUtilities.ConvertToText(post.title),
                             Auteur = HtmlUtilities.ConvertToText(post.author.name),
                             Rubrique = post.categories.Single(c => c.slug == "strips" || c.slug == "planches").title,
-                            Image = post.attachments.Single(c => c.slug.ToUpper().Contains("PREVIEW")).url,
+                            Image = post.attachments.Single(c => c.slug.ToUpper().Contains("PREVIEW") 
+                                || c.slug.ToUpper().Contains("BANNIERE")
+                                || c.slug.ToUpper().Contains("BANDEAU")).url,
                             ImagesAttachees = post.attachments.Select(a => a.url).ToList(),
                             Excerpt = HtmlUtilities.ConvertToText(post.excerpt),
                             Note = "Assets/Star.png"
@@ -135,16 +138,30 @@ namespace _30JoursDeBD
                     });
                 }
             }
+            
 
+            //Mettre au photo un auteur aléatoire
+            var jsonStringListeAutheur = await client.GetStringAsync(new Uri("http://30joursdebd.com/?json=get_author_index"));
+            var httpresponseListeAuteur = JsonConvert.DeserializeObject<AuthorIndex>(jsonStringListeAutheur.ToString());
+            Random rand = new Random();
+            int indexRandom = rand.Next(httpresponseListeAuteur.authors.Count);
+            string nomAuteurAleatoire = httpresponseListeAuteur.authors[indexRandom].name;
+            
+            this.DataContext = this;
             TrouvePremierStrip();
             TrouvePremierePlanche();
+            IMG_POR_Corps_Auteur.Source = new BitmapImage(new Uri(
+                "http://30joursdebd.com/30jdbdv3/wp-content/themes/30jdbd/scripts/timthumb.php?src=/30jdbdv3/wp-content/themes/30jdbd/images/auteurs/" 
+                + nomAuteurAleatoire + ".jpg&w=130&h=130&zc=1&q=90",
+                UriKind.Absolute));
+
+
             //Storyboard de chargement ( fin )
             POR_Grid_Load.Visibility = Visibility.Collapsed;
             POR_Engrenage_Load.Stop();
             DEF_Grid_Load.Visibility = Visibility.Collapsed;
             DEF_Engrenage_Load.Stop();
 
-            this.DataContext = this;
         }
 
         private void TrouvePremierStrip(){
