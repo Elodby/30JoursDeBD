@@ -40,6 +40,7 @@ namespace _30JoursDeBD
         public List<Auteur> ListeFiltre { get { return _listeFiltre; } }
         private string[] Alphabet = new string[28] {"Tout","0-9","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
 
+        #region navigationhelper
         /// <summary>
         /// This can be changed to a strongly typed view model.
         /// </summary>
@@ -56,6 +57,7 @@ namespace _30JoursDeBD
         {
             get { return this.navigationHelper; }
         }
+        #endregion
 
 
         public listeAuteur()
@@ -100,7 +102,9 @@ namespace _30JoursDeBD
         /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
         /// a dictionary of state preserved by this page during an earlier
         /// session. The state will be null the first time a page is visited.</param>
-        private async void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (_listeAuteur.Count == 0)
         {
             //Storyboard de chargement
             POR_Engrenage_Load.Begin();
@@ -116,9 +120,10 @@ namespace _30JoursDeBD
             foreach (Author a in httpresponse.authors)
             {
                 auteur = new Auteur();
+                    auteur.Id = a.id;
                 auteur.Nom = a.name;
                 auteur.URL = a.url;
-                auteur.Image = "http://30joursdebd.com/30jdbdv3/wp-content/themes/30jdbd/scripts/timthumb.php?src=/30jdbdv3/wp-content/themes/30jdbd/images/auteurs/"+a.name+".jpg&w=130&h=130&zc=1&q=90";
+                    auteur.Image = "http://30joursdebd.com/30jdbdv3/wp-content/themes/30jdbd/scripts/timthumb.php?src=/30jdbdv3/wp-content/themes/30jdbd/images/auteurs/" + a.name + ".jpg&w=130&h=130&zc=1&q=90";
                 auteur.Description = a.description;
                 lstAut.Add(auteur);
             }
@@ -139,6 +144,7 @@ namespace _30JoursDeBD
             DEF_Engrenage_Load.Stop();
 
             this.DataContext = this;
+        }
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -161,8 +167,8 @@ namespace _30JoursDeBD
 
         private void Image_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            
-
+            Auteur AuteurSelectionne = ((Image)sender).DataContext as Auteur;
+            Frame.Navigate(typeof(pageAuteur), AuteurSelectionne);
         }
 
 
@@ -177,14 +183,9 @@ namespace _30JoursDeBD
         /// The navigation parameter is available in the LoadState method 
         /// in addition to page state preserved during an earlier session.
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            navigationHelper.OnNavigatedTo(e);
-        }
-
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            navigationHelper.OnNavigatedFrom(e);
+            
         }
 
         #endregion
@@ -202,17 +203,18 @@ namespace _30JoursDeBD
         private void AppBar_Tapped(object sender, TappedRoutedEventArgs e) // Navigation
         {
             string leNom = (sender as Border).Name;
-            string[] tabNom = {"Accueil","BD","Albums","BestOf","Auteurs","Participer"};
+            string[] tabNom = { "Accueil", "BD", "Albums", "BestOf", "Auteurs", "Participer" };
             int i;
-            for ( i=0; i < tabNom.Length; i++)
+            for (i = 0; i < tabNom.Length; i++)
             {
-                if ( leNom.Contains(tabNom[i]))
+                if (leNom.Contains(tabNom[i]))
                     break;
             }
-            switch(i)
+            switch (i)
             {
                 case 0:
-                    Frame.Navigate(typeof(MainPage));
+                    while (Frame.CanGoBack)
+                        Frame.GoBack();
                     break;
                 case 1:
                     
@@ -272,10 +274,10 @@ namespace _30JoursDeBD
                             {
                                 _listeFiltre.Add(a);
                                 break;
-                            }
-                        }
-                    }
-                }
+            }
+        }
+    }
+}
                 else
                 {
                     foreach (Auteur a in _listeAuteur)
