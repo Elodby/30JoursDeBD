@@ -76,27 +76,20 @@
 
         </DataTemplate>
 
-        <DataTemplate x:Key="NarrowListItemTemplate">
+        <DataTemplate x:Key="NarrowListItemTemplate" x:Name="Plop">
             <Border BorderBrush="#FFCECDCE" BorderThickness="2,0,0,2">
-                <Grid Background="#FFF9F9F9" Width="Auto" >
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*"/>
-                        </Grid.ColumnDefinitions>
-                        <Image Source="{Binding Image}" Stretch="Uniform" Margin="15,15,10,15"/>
-                        <Grid Grid.Column="1">
-                            <StackPanel VerticalAlignment="Center" Margin="20,0,20,0">
-                                <TextBlock Text="{Binding Titre}" Foreground="#FFD62291" FontSize="20" TextWrapping="WrapWholeWords"/>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Auteur}" Foreground="#FFD62291" TextWrapping="WrapWholeWords"/>
-                                    <TextBlock Text=" - rubrique ." Foreground="#FF818181" TextWrapping="WrapWholeWords"/>
-                                    <TextBlock Text="{Binding Rubrique}" Foreground="#FFD62291" TextWrapping="WrapWholeWords"/>
-                                </StackPanel>
-                            </StackPanel>
-                            <Image Source="{Binding Note}" Height="12" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,5"/>
-                        </Grid>
-
+                <Grid Background="#FFF9F9F9">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="{Binding Image}" Stretch="Uniform" Margin="15,15,10,15"/>
+                    <Grid Grid.Column="1">
+                        <StackPanel VerticalAlignment="Center" Margin="20,0,20,0">
+                            <TextBlock Text="{Binding Titre}" Foreground="#FFD62291" FontSize="20" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="{Binding Auteur}" Foreground="#FFD62291" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="{Binding Rubrique}" Foreground="#FFD62291" TextWrapping="WrapWholeWords"/>
+                        </StackPanel>  
                     </Grid>
                 </Grid>
             </Border>
@@ -117,6 +110,14 @@
         </Storyboard>
         <Storyboard x:Name="DEF_Engrenage_Load">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="DEF_IMG_Load_Engrenage">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="90"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="180"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.6" Value="270"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2.3" Value="360"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="NAR_Engrenage_Load">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="NAR_IMG_Load_Engrenage">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="90"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="180"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:1.6" Value="270"/>
@@ -450,7 +451,7 @@
     <Grid x:Name="General">
         <!-- Vue par défaut -->
 
-        <Grid x:Name="DefautlView">
+        <Grid x:Name="DefautlView" Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition Height="13*"/>
                 <RowDefinition Height="115*"/>
@@ -576,7 +577,7 @@
         </Grid>
 
         <!-- Vue pour les Width < 600px -->
-        <Grid x:Name="NarrowView" Visibility="Collapsed" >
+        <Grid x:Name="NarrowView">
             <Grid.RowDefinitions>
                 <RowDefinition Height="8*"/>
                 <RowDefinition Height="115*"/>
@@ -595,6 +596,17 @@
                         ItemTemplate="{StaticResource NarrowListItemTemplate}"
                         SelectionMode="None"
                         IsSwipeEnabled="false" IsItemClickEnabled="True"/>
+                </Grid>
+
+                <Grid x:Name="NAR_Grid_Load" Grid.RowSpan="2" Grid.ColumnSpan="3" >
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                        <Image x:Name="NAR_IMG_Load_Engrenage" Source="Assets/Engrenage2.png" Stretch="None" Margin="20" RenderTransformOrigin="0.5,0.5" >
+                            <Image.RenderTransform>
+                                <CompositeTransform/>
+                            </Image.RenderTransform>
+                        </Image>
+                        <TextBlock Text="Chargement..." FontSize="52" FontFamily="SketchFlow Print" Foreground="#FFB2016E" FontWeight="Bold" TextWrapping="Wrap" />
+                    </StackPanel>
                 </Grid>
 
 

@@ -35,7 +35,10 @@ namespace _30JoursDeBD
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
         private List<Auteur> _listeAuteur = new List<Auteur>();
+        private List<Auteur> _listeFiltre = new List<Auteur>();
         public List<Auteur> ListeAuteur { get { return _listeAuteur; } }
+        public List<Auteur> ListeFiltre { get { return _listeFiltre; } }
+        private string[] Alphabet = new string[28] {"Tout","0-9","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
 
         #region navigationhelper
         /// <summary>
@@ -53,7 +56,7 @@ namespace _30JoursDeBD
         public NavigationHelper NavigationHelper
         {
             get { return this.navigationHelper; }
-        } 
+        }
         #endregion
 
 
@@ -64,6 +67,8 @@ namespace _30JoursDeBD
             //this.navigationHelper.LoadState += navigationHelper_LoadState;
             //this.navigationHelper.SaveState += navigationHelper_SaveState;
             this.NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
+            this.POR_ComboBoxFiltre.ItemsSource = Alphabet;
+            this.POR_ComboBoxFiltre.SelectedIndex = 0;
         }
 
         //Gestion des Visuals States en fonction de la taille de l'écran, lors de l'appel de l'event SizeChanged
@@ -111,18 +116,27 @@ namespace _30JoursDeBD
                 HttpClient client = new HttpClient();
                 var jsonString = await client.GetStringAsync(new Uri("http://30joursdebd.com/?json=get_author_index"));
                 var httpresponse = JsonConvert.DeserializeObject<AuthorIndex>(jsonString.ToString());
-                Auteur auteur;
+                Auteur  auteur;
+                List<Auteur> lstAut = new List<Auteur>();
                 foreach (Author a in httpresponse.authors)
                 {
                     auteur = new Auteur();
-                    auteur.Id = a.id;
+                        auteur.Id = a.id;
                     auteur.Nom = a.name;
                     auteur.URL = a.url;
-                    auteur.Image = "http://30joursdebd.com/30jdbdv3/wp-content/themes/30jdbd/scripts/timthumb.php?src=/30jdbdv3/wp-content/themes/30jdbd/images/auteurs/" + a.name + ".jpg&w=130&h=130&zc=1&q=90";
+                        auteur.Image = "http://30joursdebd.com/30jdbdv3/wp-content/themes/30jdbd/scripts/timthumb.php?src=/30jdbdv3/wp-content/themes/30jdbd/images/auteurs/" + a.name + ".jpg&w=130&h=130&zc=1&q=90";
                     auteur.Description = a.description;
-                    _listeAuteur.Add(auteur);
+                    lstAut.Add(auteur);
                 }
-                this.DataContext = this;
+
+                //Tri des auteurs par ordre alphabétique
+                IEnumerable<Auteur> sortedAuteurs =
+                    from aut in lstAut
+                    orderby aut.Nom ascending
+                    select aut;
+                _listeAuteur = sortedAuteurs.ToList();
+                lstAut.Clear();
+
 
                 //Storyboard de chargement ( fin )
                 POR_Grid_Load.Visibility = Visibility.Collapsed;
@@ -136,11 +150,8 @@ namespace _30JoursDeBD
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            AppBarTop.IsOpen = false;
             AppBarTop.Height = this.ActualHeight / 5;
-            //AppBarTop.IsOpen = true;
-
-
-            this.DataContext = this;
         }
 
         /// <summary>
@@ -179,7 +190,6 @@ namespace _30JoursDeBD
         }
 
         #endregion
-        #region appbar
         //Gestion AppBar
         private void AppBar_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
@@ -208,22 +218,97 @@ namespace _30JoursDeBD
                         Frame.GoBack();
                     break;
                 case 1:
-
+                    
                     break;
                 case 2:
-
+                    
                     break;
                 case 3:
-
+                    
                     break;
                 case 4:
-
+                    
                     break;
                 case 5:
-
+                   
                     break;
             }
-        } 
-        #endregion
+        }
+
+        private void TouchMenu(object sender, TappedRoutedEventArgs e)
+        {
+            //Frame.GoBack();
+        }
+
+
+        /// <summary>
+        /// Méthodes de tri des auteurs
+        /// </summary>
+        /// 
+
+        private void POR_BoutonFiltre_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (POR_ComboBoxFiltre.SelectedItem != null)
+            {
+                FiltreAuteurs((string)POR_ComboBoxFiltre.SelectedValue);
+            }
+        }
+
+        private void FiltreAuteurs(string carac)
+        {
+            _listeFiltre.Clear();
+            if (carac == "Tout")
+            {
+                GestionVisibiliyNoAuteur(ListeAuteur);
+                SourceGridView.Source = null;
+                SourceGridView.Source = ListeAuteur;
+            }
+            else
+            {
+                if (carac == "0-9")
+                {
+                    foreach (Auteur a in _listeAuteur)
+                    {
+                        for (int i = 0; i < 10; i++)
+                        {
+                            if (a.Nom.ToUpper().StartsWith(i.ToString()))
+                            {
+                                _listeFiltre.Add(a);
+                                break;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (Auteur a in _listeAuteur)
+                    {
+                        if (a.Nom.ToUpper().StartsWith(carac))
+                        {
+                            _listeFiltre.Add(a);
+                        }
+                    }
+                    
+                }
+
+                GestionVisibiliyNoAuteur(ListeFiltre);
+                SourceGridView.Source = null;
+                SourceGridView.Source = ListeFiltre;
+                
+            }
+            
+        }
+
+        private void GestionVisibiliyNoAuteur(List<Auteur> lst)
+        {
+            if (lst.Count == 0)
+            {
+                POR_NoAuteurs.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                POR_NoAuteurs.Visibility = Visibility.Collapsed;
+            }
+        }
     }
 }

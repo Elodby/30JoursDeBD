@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text.RegularExpressions;
 using Windows.Data.Html;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -58,70 +59,50 @@ namespace _30JoursDeBD
             HttpClient client = new HttpClient();
             var jsonString = await client.GetStringAsync(new Uri("http://30joursdebd.com/?json=get_author_posts&author_id=" + auteurSelectionne.Id));
             var httpresponse = JsonConvert.DeserializeObject<RootObject>(jsonString.ToString());
+            BD article;
             foreach (Post post in httpresponse.posts)
             {
+                article = new BD();
                 try
                 {
-                    if (post.categories.Where(c => c.slug == "planches").Count() != 0)
+                    if (post.categories.Where(c => c.slug == "planches" || c.slug == "strips").Count() != 0)
                     {
-                        lesPlanches.Add(new BD()
+                        article.Titre = HtmlUtilities.ConvertToText(post.title);
+                        article.Auteur = HtmlUtilities.ConvertToText(post.author.name);
+                        article.Rubrique = post.categories.Single(c => c.slug == "strips" || c.slug == "planches").title;
+                        article.Excerpt = HtmlUtilities.ConvertToText(post.excerpt);
+                        article.Note = "Assets/Star.png";
+                        if (post.attachments.Count != 0)
                         {
-                            Titre = HtmlUtilities.ConvertToText(post.title),
-                            Auteur = HtmlUtilities.ConvertToText(post.author.name),
-                            Rubrique = "Planches",
-                            Image = post.attachments.Single(c => c.slug.ToUpper().Contains("PREVIEW")
-                                || c.slug.ToUpper().Contains("BANNIERE")
-                                || c.slug.ToUpper().Contains("BANDEAU")).url,
-                            ImagesAttachees = post.attachments.Select(a => a.url).ToList(),
-                            Excerpt = HtmlUtilities.ConvertToText(post.excerpt),
-                            Note = "Assets/Star.png"
-                        });
-                    }
-                    else if (post.categories.Where(c => c.slug == "strips").Count() != 0)
-                    {
-                        lesStrips.Add(new BD()
+                            article.Image = post.attachments.Single(c => c.slug.ToUpper().Contains("PREVIEW")
+                                            || c.slug.ToUpper().Contains("BANNIERE")
+                                            || c.slug.ToUpper().Contains("BANDEAU")).url;
+                            article.ImagesAttachees = post.attachments.Select(a => a.url).ToList();
+                        }
+                        else
                         {
-                            Titre = HtmlUtilities.ConvertToText(post.title),
-                            Auteur = HtmlUtilities.ConvertToText(post.author.name),
-                            Rubrique = "Strips",
-                            Image = post.attachments.Single(c => c.slug.ToUpper().Contains("PREVIEW")
-                                || c.slug.ToUpper().Contains("BANNIERE")
-                                || c.slug.ToUpper().Contains("BANDEAU")).url,
-                            ImagesAttachees = post.attachments.Select(a => a.url).ToList(),
-                            Excerpt = HtmlUtilities.ConvertToText(post.excerpt),
-                            Note = "Assets/Star.png"
-                        });
+                            Regex r = new Regex(@"<a.*?href=(""|')(?<href>.*?)(""|').*?>(?<value>.*?)</a>");
+                            foreach (Match match in r.Matches(post.content))
+                            {
+                                if (article.ImagesAttachees == null)
+                                    article.ImagesAttachees = new List<string>();
+                                article.ImagesAttachees.Add("http://30joursdebd.com" + match.Groups["href"].Value);
+                            }
+                            article.Image = article.ImagesAttachees.First();
+                        }
                     }
                 }
                 catch
                 {
-                    if (post.categories.Where(c => c.slug == "planches").Count() != 0)
-                    {
-                        lesPlanches.Add(new BD()
-                        {
-                            Titre = HtmlUtilities.ConvertToText(post.title),
-                            Auteur = HtmlUtilities.ConvertToText(post.author.name),
-                            Rubrique = "Planches",
-                            Image = post.attachments.First().url,
-                            ImagesAttachees = post.attachments.Select(a => a.url).ToList(),
-                            Excerpt = HtmlUtilities.ConvertToText(post.excerpt),
-                            Note = "Assets/Star.png"
-                        });
-                    }
-                    else if (post.categories.Where(c => c.slug == "strips").Count() != 0)
-                    {
-                        lesStrips.Add(new BD()
-                        {
-                            Titre = HtmlUtilities.ConvertToText(post.title),
-                            Auteur = HtmlUtilities.ConvertToText(post.author.name),
-                            Rubrique = "Strips",
-                            Image = post.attachments.First().url,
-                            ImagesAttachees = post.attachments.Select(a => a.url).ToList(),
-                            Excerpt = HtmlUtilities.ConvertToText(post.excerpt),
-                            Note = "Assets/Star.png"
-                        });
-                    }
+                    article.Image = post.attachments.Last().url;
+                    article.ImagesAttachees = post.attachments.Select(a => a.url).ToList();
+
+
                 }
+                if (article.Rubrique == "Planches")
+                    lesPlanches.Add(article);
+                else if(article.Rubrique == "Strips")
+                    lesStrips.Add(article);
             }
             this.DataContext = this;
         }
