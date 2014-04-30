@@ -473,7 +473,7 @@
 
             <Border x:Name="BR_POR_Header" BorderBrush="#FFCECDCE" BorderThickness="0,0,0,2">
                 <Grid x:Name="GR_POR_Header" Background="#FFF9F9F9" >
-                    <Image Source="Assets/Header/HEADER_MenuIcone.png" Margin="10,2,0,0" HorizontalAlignment="Left"  VerticalAlignment="Center" />
+                    <Image Source="Assets/Header/HEADER_MenuIcone.png" Margin="10,2,0,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Tapped="TouchMenu" />
                     <Image Source="Assets/Header/Logo30J.png" Margin="267,2,266,2"/>
                     <Image Source="Assets/Header/HEADER_Tuto.png" Margin="10,2,5,0" HorizontalAlignment="Right"  VerticalAlignment="Center"/>
                 </Grid>
