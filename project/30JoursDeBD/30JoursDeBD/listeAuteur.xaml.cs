@@ -37,6 +37,7 @@ namespace _30JoursDeBD
         private List<Auteur> _listeAuteur = new List<Auteur>();
         public List<Auteur> ListeAuteur { get { return _listeAuteur; } }
 
+        #region navigationhelper
         /// <summary>
         /// This can be changed to a strongly typed view model.
         /// </summary>
@@ -52,15 +53,17 @@ namespace _30JoursDeBD
         public NavigationHelper NavigationHelper
         {
             get { return this.navigationHelper; }
-        }
+        } 
+        #endregion
 
 
         public listeAuteur()
         {
             this.InitializeComponent();
             this.navigationHelper = new NavigationHelper(this);
-            this.navigationHelper.LoadState += navigationHelper_LoadState;
-            this.navigationHelper.SaveState += navigationHelper_SaveState;
+            //this.navigationHelper.LoadState += navigationHelper_LoadState;
+            //this.navigationHelper.SaveState += navigationHelper_SaveState;
+            this.NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
         }
 
         //Gestion des Visuals States en fonction de la taille de l'écran, lors de l'appel de l'event SizeChanged
@@ -95,37 +98,40 @@ namespace _30JoursDeBD
         /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
         /// a dictionary of state preserved by this page during an earlier
         /// session. The state will be null the first time a page is visited.</param>
-        private async void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            //Storyboard de chargement
-            POR_Engrenage_Load.Begin();
-            POR_Engrenage_Load.RepeatBehavior = RepeatBehavior.Forever;
-            DEF_Engrenage_Load.Begin();
-            DEF_Engrenage_Load.RepeatBehavior = RepeatBehavior.Forever;
-
-            HttpClient client = new HttpClient();
-            var jsonString = await client.GetStringAsync(new Uri("http://30joursdebd.com/?json=get_author_index"));
-            var httpresponse = JsonConvert.DeserializeObject<AuthorIndex>(jsonString.ToString());
-            Auteur  auteur;
-            foreach (Author a in httpresponse.authors)
+            if (_listeAuteur.Count == 0)
             {
-                auteur = new Auteur();
-                auteur.Id = a.id;
-                auteur.Nom = a.name;
-                auteur.URL = a.url;
-                auteur.Image = "http://30joursdebd.com/30jdbdv3/wp-content/themes/30jdbd/scripts/timthumb.php?src=/30jdbdv3/wp-content/themes/30jdbd/images/auteurs/"+a.name+".jpg&w=130&h=130&zc=1&q=90";
-                auteur.Description = a.description;
-                _listeAuteur.Add(auteur);
+                //Storyboard de chargement
+                POR_Engrenage_Load.Begin();
+                POR_Engrenage_Load.RepeatBehavior = RepeatBehavior.Forever;
+                DEF_Engrenage_Load.Begin();
+                DEF_Engrenage_Load.RepeatBehavior = RepeatBehavior.Forever;
+
+                HttpClient client = new HttpClient();
+                var jsonString = await client.GetStringAsync(new Uri("http://30joursdebd.com/?json=get_author_index"));
+                var httpresponse = JsonConvert.DeserializeObject<AuthorIndex>(jsonString.ToString());
+                Auteur auteur;
+                foreach (Author a in httpresponse.authors)
+                {
+                    auteur = new Auteur();
+                    auteur.Id = a.id;
+                    auteur.Nom = a.name;
+                    auteur.URL = a.url;
+                    auteur.Image = "http://30joursdebd.com/30jdbdv3/wp-content/themes/30jdbd/scripts/timthumb.php?src=/30jdbdv3/wp-content/themes/30jdbd/images/auteurs/" + a.name + ".jpg&w=130&h=130&zc=1&q=90";
+                    auteur.Description = a.description;
+                    _listeAuteur.Add(auteur);
+                }
+                this.DataContext = this;
+
+                //Storyboard de chargement ( fin )
+                POR_Grid_Load.Visibility = Visibility.Collapsed;
+                POR_Engrenage_Load.Stop();
+                DEF_Grid_Load.Visibility = Visibility.Collapsed;
+                DEF_Engrenage_Load.Stop();
+
+                this.DataContext = this;
             }
-            this.DataContext = this;
-
-            //Storyboard de chargement ( fin )
-            POR_Grid_Load.Visibility = Visibility.Collapsed;
-            POR_Engrenage_Load.Stop();
-            DEF_Grid_Load.Visibility = Visibility.Collapsed;
-            DEF_Engrenage_Load.Stop();
-
-            this.DataContext = this;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -167,14 +173,9 @@ namespace _30JoursDeBD
         /// The navigation parameter is available in the LoadState method 
         /// in addition to page state preserved during an earlier session.
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            navigationHelper.OnNavigatedTo(e);
-        }
-
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            navigationHelper.OnNavigatedFrom(e);
+            
         }
 
         #endregion
@@ -203,7 +204,8 @@ namespace _30JoursDeBD
             switch (i)
             {
                 case 0:
-                    Frame.Navigate(typeof(MainPage));
+                    while (Frame.CanGoBack)
+                        Frame.GoBack();
                     break;
                 case 1:
 

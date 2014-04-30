@@ -43,6 +43,7 @@ namespace _30JoursDeBD
             // this.navigationHelper.LoadState += navigationHelper_LoadState;
             //this.navigationHelper.SaveState += navigationHelper_SaveState;
             this.SizeChanged += Page_SizeChanged;
+            this.NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
         }
 
          //Gestion des Visuals States en fonction de la taille de l'écran, lors de l'appel de l'event SizeChanged
@@ -103,7 +104,8 @@ namespace _30JoursDeBD
             switch(i)
             {
                 case 0:
-                    Frame.Navigate(typeof(MainPage));
+                    while (Frame.CanGoBack)
+                        Frame.GoBack();
                     break;
                 case 1:
                     
@@ -118,7 +120,6 @@ namespace _30JoursDeBD
                     Frame.Navigate(typeof(listeAuteur));
                     break;
                 case 5:
-                   
                     break;
             }
         }
