@@ -91,7 +91,6 @@ namespace _30JoursDeBD
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             AppBarTop.Height = this.ActualHeight / 5;
-            //AppBarTop.IsOpen = true;
 
             //Storyboard de chargement
             POR_Engrenage_Load.Begin();
@@ -250,10 +249,17 @@ namespace _30JoursDeBD
                     Frame.Navigate(typeof(listeAuteur));
                     break;
                 case 5:
-                   
+                    Frame.Navigate(typeof(Participer_Page));
                     break;
             }
         }
+
+        private void TouchMenu(object sender, TappedRoutedEventArgs e)
+        {
+            AppBarTop.IsOpen = true;
+        }
+
+
 
     }
 }

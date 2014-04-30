@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 
@@ -96,6 +97,12 @@ namespace _30JoursDeBD
         /// session. The state will be null the first time a page is visited.</param>
         private async void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+            //Storyboard de chargement
+            POR_Engrenage_Load.Begin();
+            POR_Engrenage_Load.RepeatBehavior = RepeatBehavior.Forever;
+            DEF_Engrenage_Load.Begin();
+            DEF_Engrenage_Load.RepeatBehavior = RepeatBehavior.Forever;
+
             HttpClient client = new HttpClient();
             var jsonString = await client.GetStringAsync(new Uri("http://30joursdebd.com/?json=get_author_index"));
             var httpresponse = JsonConvert.DeserializeObject<AuthorIndex>(jsonString.ToString());
@@ -109,6 +116,23 @@ namespace _30JoursDeBD
                 auteur.Description = a.description;
                 _listeAuteur.Add(auteur);
             }
+            this.DataContext = this;
+
+            //Storyboard de chargement ( fin )
+            POR_Grid_Load.Visibility = Visibility.Collapsed;
+            POR_Engrenage_Load.Stop();
+            DEF_Grid_Load.Visibility = Visibility.Collapsed;
+            DEF_Engrenage_Load.Stop();
+
+            this.DataContext = this;
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            AppBarTop.Height = this.ActualHeight / 5;
+            //AppBarTop.IsOpen = true;
+
+
             this.DataContext = this;
         }
 
