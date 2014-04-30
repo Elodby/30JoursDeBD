@@ -6,14 +6,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Loaded="Page_Loaded">
-    
+
     <Page.Resources>
 
         <!-- Collection -->
         <CollectionViewSource
             x:Name="SourceListView"
             Source="{Binding LesPlanches}" />
-        
+
         <CollectionViewSource
             x:Name="SourceListView2"
             Source="{Binding LesStrips}" />
@@ -348,70 +348,116 @@
 
 
     <Grid x:Name="General">
-        
+
         <!-- Vue par défaut -->
-        <Grid x:Name="DefautlView" Visibility="Collapsed">
+        <Grid x:Name="DefautlView" Visibility="Collapsed" Background="#FFE9E7E8" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="13*"/>
                 <RowDefinition Height="115*"/>
             </Grid.RowDefinitions>
 
-            <Grid x:Name="GR_DEF_Body" Grid.Row="1">
+            <Grid x:Name="GR_DEF_Body" Grid.Row="1" Background="#FFF3F0F1" Margin="30,10,30,5" >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="60*"/>
+                    <ColumnDefinition Width="60*"/>
+                    <ColumnDefinition Width="60*"/>
                 </Grid.ColumnDefinitions>
 
-                <Grid x:Name="GR_Corps_Page" Grid.Column="1" Background="#FFE9E7E8" >
-                    <!--<GridView
-                        Padding="60,20,0,0"
-                        x:Name="itemGridView"
-                        AutomationProperties.AutomationId="ItemsGridView"
-                        AutomationProperties.Name="Items"
-                        TabIndex="1"
-                        ItemsSource="{Binding Source={StaticResource SourceGridView}}"
-                        ItemTemplate="{StaticResource GridItemTemplate}"
-                        SelectionMode="None"
-                        IsSwipeEnabled="false" IsItemClickEnabled="True"/>-->
+                <Grid x:Name="GR_Titre_Planche" Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40*"/>
+                        <RowDefinition Height="100*"/>
+                    </Grid.RowDefinitions>
 
-                    <Grid x:Name="DEF_Grid_Load" >
-                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <Image x:Name="DEF_IMG_Load_Engrenage" Source="Assets/Engrenage2.png" Stretch="None" Margin="20" RenderTransformOrigin="0.5,0.5">
-                                <Image.RenderTransform>
-                                    <CompositeTransform/>
-                                </Image.RenderTransform>
-                            </Image>
-                            <TextBlock  Text="Chargement..." FontSize="64" FontFamily="SketchFlow Print" Foreground="#FFB2016E" FontWeight="Bold" />
-                        </StackPanel>
+                    <Grid Grid.Row="0">
+                        <Image Source="Assets/GR_AuteurVide.png" Name="GR_ImageAuteur" Margin="20 20 10 10" Width="200" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="15*"/>
+                            <RowDefinition Height="50*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="À propos de l'auteur... " Foreground="#FFB80170" FontSize="24" Margin="10,20,5,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                                <TextBlock x:Name="GR_Auteur" Foreground="Black" FontWeight="Bold" FontSize="24" Margin="0,20,5,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid Grid.Row="1">
+                            <ScrollViewer >
+                                <TextBlock x:Name="GR_AuteurDescription" Foreground="Black" FontSize="16" Text="rrrrrrrrrrr" Margin="20, 10, 30, 0" TextWrapping="WrapWholeWords"/>
+                            </ScrollViewer>
+                        </Grid>
                     </Grid>
                 </Grid>
 
+                <Grid x:Name="GR_Corps_Planche" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15*"/>
+                        <RowDefinition Height="60*"/>
+                    </Grid.RowDefinitions>
 
-            </Grid>
-
-            <Border x:Name="BR_DEF_Header" BorderBrush="#FFCECDCE" BorderThickness="0,0,0,2">
-                <Grid x:Name="GR_DEF_Header" Background="#FFF9F9F9" >
-                    <Image Source="Assets/Header/Logo30J.png" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,2,0,2"/>
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,2,10,2">
-                        <Image Source="Assets/Header/HEADER_ToutIcone_ON.png" x:Name="IMG_DEF_HEAD_TOUT"  VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,2,0,2"/>
-                        <Image Source="Assets/Header/HEADER_StripsIcone.png" x:Name="IMG_DEF_HEAD_STRIP" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,2,0,2"/>
-                        <Image Source="Assets/Header/HEADER_PlanchesIcone.png" x:Name="IMG_DEF_HEAD_PLANCHE" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,2,0,2"/>
-                    </StackPanel>
+                    <TextBlock Grid.Row="0" Text="Ses planches: " FontSize="24" Foreground="Black" Margin="30 20 0 10" FontWeight="Bold" VerticalAlignment="Bottom"/>
+                    <GridView
+                                    Grid.Row="1"
+                                    Margin="50 10 10 10"
+                                    Padding="2,2,2,2"
+                                    x:Name="GR_listePlanches"
+                                    AutomationProperties.AutomationId="ItemsListView"
+                                    AutomationProperties.Name="Items"
+                                    ItemsSource="{Binding Source={StaticResource SourceListView}}"
+                                    ItemTemplate="{StaticResource PlanchesTemplate}"
+                                    SelectionMode="None"
+                                    IsSwipeEnabled="false" IsItemClickEnabled="False">
+                    </GridView>
                 </Grid>
-            </Border>
+                <Grid x:Name="GR_Corps_Strip" Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15*"/>
+                        <RowDefinition Height="60*"/>
+                    </Grid.RowDefinitions>
 
+                    <TextBlock Grid.Row="0" Text="Ses strips: " FontSize="24" Foreground="Black" Margin="30 20 0 10" FontWeight="Bold" VerticalAlignment="Bottom"/>
+                    <GridView
+                                Grid.Row="1"
+                                Margin="50 10 10 10"
+                                Padding="2,2,2,2"
+                                x:Name="GR_listeStrips"
+                                AutomationProperties.AutomationId="ItemsListView"
+                                AutomationProperties.Name="Items"
+                                ItemsSource="{Binding Source={StaticResource SourceListView2}}"
+                                ItemTemplate="{StaticResource PlanchesTemplate}"
+                                SelectionMode="None"
+                                IsSwipeEnabled="false" IsItemClickEnabled="False">
+                    </GridView>
+                </Grid>
 
-
+<!--
+            <Grid x:Name="DEF_Grid_Load" >
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Image x:Name="DEF_IMG_Load_Engrenage" Source="Assets/Engrenage2.png" Stretch="None" Margin="20" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <CompositeTransform/>
+                        </Image.RenderTransform>
+                    </Image>
+                    <TextBlock  Text="Chargement..." FontSize="64" FontFamily="SketchFlow Print" Foreground="#FFB2016E" FontWeight="Bold" />
+                </StackPanel>
+            </Grid>-->
         </Grid>
+    </Grid>
 
-        <!-- Vue portrait ( height > width )-->
-        <Grid x:Name="PortraitView"  Background="#FFE9E7E8">
+    <!-- Vue portrait ( height > width )-->
+        <Grid x:Name="PortraitView"  Background="#FFE9E7E8" Visibility="Visible">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*"/>
                 <RowDefinition Height="115*"/>
             </Grid.RowDefinitions>
 
             <!--<ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible">-->
-            <Grid Grid.Row="1" x:Name="GR_POR_Corps_Page" Background="#FFF3F0F1" Margin="30,10,30,5" >
+            <Grid Grid.Row="1" x:Name="POR_Corps_Page" Background="#FFF3F0F1" Margin="30,10,30,5" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50*"/>
                     <RowDefinition Height="60*"/>
@@ -437,12 +483,12 @@
                         <Grid Grid.Row="0">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="À propos de l'auteur... " Foreground="#FFB80170" FontSize="24" Margin="10,20,5,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                                <TextBlock x:Name="POR_Auteur" Foreground="Black" FontWeight="Bold" FontSize="24" Margin="0,20,5,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                                <TextBlock Name="POR_Auteur" Foreground="Black" FontWeight="Bold" FontSize="24" Margin="0,20,5,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                             </StackPanel>
                         </Grid>
                         <Grid Grid.Row="1">
-                            <ScrollViewer > 
-                                <TextBlock x:Name="POR_AuteurDescription" Foreground="Black" FontSize="16" Text="rrrrrrrrrrr" Margin="20, 10, 20, 0" TextWrapping="WrapWholeWords"/>
+                            <ScrollViewer >
+                                <TextBlock Name="POR_AuteurDescription" Foreground="Black" FontSize="16" Margin="20, 10, 30, 0" TextWrapping="WrapWholeWords"/>
                             </ScrollViewer>
                         </Grid>
                     </Grid>
@@ -498,21 +544,6 @@
                         </ListView.ItemsPanel>
                     </ListView>
                 </Grid>
-                <!--
-                <Grid x:Name="POR_Commentaire_Planche" Grid.Row="1">
-                    <Border Background="White" Margin="2,12,16,12">
-                        <ListView
-                            Padding="2,2,2,2"
-                            x:Name="itemListView"
-                            AutomationProperties.AutomationId="ItemsGridView"
-                            AutomationProperties.Name="Items"
-                            ItemsSource="{Binding Source={StaticResource SourceGridView}}"
-                            ItemTemplate="{StaticResource ListItemTemplate}"
-                            SelectionMode="None"
-                            IsSwipeEnabled="false" IsItemClickEnabled="True"/>
-                    </Border>
-                </Grid>-->
-
             </Grid>
             <!--</ScrollViewer>-->
 
