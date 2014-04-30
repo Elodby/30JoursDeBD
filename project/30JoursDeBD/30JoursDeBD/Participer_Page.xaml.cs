@@ -72,9 +72,9 @@ namespace _30JoursDeBD
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            AppBarTop.IsOpen = false;
             AppBarTop.Height = this.ActualHeight / 5;
-            //AppBarTop.IsOpen = true;
-
+            
 
             this.DataContext = this;
         }

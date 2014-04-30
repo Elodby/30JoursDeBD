@@ -92,76 +92,78 @@ namespace _30JoursDeBD
         {
             if (_listeBD.Count == 0)
             {
-            //Storyboard de chargement
-            POR_Engrenage_Load.Begin();
-            POR_Engrenage_Load.RepeatBehavior = RepeatBehavior.Forever;
-            DEF_Engrenage_Load.Begin();
-            DEF_Engrenage_Load.RepeatBehavior = RepeatBehavior.Forever;
-            NAR_Engrenage_Load.Begin();
-            NAR_Engrenage_Load.RepeatBehavior = RepeatBehavior.Forever;
+                //Storyboard de chargement
+                POR_Engrenage_Load.Begin();
+                POR_Engrenage_Load.RepeatBehavior = RepeatBehavior.Forever;
+                DEF_Engrenage_Load.Begin();
+                DEF_Engrenage_Load.RepeatBehavior = RepeatBehavior.Forever;
+                NAR_Engrenage_Load.Begin();
+                NAR_Engrenage_Load.RepeatBehavior = RepeatBehavior.Forever;
 
-            HttpClient client = new HttpClient();
-            var jsonString = await client.GetStringAsync(new Uri("http://30joursdebd.com/?json=get_recent_post&count=30"));
-            var httpresponse = JsonConvert.DeserializeObject<RootObject>(jsonString.ToString());
-                foreach (Post post in httpresponse.posts)
-            {
-                try
+                HttpClient client = new HttpClient();
+                var jsonString = await client.GetStringAsync(new Uri("http://30joursdebd.com/?json=get_recent_post&count=30"));
+                var httpresponse = JsonConvert.DeserializeObject<RootObject>(jsonString.ToString());
+                    foreach (Post post in httpresponse.posts)
                 {
-                    if (post.categories.Where(c => c.slug == "news").Count() == 0)
+                    try
                     {
+                        if (post.categories.Where(c => c.slug == "news").Count() == 0)
+                        {
                         
+                            _listeBD.Add(new BD()
+                            {
+                                Titre = HtmlUtilities.ConvertToText(post.title),
+                                Auteur = HtmlUtilities.ConvertToText(post.author.name),
+                                Rubrique = post.categories.Single(c => c.slug == "strips" || c.slug == "planches").title,
+                                Image = post.attachments.Single(c => c.slug.ToUpper().Contains("PREVIEW") 
+                                    || c.slug.ToUpper().Contains("BANNIERE")
+                                    || c.slug.ToUpper().Contains("BANDEAU")).url,
+                                ImagesAttachees = post.attachments.Select(a => a.url).ToList(),
+                                Excerpt = HtmlUtilities.ConvertToText(post.excerpt),
+                                Note = "Assets/Star.png"
+                            });
+                        }
+                        
+                    }
+                    catch
+                    {
                         _listeBD.Add(new BD()
                         {
                             Titre = HtmlUtilities.ConvertToText(post.title),
                             Auteur = HtmlUtilities.ConvertToText(post.author.name),
                             Rubrique = post.categories.Single(c => c.slug == "strips" || c.slug == "planches").title,
-                            Image = post.attachments.Single(c => c.slug.ToUpper().Contains("PREVIEW") 
-                                || c.slug.ToUpper().Contains("BANNIERE")
-                                || c.slug.ToUpper().Contains("BANDEAU")).url,
+                            Image = post.attachments.Last().url,
                             ImagesAttachees = post.attachments.Select(a => a.url).ToList(),
                             Excerpt = HtmlUtilities.ConvertToText(post.excerpt),
                             Note = "Assets/Star.png"
                         });
                     }
-                        
                 }
-                catch
-                {
-                    _listeBD.Add(new BD()
-                    {
-                        Titre = HtmlUtilities.ConvertToText(post.title),
-                        Auteur = HtmlUtilities.ConvertToText(post.author.name),
-                        Rubrique = post.categories.Single(c => c.slug == "strips" || c.slug == "planches").title,
-                        Image = post.attachments.Last().url,
-                        ImagesAttachees = post.attachments.Select(a => a.url).ToList(),
-                        Excerpt = HtmlUtilities.ConvertToText(post.excerpt),
-                        Note = "Assets/Star.png"
-                    });
-                }
-            }
-            //Mettre au photo un auteur aléatoire
-            var jsonStringListeAutheur = await client.GetStringAsync(new Uri("http://30joursdebd.com/?json=get_author_index"));
-            var httpresponseListeAuteur = JsonConvert.DeserializeObject<AuthorIndex>(jsonStringListeAutheur.ToString());
-            Random rand = new Random();
-            int indexRandom = rand.Next(httpresponseListeAuteur.authors.Count);
-            string nomAuteurAleatoire = httpresponseListeAuteur.authors[indexRandom].name;
+                //Mettre au photo un auteur aléatoire
+                var jsonStringListeAutheur = await client.GetStringAsync(new Uri("http://30joursdebd.com/?json=get_author_index"));
+                var httpresponseListeAuteur = JsonConvert.DeserializeObject<AuthorIndex>(jsonStringListeAutheur.ToString());
+                Random rand = new Random();
+                int indexRandom = rand.Next(httpresponseListeAuteur.authors.Count);
+                string nomAuteurAleatoire = httpresponseListeAuteur.authors[indexRandom].name;
             
-                recupererDetailsAuteurAleatoire(httpresponseListeAuteur.authors[indexRandom]);
+                    recupererDetailsAuteurAleatoire(httpresponseListeAuteur.authors[indexRandom]);
 
-            this.DataContext = this;
-            TrouvePremierStrip();
-            TrouvePremierePlanche();
-            IMG_POR_Corps_Auteur.Source = new BitmapImage(new Uri(
-                    auteurAleatoire.Image,
-                UriKind.Absolute));
+            
+                TrouvePremierStrip();
+                TrouvePremierePlanche();
+                IMG_POR_Corps_Auteur.Source = new BitmapImage(new Uri(
+                        auteurAleatoire.Image,
+                    UriKind.Absolute));
 
-            //Storyboard de chargement ( fin )
-            POR_Grid_Load.Visibility = Visibility.Collapsed;
-            POR_Engrenage_Load.Stop();
-            DEF_Grid_Load.Visibility = Visibility.Collapsed;
-            DEF_Engrenage_Load.Stop();
-            NAR_Grid_Load.Visibility = Visibility.Collapsed;
-            NAR_Engrenage_Load.Stop();
+                //Storyboard de chargement ( fin )
+                POR_Grid_Load.Visibility = Visibility.Collapsed;
+                POR_Engrenage_Load.Stop();
+                DEF_Grid_Load.Visibility = Visibility.Collapsed;
+                DEF_Engrenage_Load.Stop();
+                NAR_Grid_Load.Visibility = Visibility.Collapsed;
+                NAR_Engrenage_Load.Stop();
+
+                this.DataContext = this;
             }
         }
 
@@ -182,6 +184,7 @@ namespace _30JoursDeBD
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            AppBarTop.IsOpen = false;
             AppBarTop.Height = this.ActualHeight / 5;
         }
 
@@ -278,7 +281,7 @@ namespace _30JoursDeBD
 
         private void TouchMenu(object sender, TappedRoutedEventArgs e)
         {
-            AppBarTop.IsOpen = true;
+            //AppBarTop.IsOpen = true;
         }
         #endregion
 

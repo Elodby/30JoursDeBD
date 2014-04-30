@@ -141,6 +141,7 @@ namespace _30JoursDeBD
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            AppBarTop.IsOpen = false;
             AppBarTop.Height = this.ActualHeight / 5;
             POR_Auteur.Text = maBD.Auteur;
             POR_Excerpt.Text = maBD.Excerpt;

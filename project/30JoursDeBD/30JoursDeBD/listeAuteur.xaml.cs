@@ -64,8 +64,9 @@ namespace _30JoursDeBD
         {
             this.InitializeComponent();
             this.navigationHelper = new NavigationHelper(this);
-            this.navigationHelper.LoadState += navigationHelper_LoadState;
-            this.navigationHelper.SaveState += navigationHelper_SaveState;
+            //this.navigationHelper.LoadState += navigationHelper_LoadState;
+            //this.navigationHelper.SaveState += navigationHelper_SaveState;
+            this.NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
             this.POR_ComboBoxFiltre.ItemsSource = Alphabet;
             this.POR_ComboBoxFiltre.SelectedIndex = 0;
         }
@@ -105,52 +106,52 @@ namespace _30JoursDeBD
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             if (_listeAuteur.Count == 0)
-        {
-            //Storyboard de chargement
-            POR_Engrenage_Load.Begin();
-            POR_Engrenage_Load.RepeatBehavior = RepeatBehavior.Forever;
-            DEF_Engrenage_Load.Begin();
-            DEF_Engrenage_Load.RepeatBehavior = RepeatBehavior.Forever;
-
-            HttpClient client = new HttpClient();
-            var jsonString = await client.GetStringAsync(new Uri("http://30joursdebd.com/?json=get_author_index"));
-            var httpresponse = JsonConvert.DeserializeObject<AuthorIndex>(jsonString.ToString());
-            Auteur  auteur;
-            List<Auteur> lstAut = new List<Auteur>();
-            foreach (Author a in httpresponse.authors)
             {
-                auteur = new Auteur();
-                    auteur.Id = a.id;
-                auteur.Nom = a.name;
-                auteur.URL = a.url;
-                    auteur.Image = "http://30joursdebd.com/30jdbdv3/wp-content/themes/30jdbd/scripts/timthumb.php?src=/30jdbdv3/wp-content/themes/30jdbd/images/auteurs/" + a.name + ".jpg&w=130&h=130&zc=1&q=90";
-                auteur.Description = a.description;
-                lstAut.Add(auteur);
+                //Storyboard de chargement
+                POR_Engrenage_Load.Begin();
+                POR_Engrenage_Load.RepeatBehavior = RepeatBehavior.Forever;
+                DEF_Engrenage_Load.Begin();
+                DEF_Engrenage_Load.RepeatBehavior = RepeatBehavior.Forever;
+
+                HttpClient client = new HttpClient();
+                var jsonString = await client.GetStringAsync(new Uri("http://30joursdebd.com/?json=get_author_index"));
+                var httpresponse = JsonConvert.DeserializeObject<AuthorIndex>(jsonString.ToString());
+                Auteur  auteur;
+                List<Auteur> lstAut = new List<Auteur>();
+                foreach (Author a in httpresponse.authors)
+                {
+                    auteur = new Auteur();
+                        auteur.Id = a.id;
+                    auteur.Nom = a.name;
+                    auteur.URL = a.url;
+                        auteur.Image = "http://30joursdebd.com/30jdbdv3/wp-content/themes/30jdbd/scripts/timthumb.php?src=/30jdbdv3/wp-content/themes/30jdbd/images/auteurs/" + a.name + ".jpg&w=130&h=130&zc=1&q=90";
+                    auteur.Description = a.description;
+                    lstAut.Add(auteur);
+                }
+
+                //Tri des auteurs par ordre alphabétique
+                IEnumerable<Auteur> sortedAuteurs =
+                    from aut in lstAut
+                    orderby aut.Nom ascending
+                    select aut;
+                _listeAuteur = sortedAuteurs.ToList();
+                lstAut.Clear();
+
+
+                //Storyboard de chargement ( fin )
+                POR_Grid_Load.Visibility = Visibility.Collapsed;
+                POR_Engrenage_Load.Stop();
+                DEF_Grid_Load.Visibility = Visibility.Collapsed;
+                DEF_Engrenage_Load.Stop();
+
+                this.DataContext = this;
             }
-
-            //Tri des auteurs par ordre alphabétique
-            IEnumerable<Auteur> sortedAuteurs =
-                from aut in lstAut
-                orderby aut.Nom ascending
-                select aut;
-            _listeAuteur = sortedAuteurs.ToList();
-            lstAut.Clear();
-
-
-            //Storyboard de chargement ( fin )
-            POR_Grid_Load.Visibility = Visibility.Collapsed;
-            POR_Engrenage_Load.Stop();
-            DEF_Grid_Load.Visibility = Visibility.Collapsed;
-            DEF_Engrenage_Load.Stop();
-
-            this.DataContext = this;
-        }
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            AppBarTop.IsOpen = false;
             AppBarTop.Height = this.ActualHeight / 5;
-            //AppBarTop.IsOpen = true;
         }
 
         /// <summary>
@@ -274,10 +275,10 @@ namespace _30JoursDeBD
                             {
                                 _listeFiltre.Add(a);
                                 break;
-            }
-        }
-    }
-}
+                            }
+                        }
+                    }
+                }
                 else
                 {
                     foreach (Auteur a in _listeAuteur)
