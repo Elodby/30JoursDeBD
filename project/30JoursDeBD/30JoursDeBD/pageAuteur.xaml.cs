@@ -44,7 +44,7 @@ namespace _30JoursDeBD
         {
             get
             {
-                return lesPlanches.Select(p => p.Image).ToList();
+                return lesStrips.Select(p => p.Image).ToList();
             }
         }
         public pageAuteur()
@@ -68,7 +68,7 @@ namespace _30JoursDeBD
                         {
                             Titre = HtmlUtilities.ConvertToText(post.title),
                             Auteur = HtmlUtilities.ConvertToText(post.author.name),
-                            Rubrique = post.categories.Single(c => c.slug == "strips" || c.slug == "planches").title,
+                            Rubrique = "Planches",
                             Image = post.attachments.Single(c => c.slug.ToUpper().Contains("PREVIEW")
                                 || c.slug.ToUpper().Contains("BANNIERE")
                                 || c.slug.ToUpper().Contains("BANDEAU")).url,
@@ -83,7 +83,7 @@ namespace _30JoursDeBD
                         {
                             Titre = HtmlUtilities.ConvertToText(post.title),
                             Auteur = HtmlUtilities.ConvertToText(post.author.name),
-                            Rubrique = post.categories.Single(c => c.slug == "strips" || c.slug == "planches").title,
+                            Rubrique = "Strips",
                             Image = post.attachments.Single(c => c.slug.ToUpper().Contains("PREVIEW")
                                 || c.slug.ToUpper().Contains("BANNIERE")
                                 || c.slug.ToUpper().Contains("BANDEAU")).url,
@@ -101,7 +101,7 @@ namespace _30JoursDeBD
                         {
                             Titre = HtmlUtilities.ConvertToText(post.title),
                             Auteur = HtmlUtilities.ConvertToText(post.author.name),
-                            Rubrique = post.categories.Single(c => c.slug == "strips" || c.slug == "planches").title,
+                            Rubrique = "Planches",
                             Image = post.attachments.First().url,
                             ImagesAttachees = post.attachments.Select(a => a.url).ToList(),
                             Excerpt = HtmlUtilities.ConvertToText(post.excerpt),
@@ -114,7 +114,7 @@ namespace _30JoursDeBD
                         {
                             Titre = HtmlUtilities.ConvertToText(post.title),
                             Auteur = HtmlUtilities.ConvertToText(post.author.name),
-                            Rubrique = post.categories.Single(c => c.slug == "strips" || c.slug == "planches").title,
+                            Rubrique = "Strips",
                             Image = post.attachments.First().url,
                             ImagesAttachees = post.attachments.Select(a => a.url).ToList(),
                             Excerpt = HtmlUtilities.ConvertToText(post.excerpt),

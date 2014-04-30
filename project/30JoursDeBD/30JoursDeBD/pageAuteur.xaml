@@ -20,7 +20,7 @@
 
         <!-- Data Template : pour la GridView du Corps -->
         <DataTemplate x:Key="PlanchesTemplate">
-            <Image Source="{Binding}" Width="200" Height="100" />
+            <Image Source="{Binding}" Width="200"/>
         </DataTemplate>
 
     </Page.Resources>
@@ -348,8 +348,8 @@
 
 
     <Grid x:Name="General">
+        
         <!-- Vue par défaut -->
-
         <Grid x:Name="DefautlView" Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition Height="13*"/>
@@ -409,48 +409,54 @@
                 <RowDefinition Height="10*"/>
                 <RowDefinition Height="115*"/>
             </Grid.RowDefinitions>
-            
-            
 
             <!--<ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible">-->
-            <Grid Grid.Row="1" x:Name="GR_POR_Corps_Page" Background="White" Margin="30,10,30,5" >
+            <Grid Grid.Row="1" x:Name="GR_POR_Corps_Page" Background="#FFF3F0F1" Margin="30,10,30,5" >
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="50*"/>
                     <RowDefinition Height="60*"/>
-                    <RowDefinition Height="150*"/>
+                    <RowDefinition Height="60*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-                <Grid x:Name="POR_Titre_Planche" Background="#FFF3F0F1">
+                <Grid x:Name="POR_Titre_Planche" >
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="80*"/>
-                        <ColumnDefinition Width="150*"/>
+                        <ColumnDefinition Width="40*"/>
+                        <ColumnDefinition Width="100*"/>
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
-                        <Image Source="Assets/POR_AuteurVide.png" Name="POR_ImageAuteur" HorizontalAlignment="Center" Margin="10" VerticalAlignment="Center" />
+                        <Image Source="Assets/POR_AuteurVide.png" Name="POR_ImageAuteur" Margin="20 20 10 10" Width="200" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                     </Grid>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="25*"/>
+                            <RowDefinition Height="15*"/>
                             <RowDefinition Height="50*"/>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="À propos de l'auteur: " Foreground="#FFB80170" FontSize="18" Margin="10,0,5,0" VerticalAlignment="Bottom"/>
-                                <TextBlock x:Name="POR_Auteur" Foreground="Black" FontWeight="Bold" FontSize="16" Margin="0,0,5,0" VerticalAlignment="Bottom" />
-                                
+                                <TextBlock Text="À propos de l'auteur... " Foreground="#FFB80170" FontSize="24" Margin="10,20,5,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                                <TextBlock x:Name="POR_Auteur" Foreground="Black" FontWeight="Bold" FontSize="24" Margin="0,20,5,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                             </StackPanel>
                         </Grid>
                         <Grid Grid.Row="1">
-                            <TextBlock x:Name="POR_AuteurDescription" Foreground="Black" FontSize="14" Text="rrrrrrrrrrr" Margin="10, 10, 0, 0" />
+                            <ScrollViewer > 
+                                <TextBlock x:Name="POR_AuteurDescription" Foreground="Black" FontSize="16" Text="rrrrrrrrrrr" Margin="20, 10, 20, 0" TextWrapping="WrapWholeWords"/>
+                            </ScrollViewer>
                         </Grid>
                     </Grid>
                 </Grid>
 
                 <Grid x:Name="POR_Corps_Planche" Grid.Row="1">
-                    <TextBlock Text="Ses planches: "  VerticalAlignment="Top" FontSize="18" Foreground="Black"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15*"/>
+                        <RowDefinition Height="60*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Ses planches: " FontSize="24" Foreground="Black" Margin="30 20 0 10" FontWeight="Bold" VerticalAlignment="Bottom"/>
                     <ListView
+                            Grid.Row="1"
+                            Margin="50 10 10 10"
                             Padding="2,2,2,2"
                             x:Name="listePlanches"
                             AutomationProperties.AutomationId="ItemsListView"
@@ -458,18 +464,39 @@
                             ItemsSource="{Binding Source={StaticResource SourceListView}}"
                             ItemTemplate="{StaticResource PlanchesTemplate}"
                             SelectionMode="None"
-                            IsSwipeEnabled="false" IsItemClickEnabled="False"/>
-                    
-                    <TextBlock Text="Ses strips: " FontSize="18" Foreground="Black"/>
+                            IsSwipeEnabled="false" IsItemClickEnabled="False">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapGrid Orientation="Horizontal" MaximumRowsOrColumns="4"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                    </ListView>
+                </Grid>
+                
+                <Grid x:Name="POR_Corps_Strip" Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15*"/>
+                        <RowDefinition Height="60*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Ses strips: " FontSize="24" Foreground="Black" Margin="30 20 0 10" FontWeight="Bold" VerticalAlignment="Bottom"/>
                     <ListView
+                            Grid.Row="1"
+                            Margin="50 10 10 10"
                             Padding="2,2,2,2"
                             x:Name="listeStrips"
                             AutomationProperties.AutomationId="ItemsListView"
                             AutomationProperties.Name="Items"
-                            ItemsSource="{Binding Source={StaticResource SourceListView}}"
+                            ItemsSource="{Binding Source={StaticResource SourceListView2}}"
                             ItemTemplate="{StaticResource PlanchesTemplate}"
                             SelectionMode="None"
-                            IsSwipeEnabled="false" IsItemClickEnabled="False"/>
+                            IsSwipeEnabled="false" IsItemClickEnabled="False">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapGrid Orientation="Horizontal" MaximumRowsOrColumns="4"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                    </ListView>
                 </Grid>
                 <!--
                 <Grid x:Name="POR_Commentaire_Planche" Grid.Row="1">
