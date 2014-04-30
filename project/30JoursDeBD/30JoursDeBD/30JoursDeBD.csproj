@@ -126,6 +126,9 @@
     <Compile Include="pageArticle.xaml.cs">
       <DependentUpon>pageArticle.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Participer_Page.xaml.cs">
+      <DependentUpon>Participer_Page.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\testmodel\model.cs" />
   </ItemGroup>
@@ -157,6 +160,7 @@
     <Content Include="Assets\Menu\Menu_AVousDeJouer.png" />
     <Content Include="Assets\Menu\Menu_BD.png" />
     <Content Include="Assets\Menu\Menu_BestOf.png" />
+    <Content Include="Assets\panneau.png" />
     <Content Include="Assets\Paysage.png" />
     <Content Include="Assets\POR_AuteurVide.jpg" />
     <Content Include="Assets\POR_PlancheVide.jpg" />
@@ -193,6 +197,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="pageArticle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Participer_Page.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

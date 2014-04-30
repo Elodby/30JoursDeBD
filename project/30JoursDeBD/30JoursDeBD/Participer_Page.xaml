@@ -1,0 +1,551 @@
+﻿<Page
+    x:Class="_30JoursDeBD.Participer_Page"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:_30JoursDeBD"
+    xmlns:common="using:_30JoursDeBD.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" SizeChanged="Page_SizeChanged" Loaded="Page_Loaded">
+
+    <Page.Resources>
+
+        <!-- Collection -->
+
+        <!-- Data Template : pour la GridView du Corps -->
+
+        <!--
+        Storyboards
+    -->
+        <Storyboard x:Name="POR_Engrenage_Load">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="POR_IMG_Load_Engrenage">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="90"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="180"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.6" Value="270"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2.3" Value="360"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Page.Resources>
+
+
+    <!--
+        Barre d'application. Contient les liens vers les autres pages
+    -->
+    <Page.TopAppBar>
+        <AppBar Padding="10,0,10,0" x:Name="AppBarTop" Background="#FFB2016E" BorderBrush="White" Height="160">
+            <Grid>
+                <Grid x:Name="DEF_AppBar" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="9*"/>
+                        <RowDefinition Height="55*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border x:Name="DEF_HEAD_Accueil" Grid.Row="1" BorderBrush="#FF8B0457" Tag="DefaultAppBar" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped"  >
+                        <Grid Background="#FF8B0457">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="35*"/>
+                                <RowDefinition Height="21*"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="Assets/Menu/Menu_Accueil.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Left"/>
+                            <TextBlock Text="Accueil" FontSize="20" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <Border  x:Name="DEF_HEAD_BD" Grid.Row="1" Grid.Column="1" BorderBrush="#FF8B0457" Tag="DefaultAppBar" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped" >
+                        <Grid Background="#FF8B0457" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="35*"/>
+                                <RowDefinition Height="21*"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="Assets/Menu/Menu_BD.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Left"/>
+                            <TextBlock Text="BD" FontSize="20" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <Border x:Name="DEF_HEAD_Albums" Grid.Row="1" Grid.Column="2" BorderBrush="#FF8B0457" Tag="DefaultAppBar" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped" >
+                        <Grid  Background="#FF8B0457" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="35*"/>
+                                <RowDefinition Height="21*"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="Assets/Menu/Menu_Album.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Left"/>
+                            <TextBlock Text="Albums" FontSize="20" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <Border x:Name="DEF_HEAD_BestOf" Grid.Row="1" Grid.Column="3" BorderBrush="#FF8B0457" Tag="DefaultAppBar" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped" >
+                        <Grid Background="#FF8B0457" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="35*"/>
+                                <RowDefinition Height="21*"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="Assets/Menu/Menu_BestOf.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Left"/>
+                            <TextBlock Text="Best-of" FontSize="20" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <Border x:Name="DEF_HEAD_Auteurs" Grid.Row="1" Grid.Column="4" BorderBrush="#FF8B0457" Tag="DefaultAppBar" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped" >
+                        <Grid Background="#FF8B0457" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="35*"/>
+                                <RowDefinition Height="21*"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="Assets/Menu/Menu_Auteurs.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Left"/>
+                            <TextBlock Text="Auteurs" FontSize="20" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <Border x:Name="DEF_HEAD_Participer" Grid.Row="1" Grid.Column="5" BorderBrush="#FF8B0457" Tag="DefaultAppBar" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped" >
+                        <Grid Background="#FF8B0457" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="35*"/>
+                                <RowDefinition Height="21*"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="Assets/Menu/Menu_AVousDeJouer.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Left"/>
+                            <TextBlock Text="Participer" FontSize="20" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <!--                    
+                    <Grid x:Name="Test2" Grid.Column="7" Margin="15,10,10,20" Grid.Row="1"  >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35*"/>
+                            <RowDefinition Height="21*"/>
+                        </Grid.RowDefinitions>
+                        <Image Source="Assets/Engrenage.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Paramètres" FontSize="20" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                    </Grid>
+
+                    <Border  Grid.Column="6" Margin="15,10,10,20" Grid.Row="1" BorderBrush="White" BorderThickness="1">
+                    <Grid x:Name="Test3"  >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35*"/>
+                            <RowDefinition Height="21*"/>
+                        </Grid.RowDefinitions>
+                        <Image Source="Assets/Engrenage.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Paramètres" FontSize="20" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+-->
+                </Grid>
+
+                <Grid x:Name="POR_AppBar" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="6*"/>
+                        <RowDefinition Height="55*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border x:Name="POR_HEAD_Accueil" Grid.Row="1" BorderBrush="#FF8B0457" BorderThickness="1" Tag="PortraitAppBar"  Margin="15,10,10,20" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped"  >
+                        <Grid Background="#FF8B0457">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="76*"/>
+                                <RowDefinition Height="33*"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="Assets/Menu/Menu_Accueil.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Accueil" FontSize="14" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <Border x:Name="POR_HEAD_BD" Grid.Row="1" Grid.Column="1" BorderBrush="#FF8B0457" Tag="PortraitAppBar" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped" >
+                        <Grid Background="#FF8B0457" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="76*"/>
+                                <RowDefinition Height="33*"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="Assets/Menu/Menu_BD.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Center"/>
+                            <TextBlock Text="BD" FontSize="14" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <Border x:Name="POR_HEAD_Albums" Grid.Row="1" Grid.Column="2" BorderBrush="#FF8B0457" Tag="PortraitAppBar" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped" >
+                        <Grid Background="#FF8B0457" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="76*"/>
+                                <RowDefinition Height="33*"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="Assets/Menu/Menu_Album.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Albums" FontSize="14" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <Border x:Name="POR_HEAD_BestOf" Grid.Row="1" Grid.Column="3" BorderBrush="#FF8B0457" Tag="PortraitAppBar" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped" >
+                        <Grid Background="#FF8B0457" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="76*"/>
+                                <RowDefinition Height="33*"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="Assets/Menu/Menu_BestOf.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Best-of" FontSize="14" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <Border x:Name="POR_HEAD_Auteurs" Grid.Row="1" Grid.Column="4" BorderBrush="#FF8B0457" Tag="PortraitAppBar" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped" >
+                        <Grid Background="#FF8B0457" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="76*"/>
+                                <RowDefinition Height="33*"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="Assets/Menu/Menu_Auteurs.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Auteurs" FontSize="14" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <Border x:Name="POR_HEAD_Participer" Grid.Row="1" Grid.Column="5" BorderBrush="#FF8B0457" Tag="PortraitAppBar" BorderThickness="1"  Margin="15,10,10,20" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped" >
+                        <Grid Background="#FF8B0457" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="76*"/>
+                                <RowDefinition Height="33*"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="Assets/Menu/Menu_AVousDeJouer.png" Stretch="Uniform" Margin="10,7" HorizontalAlignment="Center" Width="63"/>
+                            <TextBlock Text="Participer" FontSize="14" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <!--
+                    <Grid x:Name="Test2" Grid.Column="7" Margin="15,10,10,20" Grid.Row="1"  >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35*"/>
+                            <RowDefinition Height="21*"/>
+                        </Grid.RowDefinitions>
+                        <Image Source="Assets/Engrenage.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Paramètres" FontSize="20" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                    </Grid>
+
+                    <Border  Grid.Column="6" Margin="15,10,10,20" Grid.Row="1" BorderBrush="White" BorderThickness="1">
+                    <Grid x:Name="Test3"  >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35*"/>
+                            <RowDefinition Height="21*"/>
+                        </Grid.RowDefinitions>
+                        <Image Source="Assets/Engrenage.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Paramètres" FontSize="20" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+-->
+                </Grid>
+
+                <Grid x:Name="NAR_AppBar" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="55*"/>
+                        <RowDefinition Height="55*"/>
+                        <RowDefinition Height="55*"/>
+                        <RowDefinition Height="5*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30*"/>
+                        <ColumnDefinition Width="30*"/>
+
+                    </Grid.ColumnDefinitions>
+
+                    <Border x:Name="NAR_HEAD_Accueil" Grid.Row="1" BorderBrush="#FF8B0457" BorderThickness="1" Tag="NarrowAppBar"  Margin="5,5,5,5" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped"  >
+                        <Grid Background="#FF8B0457">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="Assets/Menu/Menu_Accueil.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Accueil" Grid.Column="1" FontSize="22" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <Border x:Name="NAR_HEAD_BD" Grid.Row="1" Grid.Column="1" BorderBrush="#FF8B0457" Tag="NarrowAppBar" BorderThickness="1"  Margin="5,5,5,5" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped"  >
+                        <Grid Background="#FF8B0457" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="Assets/Menu/Menu_BD.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Center"/>
+                            <TextBlock Text="BD"  Grid.Column="1" FontSize="22" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <Border x:Name="NAR_HEAD_Albums" Grid.Row="2" BorderBrush="#FF8B0457" BorderThickness="1" Tag="NarrowAppBar"  Margin="5,5,5,5" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped"  >
+                        <Grid Background="#FF8B0457" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="Assets/Menu/Menu_Album.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Albums"  Grid.Column="1" FontSize="22" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <Border x:Name="NAR_HEAD_BestOf" Grid.Row="2" Grid.Column="1" BorderBrush="#FF8B0457" Tag="NarrowAppBar" BorderThickness="1"  Margin="5,5,5,5" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped" >
+                        <Grid Background="#FF8B0457" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="Assets/Menu/Menu_BestOf.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Best-Of" Grid.Column="1" FontSize="22" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <Border x:Name="NAR_HEAD_Auteurs" Grid.Row="3" Grid.Column="0" BorderBrush="#FF8B0457" Tag="NarrowAppBar" BorderThickness="1"  Margin="5,5,5,5" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped"  >
+                        <Grid Background="#FF8B0457" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="Assets/Menu/Menu_Auteurs.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Auteurs"  Grid.Column="1" FontSize="22" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <Border x:Name="NAR_HEAD_Participer" Grid.Row="3" Grid.Column="1" BorderBrush="#FF8B0457" Tag="NarrowAppBar" BorderThickness="1"  Margin="5,5,5,5" PointerEntered="AppBar_PointerEntered" PointerExited="AppBar_PointerExited" Tapped="AppBar_Tapped" >
+                        <Grid Background="#FF8B0457" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="Assets/Menu/Menu_AVousDeJouer.png" Stretch="Uniform" Margin="10,7" HorizontalAlignment="Center" Width="63"/>
+                            <TextBlock Text="Participer"  Grid.Column="1" FontSize="22" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+
+                    <!--
+                    <Grid x:Name="Test2" Grid.Column="7" Margin="15,10,10,20" Grid.Row="1"  >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35*"/>
+                            <RowDefinition Height="21*"/>
+                        </Grid.RowDefinitions>
+                        <Image Source="Assets/Engrenage.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Paramètres" FontSize="20" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                    </Grid>
+
+                    <Border  Grid.Column="6" Margin="15,10,10,20" Grid.Row="1" BorderBrush="White" BorderThickness="1">
+                    <Grid x:Name="Test3"  >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35*"/>
+                            <RowDefinition Height="21*"/>
+                        </Grid.RowDefinitions>
+                        <Image Source="Assets/Engrenage.png" Stretch="Uniform" Margin="7" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Paramètres" FontSize="20" Grid.Row="1" Margin="7" FontFamily="SketchFlow Print"/>
+                        </Grid>
+                    </Border>
+-->
+                </Grid>
+            </Grid>
+        </AppBar>
+    </Page.TopAppBar>
+
+
+    <Grid x:Name="General">
+        <!-- Vue par défaut -->
+
+        <Grid x:Name="DefautlView" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="13*"/>
+                <RowDefinition Height="115*"/>
+            </Grid.RowDefinitions>
+
+            <Grid x:Name="GR_DEF_Body" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid x:Name="GR_Corps_Page" Grid.Column="1" Background="#FFE9E7E8" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30*"/>
+                        <RowDefinition Height="20*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40*"/>
+                            <ColumnDefinition Width="25*"/>
+                            <ColumnDefinition Width="40*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="Assets/panneau.png" Grid.Column="1" VerticalAlignment="Bottom" Margin="0 0 0 30"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="36*"/>
+                            <ColumnDefinition Width="305*"/>
+                            <ColumnDefinition Width="36*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="1" Text="Page en construction" TextAlignment="Center" TextWrapping="WrapWholeWords" Foreground="#FFB2016E" FontSize="64" FontFamily="SketchFlow Print" />
+                    </Grid>
+
+                </Grid>
+
+
+            </Grid>
+
+            <Border x:Name="BR_DEF_Header" BorderBrush="#FFCECDCE" BorderThickness="0,0,0,2">
+                <Grid x:Name="GR_DEF_Header" Background="#FFF9F9F9" >
+                    <Image Source="Assets/Header/Logo30J.png" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,2,0,2"/>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,2,10,2">
+                        <Image Source="Assets/Header/HEADER_ToutIcone_ON.png" x:Name="IMG_DEF_HEAD_TOUT"  VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,2,0,2"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+
+
+        </Grid>
+
+        <!-- Vue portrait ( height > width )-->
+        <Grid x:Name="PortraitView" Visibility="Collapsed" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="115*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="1" x:Name="GR_POR_Corps_Page" Background="#FFE9E7E8" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="459*"/>
+                    <RowDefinition Height="248*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="25*"/>
+                        <ColumnDefinition Width="50*"/>
+                        <ColumnDefinition Width="25*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="Assets/panneau.png" Grid.Column="1" VerticalAlignment="Bottom" Margin="0 0 0 30"/>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="36*"/>
+                        <ColumnDefinition Width="305*"/>
+                        <ColumnDefinition Width="36*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="1" Text="Page en construction" TextAlignment="Center" TextWrapping="WrapWholeWords" Foreground="#FFB2016E" FontSize="58" FontFamily="SketchFlow Print" />
+                </Grid>
+            </Grid>
+
+
+            <Border x:Name="BR_POR_Header" BorderBrush="#FFCECDCE" BorderThickness="0,0,0,2">
+                <Grid x:Name="GR_POR_Header" Background="#FFF9F9F9" >
+                    <Image Source="Assets/Header/HEADER_MenuIcone.png" Margin="10,2,0,0" HorizontalAlignment="Left"  VerticalAlignment="Center" />
+                    <Image Source="Assets/Header/Logo30J.png" Margin="267,2,266,2"/>
+                    <Image Source="Assets/Header/HEADER_Tuto.png" Margin="10,2,5,0" HorizontalAlignment="Right"  VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+
+        </Grid>
+
+
+        <!-- Vue pour les Width < 600px -->
+
+
+
+        <!-- Les Visual States -->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="DefaultLayout" >
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DefautlView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PortraitView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <!-- App Bar -->
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DEF_AppBar" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="POR_AppBar" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NAR_AppBar" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <!-- App Bar -->
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="BigDefaultLayout" >
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NarrowView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DefautlView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PortraitView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <!-- App Bar -->
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DEF_AppBar" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="POR_AppBar" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NAR_AppBar" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <!-- App Bar -->
+                    </Storyboard>
+                </VisualState>
+
+                <VisualState x:Name="NarrowLayout">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DefautlView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PortraitView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <!-- App Bar -->
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DEF_AppBar" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="POR_AppBar" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NAR_AppBar" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <!-- App Bar -->
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="PortraitLayout">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PortraitView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DefautlView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <!-- App Bar -->
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DEF_AppBar" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="POR_AppBar" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NAR_AppBar" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <!-- App Bar -->
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+    </Grid>
+</Page>
