@@ -91,12 +91,15 @@ namespace _30JoursDeBD
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             AppBarTop.Height = this.ActualHeight / 5;
+ 
 
             //Storyboard de chargement
             POR_Engrenage_Load.Begin();
             POR_Engrenage_Load.RepeatBehavior = RepeatBehavior.Forever;
             DEF_Engrenage_Load.Begin();
             DEF_Engrenage_Load.RepeatBehavior = RepeatBehavior.Forever;
+            NAR_Engrenage_Load.Begin();
+            NAR_Engrenage_Load.RepeatBehavior = RepeatBehavior.Forever;
 
             HttpClient client = new HttpClient();
             var jsonString = await client.GetStringAsync(new Uri("http://30joursdebd.com/?json=get_recent_post&count=30"));
@@ -160,6 +163,8 @@ namespace _30JoursDeBD
             POR_Engrenage_Load.Stop();
             DEF_Grid_Load.Visibility = Visibility.Collapsed;
             DEF_Engrenage_Load.Stop();
+            NAR_Grid_Load.Visibility = Visibility.Collapsed;
+            NAR_Engrenage_Load.Stop();
 
         }
 

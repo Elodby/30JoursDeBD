@@ -198,5 +198,10 @@ namespace _30JoursDeBD
             }
         }
 
+        private void TouchMenu(object sender, TappedRoutedEventArgs e)
+        {
+            Frame.GoBack();
+        }
+
     }
 }
