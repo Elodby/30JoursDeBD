@@ -8,6 +8,7 @@ namespace _30JoursDeBD.Common.testmodel
 {
     public class Auteur
     {
+        public int Id { get; set; }
         public string Nom { get; set; }
         public string URL { get; set; }
         public string Description { get; set; }

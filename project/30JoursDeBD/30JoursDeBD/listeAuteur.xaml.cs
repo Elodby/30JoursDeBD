@@ -110,6 +110,7 @@ namespace _30JoursDeBD
             foreach (Author a in httpresponse.authors)
             {
                 auteur = new Auteur();
+                auteur.Id = a.id;
                 auteur.Nom = a.name;
                 auteur.URL = a.url;
                 auteur.Image = "http://30joursdebd.com/30jdbdv3/wp-content/themes/30jdbd/scripts/timthumb.php?src=/30jdbdv3/wp-content/themes/30jdbd/images/auteurs/"+a.name+".jpg&w=130&h=130&zc=1&q=90";
@@ -150,7 +151,8 @@ namespace _30JoursDeBD
 
         private void Image_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            
+            Auteur AuteurSelectionne = ((Image)sender).DataContext as Auteur;
+            Frame.Navigate(typeof(pageAuteur), AuteurSelectionne);
         }
 
 
@@ -176,6 +178,7 @@ namespace _30JoursDeBD
         }
 
         #endregion
+        #region appbar
         //Gestion AppBar
         private void AppBar_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
@@ -190,34 +193,35 @@ namespace _30JoursDeBD
         private void AppBar_Tapped(object sender, TappedRoutedEventArgs e) // Navigation
         {
             string leNom = (sender as Border).Name;
-            string[] tabNom = {"Accueil","BD","Albums","BestOf","Auteurs","Participer"};
+            string[] tabNom = { "Accueil", "BD", "Albums", "BestOf", "Auteurs", "Participer" };
             int i;
-            for ( i=0; i < tabNom.Length; i++)
+            for (i = 0; i < tabNom.Length; i++)
             {
-                if ( leNom.Contains(tabNom[i]))
+                if (leNom.Contains(tabNom[i]))
                     break;
             }
-            switch(i)
+            switch (i)
             {
                 case 0:
                     Frame.Navigate(typeof(MainPage));
                     break;
                 case 1:
-                    
+
                     break;
                 case 2:
-                    
+
                     break;
                 case 3:
-                    
+
                     break;
                 case 4:
-                    
+
                     break;
                 case 5:
-                   
+
                     break;
             }
-        }
+        } 
+        #endregion
     }
 }

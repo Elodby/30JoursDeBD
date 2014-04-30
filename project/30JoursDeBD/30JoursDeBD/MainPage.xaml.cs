@@ -192,7 +192,7 @@ namespace _30JoursDeBD
         {
             BD laBDSelectionnee = ((Image)sender).DataContext as BD;
             
-            if ( laBDSelectionnee.Rubrique == "Planches" )
+            /*if ( laBDSelectionnee.Rubrique == "Planches" )
             {
                 if (laBDSelectionnee.ImagesAttachees != null)
                     IMG_POR_Corps_Planche.Source = new BitmapImage(new Uri(laBDSelectionnee.ImagesAttachees.First(), UriKind.RelativeOrAbsolute));
@@ -205,7 +205,7 @@ namespace _30JoursDeBD
                    // IMG_POR_Corps_Strip.Source = new BitmapImage(new Uri(laBDSelectionnee.ImagesAttachees.First(), UriKind.RelativeOrAbsolute));
                 //else
                     IMG_POR_Corps_Strip.Source = new BitmapImage(new Uri(laBDSelectionnee.Image, UriKind.RelativeOrAbsolute));
-            }
+            }*/
             Frame.Navigate(typeof(pageArticle), laBDSelectionnee);
         }
 

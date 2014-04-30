@@ -126,6 +126,9 @@
     <Compile Include="pageArticle.xaml.cs">
       <DependentUpon>pageArticle.xaml</DependentUpon>
     </Compile>
+    <Compile Include="pageAuteur.xaml.cs">
+      <DependentUpon>pageAuteur.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Participer_Page.xaml.cs">
       <DependentUpon>Participer_Page.xaml</DependentUpon>
     </Compile>
@@ -197,6 +200,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="pageArticle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pageAuteur.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
