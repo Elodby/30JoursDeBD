@@ -540,7 +540,7 @@
 
                 <Grid x:Name="POR_Corps_Auteur" Grid.Row="1" >
                     <Border Background="White" Margin="30,2,16,8">
-                        <Image Margin="10" Source="Assets/POR_AuteurVide.jpg" x:Name="IMG_POR_Corps_Auteur" />
+                        <Image Margin="10" Source="Assets/POR_AuteurVide.jpg" x:Name="IMG_POR_Corps_Auteur" Tapped="IMG_POR_Corps_Auteur_Tapped" />
                     </Border>
                 </Grid>
                 <Grid x:Name="POR_Corps_Strip" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" >

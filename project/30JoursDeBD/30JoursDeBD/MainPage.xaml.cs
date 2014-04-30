@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.Data.Html;
 using _30JoursDeBD.Common.testmodel;
+using Windows.UI.Xaml.Navigation;
 
 // Pour en savoir plus sur le modèle d'élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -49,6 +50,7 @@ namespace _30JoursDeBD
         }
         #endregion
 
+        private Auteur auteurAleatoire;
 
         private List<BD> _listeBD = new List<BD>();
 
@@ -58,9 +60,10 @@ namespace _30JoursDeBD
         {
             this.InitializeComponent();
             this.navigationHelper = new NavigationHelper(this);
-            // this.navigationHelper.LoadState += navigationHelper_LoadState;
+            //this.navigationHelper.LoadState += navigationHelper_LoadState;
             //this.navigationHelper.SaveState += navigationHelper_SaveState;
             this.SizeChanged += Page_SizeChanged;
+            this.NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
         }
 
 
@@ -85,82 +88,97 @@ namespace _30JoursDeBD
             }
         }
 
-
-  
-
-        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            AppBarTop.Height = this.ActualHeight / 5;
-
-            //Storyboard de chargement
-            POR_Engrenage_Load.Begin();
-            POR_Engrenage_Load.RepeatBehavior = RepeatBehavior.Forever;
-            DEF_Engrenage_Load.Begin();
-            DEF_Engrenage_Load.RepeatBehavior = RepeatBehavior.Forever;
-
-            HttpClient client = new HttpClient();
-            var jsonString = await client.GetStringAsync(new Uri("http://30joursdebd.com/?json=get_recent_post&count=30"));
-            var httpresponse = JsonConvert.DeserializeObject<RootObject>(jsonString.ToString());
-            foreach(Post post in httpresponse.posts)
+            if (_listeBD.Count == 0)
             {
-                try
+                //Storyboard de chargement
+                POR_Engrenage_Load.Begin();
+                POR_Engrenage_Load.RepeatBehavior = RepeatBehavior.Forever;
+                DEF_Engrenage_Load.Begin();
+                DEF_Engrenage_Load.RepeatBehavior = RepeatBehavior.Forever;
+
+                HttpClient client = new HttpClient();
+                var jsonString = await client.GetStringAsync(new Uri("http://30joursdebd.com/?json=get_recent_post&count=30"));
+                var httpresponse = JsonConvert.DeserializeObject<RootObject>(jsonString.ToString());
+                foreach (Post post in httpresponse.posts)
                 {
-                    if (post.categories.Where(c => c.slug == "news").Count() == 0)
+                    try
                     {
-                        
+                        if (post.categories.Where(c => c.slug == "news").Count() == 0)
+                        {
+
+                            _listeBD.Add(new BD()
+                            {
+                                Titre = HtmlUtilities.ConvertToText(post.title),
+                                Auteur = HtmlUtilities.ConvertToText(post.author.name),
+                                Rubrique = post.categories.Single(c => c.slug == "strips" || c.slug == "planches").title,
+                                Image = post.attachments.Single(c => c.slug.ToUpper().Contains("PREVIEW")
+                                    || c.slug.ToUpper().Contains("BANNIERE")
+                                    || c.slug.ToUpper().Contains("BANDEAU")).url,
+                                ImagesAttachees = post.attachments.Select(a => a.url).ToList(),
+                                Excerpt = HtmlUtilities.ConvertToText(post.excerpt),
+                                Note = "Assets/Star.png"
+                            });
+                        }
+
+                    }
+                    catch
+                    {
                         _listeBD.Add(new BD()
                         {
                             Titre = HtmlUtilities.ConvertToText(post.title),
                             Auteur = HtmlUtilities.ConvertToText(post.author.name),
                             Rubrique = post.categories.Single(c => c.slug == "strips" || c.slug == "planches").title,
-                            Image = post.attachments.Single(c => c.slug.ToUpper().Contains("PREVIEW") 
-                                || c.slug.ToUpper().Contains("BANNIERE")
-                                || c.slug.ToUpper().Contains("BANDEAU")).url,
+                            Image = post.attachments.Last().url,
                             ImagesAttachees = post.attachments.Select(a => a.url).ToList(),
                             Excerpt = HtmlUtilities.ConvertToText(post.excerpt),
                             Note = "Assets/Star.png"
                         });
                     }
-                        
                 }
-                catch
-                {
-                    _listeBD.Add(new BD()
-                    {
-                        Titre = HtmlUtilities.ConvertToText(post.title),
-                        Auteur = HtmlUtilities.ConvertToText(post.author.name),
-                        Rubrique = post.categories.Single(c => c.slug == "strips" || c.slug == "planches").title,
-                        Image = post.attachments.Last().url,
-                        ImagesAttachees = post.attachments.Select(a => a.url).ToList(),
-                        Excerpt = HtmlUtilities.ConvertToText(post.excerpt),
-                        Note = "Assets/Star.png"
-                    });
-                }
+                //Mettre au photo un auteur aléatoire
+                var jsonStringListeAutheur = await client.GetStringAsync(new Uri("http://30joursdebd.com/?json=get_author_index"));
+                var httpresponseListeAuteur = JsonConvert.DeserializeObject<AuthorIndex>(jsonStringListeAutheur.ToString());
+                Random rand = new Random();
+                int indexRandom = rand.Next(httpresponseListeAuteur.authors.Count);
+                string nomAuteurAleatoire = httpresponseListeAuteur.authors[indexRandom].name;
+                
+                recupererDetailsAuteurAleatoire(httpresponseListeAuteur.authors[indexRandom]);
+
+                this.DataContext = this;
+                TrouvePremierStrip();
+                TrouvePremierePlanche();
+                IMG_POR_Corps_Auteur.Source = new BitmapImage(new Uri(
+                    auteurAleatoire.Image,
+                    UriKind.Absolute));
+
+                //Storyboard de chargement ( fin )
+                POR_Grid_Load.Visibility = Visibility.Collapsed;
+                POR_Engrenage_Load.Stop();
+                DEF_Grid_Load.Visibility = Visibility.Collapsed;
+                DEF_Engrenage_Load.Stop();
             }
-            
+        }
 
-            //Mettre au photo un auteur aléatoire
-            var jsonStringListeAutheur = await client.GetStringAsync(new Uri("http://30joursdebd.com/?json=get_author_index"));
-            var httpresponseListeAuteur = JsonConvert.DeserializeObject<AuthorIndex>(jsonStringListeAutheur.ToString());
-            Random rand = new Random();
-            int indexRandom = rand.Next(httpresponseListeAuteur.authors.Count);
-            string nomAuteurAleatoire = httpresponseListeAuteur.authors[indexRandom].name;
-            
-            this.DataContext = this;
-            TrouvePremierStrip();
-            TrouvePremierePlanche();
-            IMG_POR_Corps_Auteur.Source = new BitmapImage(new Uri(
-                "http://30joursdebd.com/30jdbdv3/wp-content/themes/30jdbd/scripts/timthumb.php?src=/30jdbdv3/wp-content/themes/30jdbd/images/auteurs/" 
-                + nomAuteurAleatoire + ".jpg&w=130&h=130&zc=1&q=90",
-                UriKind.Absolute));
+        private void recupererDetailsAuteurAleatoire(Author randomAuthor)
+        {
+            auteurAleatoire = new Auteur()
+            {
+                Id = randomAuthor.id,
+                Nom = randomAuthor.name,
+                Description = randomAuthor.description,
+                URL = randomAuthor.url,
+                Image =
+                "http://30joursdebd.com/30jdbdv3/wp-content/themes/30jdbd/scripts/timthumb.php?src=/30jdbdv3/wp-content/themes/30jdbd/images/auteurs/"
+                    + randomAuthor.name + ".jpg&w=130&h=130&zc=1&q=90"
+            };
+        }
+  
 
-
-            //Storyboard de chargement ( fin )
-            POR_Grid_Load.Visibility = Visibility.Collapsed;
-            POR_Engrenage_Load.Stop();
-            DEF_Grid_Load.Visibility = Visibility.Collapsed;
-            DEF_Engrenage_Load.Stop();
-
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            AppBarTop.Height = this.ActualHeight / 5;
         }
 
         private void TrouvePremierStrip(){
@@ -210,6 +228,7 @@ namespace _30JoursDeBD
         }
 
 
+        #region appbar
         //Gestion AppBar
         private void AppBar_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
@@ -224,26 +243,25 @@ namespace _30JoursDeBD
         private void AppBar_Tapped(object sender, TappedRoutedEventArgs e) // Navigation
         {
             string leNom = (sender as Border).Name;
-            string[] tabNom = {"Accueil","BD","Albums","BestOf","Auteurs","Participer"};
+            string[] tabNom = { "Accueil", "BD", "Albums", "BestOf", "Auteurs", "Participer" };
             int i;
-            for ( i=0; i < tabNom.Length; i++)
+            for (i = 0; i < tabNom.Length; i++)
             {
-                if ( leNom.Contains(tabNom[i]))
+                if (leNom.Contains(tabNom[i]))
                     break;
             }
-            switch(i)
+            switch (i)
             {
                 case 0:
-                    Frame.Navigate(typeof(MainPage));
                     break;
                 case 1:
-                    
+
                     break;
                 case 2:
-                    
+
                     break;
                 case 3:
-                    
+
                     break;
                 case 4:
                     Frame.Navigate(typeof(listeAuteur));
@@ -257,6 +275,13 @@ namespace _30JoursDeBD
         private void TouchMenu(object sender, TappedRoutedEventArgs e)
         {
             AppBarTop.IsOpen = true;
+        } 
+        #endregion
+
+        private void IMG_POR_Corps_Auteur_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            
+            Frame.Navigate(typeof(pageAuteur), auteurAleatoire);
         }
 
 

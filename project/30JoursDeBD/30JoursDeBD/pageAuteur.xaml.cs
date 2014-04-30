@@ -179,7 +179,8 @@ namespace _30JoursDeBD
             switch (i)
             {
                 case 0:
-                    Frame.Navigate(typeof(MainPage));
+                    while (Frame.CanGoBack)
+                        Frame.GoBack();
                     break;
                 case 1:
 
@@ -191,10 +192,10 @@ namespace _30JoursDeBD
 
                     break;
                 case 4:
-
+                    Frame.Navigate(typeof(listeAuteur));
                     break;
                 case 5:
-
+                    Frame.Navigate(typeof(Participer_Page));
                     break;
             }
         }
