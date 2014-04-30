@@ -69,7 +69,7 @@ namespace _30JoursDeBD
 
   
 
-        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             AppBarTop.Height = this.ActualHeight / 5;
             //AppBarTop.IsOpen = true;
