@@ -118,6 +118,7 @@ namespace _30JoursDeBD
                     break;
                 }
             }
+            lesImages.Sort();
         }
 
 
