@@ -14,12 +14,20 @@
         <CollectionViewSource
             x:Name="SourceListView"
             Source="{Binding LesImages}" />
+        <CollectionViewSource
+            x:Name="SourceListViewComments"
+            Source="{Binding LesCommentaires}" />
+                                
 
         <!-- Data Template : pour la GridView du Corps -->
         <DataTemplate x:Key="PlanchesTemplate">
             <Image Source="{Binding}" />
         </DataTemplate>
-        
+
+        <DataTemplate x:Key="CommentsTemplate">
+            <TextBlock Text="{Binding Nom}" Foreground="Black"/>
+        </DataTemplate>
+
     </Page.Resources>
 
     <!--
@@ -442,15 +450,31 @@
                 </Grid>
 
                 <Grid x:Name="POR_Corps_Planche" Grid.Row="1">
-                    <ListView
-                            Padding="2,2,2,2"
-                            x:Name="listePlanches"
-                            AutomationProperties.AutomationId="ItemsListView"
-                            AutomationProperties.Name="Items"
-                            ItemsSource="{Binding Source={StaticResource SourceListView}}"
-                            ItemTemplate="{StaticResource PlanchesTemplate}"
-                            SelectionMode="None"
-                            IsSwipeEnabled="false" IsItemClickEnabled="False"/>
+                    <ScrollViewer HorizontalScrollMode="Disabled">
+                        <StackPanel>
+                            <ListView
+                                Padding="2,2,2,2"
+                                x:Name="listePlanches"
+                                AutomationProperties.AutomationId="ItemsListView"
+                                AutomationProperties.Name="Items"
+                                ItemsSource="{Binding Source={StaticResource SourceListView}}"
+                                ItemTemplate="{StaticResource PlanchesTemplate}"
+                                SelectionMode="None"
+                                IsSwipeEnabled="false" IsItemClickEnabled="False"/>
+                            <StackPanel Orientation="Horizontal" Background="#FFF3F0F1" Margin="0,30,0,0">
+                                <TextBlock Text="Commentaire(s) :" Foreground="#FFA9A3A6" FontSize="16" Margin="10,0,10,0" Padding="3" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <ListView
+                                Padding="2,2,2,2"
+                                x:Name="listeCommentaires"
+                                AutomationProperties.AutomationId="ItemsListView"
+                                AutomationProperties.Name="Items"
+                                ItemsSource="{Binding Source={StaticResource SourceListViewComments}}"
+                                ItemTemplate="{StaticResource CommentsTemplate}"
+                                SelectionMode="None"
+                                IsSwipeEnabled="false" IsItemClickEnabled="False"/>
+                        </StackPanel>
+                    </ScrollViewer>
                 </Grid>
                 <!--
                 <Grid x:Name="POR_Commentaire_Planche" Grid.Row="1">

@@ -105,6 +105,7 @@ namespace _30JoursDeBD
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            AppBarTop.IsOpen = false;
             maBD = e.Parameter as BD;
             lesImages = maBD.ImagesAttachees;
             lesCommentaires = maBD.Commentaires;
