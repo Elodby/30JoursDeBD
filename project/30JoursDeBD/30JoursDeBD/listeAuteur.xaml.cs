@@ -179,8 +179,6 @@ namespace _30JoursDeBD
         {
             AppBarTop.IsOpen = false;
             AppBarTop.Height = this.ActualHeight / 5;
-
-            this.DataContext = this;
         }
 
         /// <summary>
