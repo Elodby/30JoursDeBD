@@ -90,6 +90,7 @@ namespace _30JoursDeBD
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
+            AppBarTop.IsOpen = false;
             if (_listeBD.Count == 0)
             {
                 //Storyboard de chargement
