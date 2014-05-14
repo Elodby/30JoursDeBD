@@ -26,7 +26,7 @@
                         </Grid.RowDefinitions>
                         <Image Source="{Binding Image}" Stretch="Uniform" Margin="10,10,10,5" Tapped="Image_Tapped"/>
                         <Grid Grid.Row="1">
-                            <TextBlock Text="{Binding Nom}" Foreground="#FFD62291" FontSize="18" TextWrapping="WrapWholeWords" Margin="20,0,20,10"/>
+                            <TextBlock Text="{Binding Nom}" Tapped="TextBlock_Tapped"  Foreground="#FFD62291" FontSize="18" TextWrapping="WrapWholeWords" Margin="20,0,20,10"/>
                         </Grid>
 
                     </Grid>
@@ -64,7 +64,7 @@
                         </Grid.RowDefinitions>
                         <Image Source="{Binding Image}" Stretch="Uniform" Margin="10,10,10,5" Tapped="Image_Tapped"/>
                         <Grid Grid.Row="1">
-                            <TextBlock Text="{Binding Nom}" Foreground="#FFD62291" FontSize="18" TextWrapping="WrapWholeWords" Margin="30,0,20,10"/>
+                            <TextBlock Text="{Binding Nom}" Tapped="TextBlock_Tapped" Foreground="#FFD62291" FontSize="18" TextWrapping="WrapWholeWords" Margin="30,0,20,10"/>
                         </Grid>
 
                     </Grid>
@@ -80,9 +80,9 @@
                             <RowDefinition Height="80*"/>
                             <RowDefinition Height="20*"/>
                         </Grid.RowDefinitions>
-                        <Image Source="{Binding Image}" Stretch="Uniform" Margin="10,10,10,5"/>
+                        <Image Source="{Binding Image}" Stretch="Uniform" Margin="10,10,10,5" Tapped="Image_Tapped"/>
                         <Grid Grid.Row="1">
-                            <TextBlock Text="{Binding Nom}" Foreground="#FFD62291" FontSize="18" TextWrapping="WrapWholeWords" Margin="30,0,20,10"/>
+                            <TextBlock Text="{Binding Nom}" Tapped="TextBlock_Tapped" Foreground="#FFD62291" FontSize="18" TextWrapping="WrapWholeWords" Margin="30,0,20,10"/>
                         </Grid>
 
                     </Grid>
@@ -531,7 +531,7 @@
                         ItemsSource="{Binding Source={StaticResource SourceGridView}}"
                         ItemTemplate="{StaticResource POR_ItemTemplate}"
                         SelectionMode="None"
-                        IsSwipeEnabled="false" IsItemClickEnabled="True" >
+                        IsSwipeEnabled="false" IsItemClickEnabled="True">
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapGrid Orientation="Horizontal" MaximumRowsOrColumns="4"/>

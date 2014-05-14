@@ -51,6 +51,7 @@ namespace _30JoursDeBD
         public pageAuteur()
         {
             this.InitializeComponent();
+            this.SizeChanged += Page_SizeChanged;
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
@@ -81,14 +82,29 @@ namespace _30JoursDeBD
                         }
                         else
                         {
-                            Regex r = new Regex(@"<a.*?href=(""|')(?<href>.*?)(""|').*?>(?<value>.*?)</a>");
-                            foreach (Match match in r.Matches(post.content))
+                            Regex regexA = new Regex(@"<a.*?href=(""|')(?<href>.*?)(""|').*?>(?<value>.*?)</a>");
+                            Regex regexImg = new Regex(@"<img.*?src=(""|')(?<src>.*?)(""|').*?>(?<value>.*?)");
+                            //@"<img.+?src=[""|'](.+?)[""|'].*?>");
+                            if (regexA.Matches(post.content).Count != 0)
                             {
-                                if (article.ImagesAttachees == null)
-                                    article.ImagesAttachees = new List<string>();
-                                article.ImagesAttachees.Add("http://30joursdebd.com" + match.Groups["href"].Value);
+                                foreach (Match match in regexA.Matches(post.content))
+                                {
+                                    if (article.ImagesAttachees == null)
+                                        article.ImagesAttachees = new List<string>();
+                                    article.ImagesAttachees.Add("http://30joursdebd.com" + match.Groups["href"].Value);
+                                }
+                                article.Image = article.ImagesAttachees.First();
                             }
-                            article.Image = article.ImagesAttachees.First();
+                            else if (regexImg.Matches(post.content).Count != 0)
+                            {
+                                foreach (Match match in regexImg.Matches(post.content))
+                                {
+                                    if (article.ImagesAttachees == null)
+                                        article.ImagesAttachees = new List<string>();
+                                    article.ImagesAttachees.Add("http://30joursdebd.com" + match.Groups["src"].Value);
+                                }
+                                article.Image = article.ImagesAttachees.First();
+                            }
                         }
                     }
                 }
@@ -113,6 +129,14 @@ namespace _30JoursDeBD
             POR_Auteur.Text = auteurSelectionne.Nom;
             POR_AuteurDescription.Text = auteurSelectionne.Description;
             POR_ImageAuteur.Source = new BitmapImage(new Uri(auteurSelectionne.Image, UriKind.Absolute));
+
+            GR_Auteur.Text = auteurSelectionne.Nom;
+            GR_AuteurDescription.Text = auteurSelectionne.Description;
+            GR_ImageAuteur.Source = new BitmapImage(new Uri(auteurSelectionne.Image, UriKind.Absolute));
+
+            NAR_Auteur.Text = auteurSelectionne.Nom;
+            NAR_AuteurDescription.Text = auteurSelectionne.Description;
+            NAR_ImageAuteur.Source = new BitmapImage(new Uri(auteurSelectionne.Image, UriKind.Absolute));
         }
 
         private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
