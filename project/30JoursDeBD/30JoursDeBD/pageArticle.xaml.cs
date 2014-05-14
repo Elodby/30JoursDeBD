@@ -188,7 +188,7 @@ namespace _30JoursDeBD
             {
                 case 0:
                     while (Frame.CanGoBack)
-                        Frame.Navigate(typeof(MainPage));
+                        Frame.GoBack();
                     break;
                 case 1:
 

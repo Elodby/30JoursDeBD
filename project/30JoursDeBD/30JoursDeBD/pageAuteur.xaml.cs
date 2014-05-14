@@ -3,19 +3,13 @@ using _30JoursDeBD.testmodel;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.RegularExpressions;
 using Windows.Data.Html;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
@@ -61,10 +55,11 @@ namespace _30JoursDeBD
             var jsonString = await client.GetStringAsync(new Uri("http://30joursdebd.com/?json=get_author_posts&author_id=" + auteurSelectionne.Id));
             var httpresponse = JsonConvert.DeserializeObject<RootObject>(jsonString.ToString());
             BD article;
-            List<Commentaire> lesCommentaires = new List<Commentaire>();
+            List<Commentaire> lesCommentaires;
             foreach (Post post in httpresponse.posts)
             {
                 article = new BD();
+                lesCommentaires = new List<Commentaire>();
                 try
                 {
                     foreach(Comment comment in post.comments)
@@ -152,7 +147,7 @@ namespace _30JoursDeBD
 
         private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (e.NewSize.Width < 600)
+            if (e.NewSize.Width < 700)
             {
                 VisualStateManager.GoToState(this, "NarrowLayout", true);
             }
