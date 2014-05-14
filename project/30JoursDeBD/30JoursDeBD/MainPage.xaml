@@ -24,7 +24,7 @@
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
-                        <Image Source="{Binding Image}" Stretch="Uniform" Margin="15,15,10,15"/>
+                        <Image Source="{Binding Image}" Stretch="Uniform" Margin="15,15,10,15" Tapped="Image_Tapped"/>
                         <Grid Grid.Column="1">
                             <StackPanel VerticalAlignment="Center" Margin="20,0,20,0">
                                 <TextBlock Text="{Binding Titre}" Foreground="#FFD62291" FontSize="24" TextWrapping="WrapWholeWords"/>
@@ -49,7 +49,7 @@
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
-                        <Image Source="{Binding Image}" Stretch="Uniform" Margin="15,15,10,15"/>
+                        <Image Source="{Binding Image}" Stretch="Uniform" Margin="15,15,10,15" Tapped="Image_Tapped"/>
                         <Grid Grid.Column="1">
                             <StackPanel VerticalAlignment="Center" Margin="20,0,20,0">
                                 <TextBlock Text="{Binding Titre}" Foreground="#FFD62291" FontSize="40" TextWrapping="WrapWholeWords"/>
@@ -83,7 +83,7 @@
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <Image Source="{Binding Image}" Stretch="Uniform" Margin="15,15,10,15"/>
+                    <Image Source="{Binding Image}" Stretch="Uniform" Margin="15,15,10,15" Tapped="Image_Tapped"/>
                     <Grid Grid.Column="1">
                         <StackPanel VerticalAlignment="Center" Margin="20,0,20,0">
                             <TextBlock Text="{Binding Titre}" Foreground="#FFD62291" FontSize="20" TextWrapping="WrapWholeWords"/>
