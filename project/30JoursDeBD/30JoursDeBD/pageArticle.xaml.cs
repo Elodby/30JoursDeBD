@@ -114,6 +114,11 @@ namespace _30JoursDeBD
             maBD = e.Parameter as BD;
             lesImages = maBD.ImagesAttachees;
             lesCommentaires = maBD.Commentaires;
+            if (lesCommentaires.Count == 0)
+            {
+                lesCommentaires.Add(new Commentaire());
+                lesCommentaires[0].Nom = "Aucun commentaire";
+            }
             foreach(string nom in lesImages)
             {
                 if(nom.ToUpper().Contains("PREVIEW")

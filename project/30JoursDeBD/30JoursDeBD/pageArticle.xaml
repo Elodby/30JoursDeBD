@@ -28,7 +28,6 @@
             <StackPanel Margin="0,0,0,20">
                 <StackPanel Margin="10,10,10,0" Orientation="Horizontal">
                     <TextBlock Text="{Binding Nom}" Foreground="#FFB80170" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
-                    <TextBlock Text=" : " Foreground="#FFA9A3A6" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
                     <TextBlock Text="{Binding Date}"  Foreground="#FFA9A3A6" FontSize="16" Margin="5,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
                 </StackPanel>
                 <TextBlock Text="{Binding Content}" TextWrapping="WrapWholeWords" Padding="20,5,10,0" Foreground="Black"/>
