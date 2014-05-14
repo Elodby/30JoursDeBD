@@ -55,18 +55,29 @@ namespace _30JoursDeBD
             var jsonString = await client.GetStringAsync(new Uri("http://30joursdebd.com/?json=get_author_posts&author_id=" + auteurSelectionne.Id));
             var httpresponse = JsonConvert.DeserializeObject<RootObject>(jsonString.ToString());
             BD article;
+            List<Commentaire> lesCommentaires;
             foreach (Post post in httpresponse.posts)
             {
                 article = new BD();
+                lesCommentaires = new List<Commentaire>();
                 try
                 {
+                    foreach(Comment comment in post.comments)
+                    {
+                        lesCommentaires.Add(new Commentaire()
+                        {
+                            Nom = comment.name,
+                            Content = HtmlUtilities.ConvertToText(comment.content),
+                            Date = comment.date
+                        });
+                    }
                     if (post.categories.Where(c => c.slug == "planches" || c.slug == "strips").Count() != 0)
                     {
                         article.Titre = HtmlUtilities.ConvertToText(post.title);
                         article.Auteur = HtmlUtilities.ConvertToText(post.author.name);
                         article.Rubrique = post.categories.Single(c => c.slug == "strips" || c.slug == "planches").title;
                         article.Excerpt = HtmlUtilities.ConvertToText(post.excerpt);
-                        article.Note = "Assets/Star.png";
+                        article.Commentaires = lesCommentaires;
                         if (post.attachments.Count != 0)
                         {
                             article.Image = post.attachments.Single(c => c.slug.ToUpper().Contains("PREVIEW")
@@ -74,6 +85,7 @@ namespace _30JoursDeBD
                                             || c.slug.ToUpper().Contains("BANDEAU")).url;
                             article.ImagesAttachees = post.attachments.Select(a => a.url).ToList();
                         }
+
                         else
                         {
                             Regex regexA = new Regex(@"<a.*?href=(""|')(?<href>.*?)(""|').*?>(?<value>.*?)</a>");
@@ -82,13 +94,13 @@ namespace _30JoursDeBD
                             if (regexA.Matches(post.content).Count != 0)
                             {
                                 foreach (Match match in regexA.Matches(post.content))
-                                {
-                                    if (article.ImagesAttachees == null)
-                                        article.ImagesAttachees = new List<string>();
+                            {
+                                if (article.ImagesAttachees == null)
+                                    article.ImagesAttachees = new List<string>();
                                     article.ImagesAttachees.Add("http://30joursdebd.com" + match.Groups["href"].Value);
-                                }
-                                article.Image = article.ImagesAttachees.First();
                             }
+                            article.Image = article.ImagesAttachees.First();
+                        }
                             else if (regexImg.Matches(post.content).Count != 0)
                             {
                                 foreach (Match match in regexImg.Matches(post.content))
@@ -99,8 +111,8 @@ namespace _30JoursDeBD
                                 }
                                 article.Image = article.ImagesAttachees.First();
                             }
-                        }
                     }
+                }
                 }
                 catch
                 {
@@ -199,5 +211,20 @@ namespace _30JoursDeBD
             }
         }
         #endregion
+
+        private void Image_Tapped(object sender, TappedRoutedEventArgs e)
+        {            
+            string lienBDSelectionnee = ((Image)sender).DataContext.ToString();
+            BD laBDSelectionnee;
+            try 
+            { 
+                laBDSelectionnee = lesPlanches.Single(p => p.ImagesAttachees.Contains(lienBDSelectionnee)); 
+            }
+            catch(InvalidOperationException)
+            {
+                laBDSelectionnee = lesStrips.Single(s => s.ImagesAttachees.Contains(lienBDSelectionnee));
+            }
+            Frame.Navigate(typeof(pageArticle), laBDSelectionnee);
+        }
     }
 }

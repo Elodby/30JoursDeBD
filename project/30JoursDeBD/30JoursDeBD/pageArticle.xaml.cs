@@ -124,7 +124,6 @@ namespace _30JoursDeBD
                     break;
                 }
             }
-            lesImages.Sort();
         }
 
         private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -189,7 +188,7 @@ namespace _30JoursDeBD
             {
                 case 0:
                     while (Frame.CanGoBack)
-                        Frame.Navigate(typeof(MainPage));
+                        Frame.GoBack();
                     break;
                 case 1:
 
