@@ -71,7 +71,6 @@ namespace _30JoursDeBD
                         article.Auteur = HtmlUtilities.ConvertToText(post.author.name);
                         article.Rubrique = post.categories.Single(c => c.slug == "strips" || c.slug == "planches").title;
                         article.Excerpt = HtmlUtilities.ConvertToText(post.excerpt);
-                        article.Note = "Assets/Star.png";
                         if (post.attachments.Count != 0)
                         {
                             article.Image = post.attachments.Single(c => c.slug.ToUpper().Contains("PREVIEW")

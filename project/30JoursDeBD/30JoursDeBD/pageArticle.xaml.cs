@@ -1,4 +1,5 @@
 ﻿using _30JoursDeBD.Common;
+using _30JoursDeBD.Common.testmodel;
 using _30JoursDeBD.testmodel;
 using Newtonsoft.Json;
 using System;
@@ -30,6 +31,8 @@ namespace _30JoursDeBD
         public BD MaBD { get { return maBD; } }
         private List<string> lesImages;
         public List<string> LesImages { get { return lesImages; } }
+        private List<Commentaire> lesCommentaires = new List<Commentaire>();
+        public List<Commentaire> LesCommentaires { get { return lesCommentaires; } }
 
         #region MyRegion
         /// <summary>
@@ -104,6 +107,7 @@ namespace _30JoursDeBD
         {
             maBD = e.Parameter as BD;
             lesImages = maBD.ImagesAttachees;
+            lesCommentaires = maBD.Commentaires;
             foreach(string nom in lesImages)
             {
                 if(nom.ToUpper().Contains("PREVIEW")

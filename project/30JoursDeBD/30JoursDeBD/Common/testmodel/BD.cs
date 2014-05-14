@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _30JoursDeBD.Common.testmodel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,8 @@ namespace _30JoursDeBD.testmodel
         public List<string> ImagesAttachees { get; set; }
         public string Auteur { get; set; }
         public string Rubrique { get; set; }
-        public string Note { get; set; }
         public string Excerpt { get; set; }
+
+        public List<Commentaire> Commentaires { get; set; }
     }
 }
