@@ -123,5 +123,10 @@ namespace _30JoursDeBD
                     break;
             }
         }
+
+        private void RetourText_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Frame.GoBack();
+        }
     }
 }
