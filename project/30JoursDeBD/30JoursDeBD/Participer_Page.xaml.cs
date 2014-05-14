@@ -94,7 +94,7 @@ namespace _30JoursDeBD
         private void AppBar_Tapped(object sender, TappedRoutedEventArgs e) // Navigation
         {
             string leNom = (sender as Border).Name;
-            string[] tabNom = {"Accueil","BD","Albums","BestOf","Auteurs","Participer"};
+            string[] tabNom = {"Accueil","BestOf","Planches","Strips","Auteurs","Participer"};
             int i;
             for ( i=0; i < tabNom.Length; i++)
             {
@@ -124,6 +124,10 @@ namespace _30JoursDeBD
             }
         }
 
+        private void TouchMenu(object sender, TappedRoutedEventArgs e)
+        {
+            AppBarTop.IsOpen = true;
+        }
         private void RetourText_Tapped(object sender, TappedRoutedEventArgs e)
         {
             Frame.GoBack();

@@ -491,10 +491,8 @@
 
             <Border x:Name="BR_DEF_Header" BorderBrush="#FFCECDCE" BorderThickness="0,0,0,2">
                 <Grid x:Name="GR_DEF_Header" Background="#FFF9F9F9" >
-                    <Image Source="Assets/Header/Logo30J.png" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,2,0,2"/>
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,2,10,2">
-                        <Image Source="Assets/Header/HEADER_MenuIcone.png" x:Name="IMG_DEF_HEAD_TOUT"  VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,2,0,2" Tapped="TouchMenu" />
-                    </StackPanel>
+                    <Image Source="Assets/Header/HEADER_MenuIcone.png" Margin="10,2,0,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Tapped="TouchMenu" />
+                    <Image Source="Assets/Header/Logo30J.png" Margin="267,2,266,2"/>
                 </Grid>
             </Border>
 
@@ -569,8 +567,7 @@
             <Border x:Name="BR_POR_Header" BorderBrush="#FFCECDCE" BorderThickness="0,0,0,2">
                 <Grid x:Name="GR_POR_Header" Background="#FFF9F9F9" >
                     <Image Source="Assets/Header/HEADER_MenuIcone.png" Margin="10,2,0,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Tapped="TouchMenu" />
-                    <Image Source="Assets/Header/Logo30J.png" Margin="267,2,266,2"/>
-                    <Image Source="Assets/Header/HEADER_Tuto.png" Margin="10,2,5,0" HorizontalAlignment="Right"  VerticalAlignment="Center"/>
+                    <Image Source="Assets/Header/Logo30J.png"  HorizontalAlignment="Center"  VerticalAlignment="Center"/>
                 </Grid>
             </Border>
 
@@ -614,13 +611,8 @@
 
             <Border x:Name="BR_NAR_Header" BorderBrush="#FFCECDCE" BorderThickness="0,0,0,2">
                 <Grid x:Name="GR_NAR_Header" Background="#FFF9F9F9" >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Source="Assets/Header/HEADER_MenuIcone.png" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,2,0,2" Tapped="TouchMenu"/>
-                    <Image Source="Assets/Header/Logo30J.png" VerticalAlignment="Center" Margin="0,2,0,2" Grid.Column="1"/>
+                    <Image Source="Assets/Header/HEADER_MenuIcone.png" Margin="10,2,0,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Tapped="TouchMenu" />
+                    <Image Source="Assets/Header/Logo30J.png"  HorizontalAlignment="Center"  VerticalAlignment="Center"/>
                 </Grid>
             </Border>
 
