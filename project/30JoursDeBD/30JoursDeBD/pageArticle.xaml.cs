@@ -1,4 +1,5 @@
 ﻿using _30JoursDeBD.Common;
+using _30JoursDeBD.Common.testmodel;
 using _30JoursDeBD.testmodel;
 using Newtonsoft.Json;
 using System;
@@ -25,11 +26,20 @@ namespace _30JoursDeBD
     {
 
         private NavigationHelper navigationHelper;
-        private ObservableDictionary defaultViewModel = new ObservableDictionary();
+        private ObservableDictionary defaultViewModel = new ObservableDictionary(); 
+        private bool DEF_zoom = false;
+
+        // BD récupérée
         private BD maBD;
         public BD MaBD { get { return maBD; } }
+
+        //Listes
         private List<string> lesImages;
         public List<string> LesImages { get { return lesImages; } }
+        private List<Commentaire> lesCommentaires = new List<Commentaire>();
+        public List<Commentaire> LesCommentaires { get { return lesCommentaires; } }
+
+        
 
         #region MyRegion
         /// <summary>
@@ -98,12 +108,12 @@ namespace _30JoursDeBD
             this.SizeChanged += Page_SizeChanged;
         }
 
-       
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            AppBarTop.IsOpen = false;
             maBD = e.Parameter as BD;
             lesImages = maBD.ImagesAttachees;
+            lesCommentaires = maBD.Commentaires;
             foreach(string nom in lesImages)
             {
                 if(nom.ToUpper().Contains("PREVIEW")
@@ -114,9 +124,8 @@ namespace _30JoursDeBD
                     break;
                 }
             }
+            lesImages.Sort();
         }
-
-
 
         private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
         {
@@ -138,14 +147,13 @@ namespace _30JoursDeBD
             }
         }
 
-
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             AppBarTop.IsOpen = false;
             AppBarTop.Height = this.ActualHeight / 5;
-            POR_Auteur.Text = maBD.Auteur;
-            POR_Excerpt.Text = maBD.Excerpt;
-            POR_Titre.Text = maBD.Titre;
+            POR_Auteur.Text = maBD.Auteur;          DEF_Auteur.Text = maBD.Auteur;
+            POR_Excerpt.Text = maBD.Excerpt;        DEF_Excerpt.Text = maBD.Excerpt;
+            POR_Titre.Text = maBD.Titre;            DEF_Titre.Text = maBD.Titre;
             if (POR_Titre.Text.Length > 50)
             { POR_Titre.FontSize = 20; }
 
@@ -156,6 +164,7 @@ namespace _30JoursDeBD
 
 
         //Gestion AppBar
+
         private void AppBar_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
             (sender as Border).BorderBrush = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
@@ -180,7 +189,7 @@ namespace _30JoursDeBD
             {
                 case 0:
                     while (Frame.CanGoBack)
-                        Frame.GoBack();
+                        Frame.Navigate(typeof(MainPage));
                     break;
                 case 1:
 
@@ -200,9 +209,34 @@ namespace _30JoursDeBD
             }
         }
 
+        
+        // Menu
         private void TouchMenu(object sender, TappedRoutedEventArgs e)
         {
+            AppBarTop.IsOpen = true;
+        }
+
+        //Appuie sur le bouton Retour
+        private void RetourText_Tapped(object sender, TappedRoutedEventArgs e)
+        {
             Frame.GoBack();
+        }
+
+        //Appuie sur la loupe
+        private void DEF_Zoom_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (DEF_zoom)
+            {
+                DEF_Corps_LesPlanches.ColumnDefinitions[0].Width = new GridLength(1, GridUnitType.Star);
+                DEF_Corps_LesPlanches.ColumnDefinitions[2].Width = new GridLength(1, GridUnitType.Star);
+                DEF_zoom = false;
+            }
+            else
+            {
+                DEF_Corps_LesPlanches.ColumnDefinitions[0].Width = new GridLength(0, GridUnitType.Star);
+                DEF_Corps_LesPlanches.ColumnDefinitions[2].Width = new GridLength(0, GridUnitType.Star);              
+                DEF_zoom = true;
+            }
         }
 
     }

@@ -352,7 +352,7 @@
     <Grid x:Name="General">
         <!-- Vue par défaut -->
 
-        <Grid x:Name="DefautlView" >
+        <Grid x:Name="DefautlView" Background="#FFE9E7E8" Visibility="Collapsed" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="13*"/>
                 <RowDefinition Height="115*"/>
@@ -362,8 +362,12 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="65*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
 
-                <Grid x:Name="GR_Corps_Page" Grid.Column="1" Background="#FFE9E7E8" >
+                <Grid x:Name="GR_Corps_Page" Grid.Column="1" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30*"/>
                         <RowDefinition Height="20*"/>
@@ -389,6 +393,13 @@
 
                 </Grid>
 
+                <Border Grid.Row="2" BorderBrush="#FF9C0962" BorderThickness="0,3,0,0">
+                    <Grid x:Name="DEF_GR_Retour"  Background="#FFB80170">
+                        <TextBlock x:Name="DEF_RetourText" Text="Retour" FontFamily="SketchFlow Print" Foreground="White" FontSize="25" Margin="15,0,5,0" VerticalAlignment="Center" Tapped="RetourText_Tapped"/>
+                    </Grid>
+                </Border>
+
+
 
             </Grid>
 
@@ -406,36 +417,50 @@
         </Grid>
 
         <!-- Vue portrait ( height > width )-->
-        <Grid x:Name="PortraitView" Visibility="Collapsed" >
+        <Grid x:Name="PortraitView"  >
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*"/>
                 <RowDefinition Height="115*"/>
             </Grid.RowDefinitions>
-
-            <Grid Grid.Row="1" x:Name="GR_POR_Corps_Page" Background="#FFE9E7E8" >
+            
+            <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="459*"/>
-                    <RowDefinition Height="248*"/>
+                    <RowDefinition Height="65*"/>
+                    <RowDefinition Height="5*"/>
                 </Grid.RowDefinitions>
+                <Grid x:Name="GR_POR_Corps_Page" Background="#FFE9E7E8" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="459*"/>
+                        <RowDefinition Height="248*"/>
+                    </Grid.RowDefinitions>
 
-                <Grid Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="25*"/>
-                        <ColumnDefinition Width="50*"/>
-                        <ColumnDefinition Width="25*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Source="Assets/panneau.png" Grid.Column="1" VerticalAlignment="Bottom" Margin="0 0 0 30"/>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="25*"/>
+                            <ColumnDefinition Width="50*"/>
+                            <ColumnDefinition Width="25*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="Assets/panneau.png" Grid.Column="1" VerticalAlignment="Bottom" Margin="0 0 0 30"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="36*"/>
+                            <ColumnDefinition Width="305*"/>
+                            <ColumnDefinition Width="36*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="1" Text="Page en construction" TextAlignment="Center" TextWrapping="WrapWholeWords" Foreground="#FFB2016E" FontSize="58" FontFamily="SketchFlow Print" />
+                    </Grid>
                 </Grid>
 
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="36*"/>
-                        <ColumnDefinition Width="305*"/>
-                        <ColumnDefinition Width="36*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="1" Text="Page en construction" TextAlignment="Center" TextWrapping="WrapWholeWords" Foreground="#FFB2016E" FontSize="58" FontFamily="SketchFlow Print" />
-                </Grid>
+                <Border Grid.Row="1" BorderBrush="#FF9C0962" BorderThickness="0,3,0,0">
+                    <Grid x:Name="POR_GR_Retour"  Background="#FFB80170">
+                        <TextBlock x:Name="POR_RetourText" Text="Retour" FontFamily="SketchFlow Print" Foreground="White" FontSize="25" Margin="15,0,5,0" VerticalAlignment="Center" Tapped="RetourText_Tapped"/>
+                    </Grid>
+                </Border>
             </Grid>
+
+            
 
 
             <Border x:Name="BR_POR_Header" BorderBrush="#FFCECDCE" BorderThickness="0,0,0,2">

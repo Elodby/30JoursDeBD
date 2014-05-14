@@ -90,6 +90,7 @@ namespace _30JoursDeBD
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
+            AppBarTop.IsOpen = false;
             if (_listeBD.Count == 0)
             {
                 //Storyboard de chargement
@@ -103,40 +104,49 @@ namespace _30JoursDeBD
                 HttpClient client = new HttpClient();
                 var jsonString = await client.GetStringAsync(new Uri("http://30joursdebd.com/?json=get_recent_post&count=30"));
                 var httpresponse = JsonConvert.DeserializeObject<RootObject>(jsonString.ToString());
-                    foreach (Post post in httpresponse.posts)
+
+                BD uneBD;
+
+                foreach (Post post in httpresponse.posts)
                 {
+                    List<Commentaire> lesCommentaires = new List<Commentaire>();
+                    uneBD = new BD();
                     try
                     {
-                        if (post.categories.Where(c => c.slug == "news").Count() == 0)
+                        foreach(Comment comment in post.comments)
                         {
-                        
-                            _listeBD.Add(new BD()
+                            lesCommentaires.Add(new Commentaire()
                             {
-                                Titre = HtmlUtilities.ConvertToText(post.title),
-                                Auteur = HtmlUtilities.ConvertToText(post.author.name),
-                                Rubrique = post.categories.Single(c => c.slug == "strips" || c.slug == "planches").title,
-                                Image = post.attachments.Single(c => c.slug.ToUpper().Contains("PREVIEW") 
-                                    || c.slug.ToUpper().Contains("BANNIERE")
-                                    || c.slug.ToUpper().Contains("BANDEAU")).url,
-                                ImagesAttachees = post.attachments.Select(a => a.url).ToList(),
-                                Excerpt = HtmlUtilities.ConvertToText(post.excerpt),
-                                Note = "Assets/Star.png"
+                                Content = HtmlUtilities.ConvertToText(comment.content),
+                                Date = comment.date,
+                                Nom = comment.name
                             });
+                        }
+                        if (post.categories.Where(c => c.slug == "strips" || c.slug == "planches").Count() != 0)
+                        {
+                            uneBD.Titre = HtmlUtilities.ConvertToText(post.title);
+                            uneBD.Auteur = HtmlUtilities.ConvertToText(post.author.name);
+                            uneBD.Rubrique = post.categories.Single(c => c.slug == "strips" || c.slug == "planches").title;
+                            uneBD.Image = post.attachments.Single(c => c.slug.ToUpper().Contains("PREVIEW") 
+                                || c.slug.ToUpper().Contains("BANNIERE")
+                                || c.slug.ToUpper().Contains("BANDEAU")).url;
+                            uneBD.ImagesAttachees = post.attachments.Select(a => a.url).ToList();
+                            uneBD.Excerpt = HtmlUtilities.ConvertToText(post.excerpt);
+                            uneBD.Commentaires = lesCommentaires;
+                            _listeBD.Add(uneBD);
                         }
                         
                     }
                     catch
                     {
-                        _listeBD.Add(new BD()
-                        {
-                            Titre = HtmlUtilities.ConvertToText(post.title),
-                            Auteur = HtmlUtilities.ConvertToText(post.author.name),
-                            Rubrique = post.categories.Single(c => c.slug == "strips" || c.slug == "planches").title,
-                            Image = post.attachments.Last().url,
-                            ImagesAttachees = post.attachments.Select(a => a.url).ToList(),
-                            Excerpt = HtmlUtilities.ConvertToText(post.excerpt),
-                            Note = "Assets/Star.png"
-                        });
+                        uneBD.Titre = HtmlUtilities.ConvertToText(post.title);
+                        uneBD.Auteur = HtmlUtilities.ConvertToText(post.author.name);
+                        uneBD.Rubrique = post.categories.Single(c => c.slug == "strips" || c.slug == "planches").title;
+                        uneBD.Image = post.attachments.Last().url;
+                        uneBD.ImagesAttachees = post.attachments.Select(a => a.url).ToList();
+                        uneBD.Excerpt = HtmlUtilities.ConvertToText(post.excerpt);
+                        uneBD.Commentaires = lesCommentaires;
+                        _listeBD.Add(uneBD);
                     }
                 }
                 //Mettre au photo un auteur aléatoire
@@ -281,7 +291,7 @@ namespace _30JoursDeBD
 
         private void TouchMenu(object sender, TappedRoutedEventArgs e)
         {
-            //AppBarTop.IsOpen = true;
+            AppBarTop.IsOpen = true;
         }
         #endregion
 
