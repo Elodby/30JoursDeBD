@@ -113,6 +113,7 @@
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Common\testmodel\Auteur.cs" />
+    <Compile Include="Common\testmodel\Commentaire.cs" />
     <Compile Include="listeAuteur.xaml.cs">
       <DependentUpon>listeAuteur.xaml</DependentUpon>
     </Compile>
