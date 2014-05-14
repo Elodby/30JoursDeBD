@@ -30,8 +30,8 @@
                                 <TextBlock Text="{Binding Titre}" Foreground="#FFD62291" FontSize="24" TextWrapping="WrapWholeWords"/>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="{Binding Auteur}" Foreground="#FFD62291" TextWrapping="WrapWholeWords"/>
-                                    <TextBlock Text=" - rubrique ." Foreground="#FF818181" TextWrapping="WrapWholeWords"/>
-                                    <TextBlock Text="{Binding Rubrique}" Foreground="#FFD62291" TextWrapping="WrapWholeWords"/>
+                                    <TextBlock Text=" - rubrique " Foreground="#FF818181" TextWrapping="WrapWholeWords"/>
+                                    <TextBlock Text="{Binding Rubrique}" Padding="3,0,0,0" Foreground="#FFD62291" TextWrapping="WrapWholeWords"/>
                                 </StackPanel>
                             </StackPanel>
                             <Image Source="{Binding Note}" Height="16" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,5"/>
@@ -55,8 +55,8 @@
                                 <TextBlock Text="{Binding Titre}" Foreground="#FFD62291" FontSize="40" TextWrapping="WrapWholeWords"/>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="{Binding Auteur}"  FontSize="28" Foreground="#FFD62291" TextWrapping="WrapWholeWords"/>
-                                    <TextBlock Text=" - rubrique ."  FontSize="28" Foreground="#FF818181" TextWrapping="WrapWholeWords"/>
-                                    <TextBlock Text="{Binding Rubrique}"  FontSize="28" Foreground="#FFD62291" TextWrapping="WrapWholeWords"/>
+                                    <TextBlock Text=" - rubrique "  FontSize="28" Foreground="#FF818181" TextWrapping="WrapWholeWords"/>
+                                    <TextBlock Text="{Binding Rubrique}" Padding="3,0,0,0"  FontSize="28" Foreground="#FFD62291" TextWrapping="WrapWholeWords"/>
                                 </StackPanel>
                             </StackPanel>
                             <Image Source="{Binding Note}" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,5"/>
