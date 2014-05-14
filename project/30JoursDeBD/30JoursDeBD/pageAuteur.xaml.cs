@@ -61,10 +61,11 @@ namespace _30JoursDeBD
             var jsonString = await client.GetStringAsync(new Uri("http://30joursdebd.com/?json=get_author_posts&author_id=" + auteurSelectionne.Id));
             var httpresponse = JsonConvert.DeserializeObject<RootObject>(jsonString.ToString());
             BD article;
-            List<Commentaire> lesCommentaires = new List<Commentaire>();
+            List<Commentaire> lesCommentaires;
             foreach (Post post in httpresponse.posts)
             {
                 article = new BD();
+                lesCommentaires = new List<Commentaire>();
                 try
                 {
                     foreach(Comment comment in post.comments)
