@@ -289,7 +289,7 @@ namespace _30JoursDeBD
 
         private void TouchMenu(object sender, TappedRoutedEventArgs e)
         {
-            //AppBarTop.IsOpen = true;
+            AppBarTop.IsOpen = true;
         }
         #endregion
 

@@ -144,6 +144,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\BD_Zoom.png" />
     <Content Include="Assets\BigLogo.scale-100.png" />
     <Content Include="Assets\Engrenage.png" />
     <Content Include="Assets\Engrenage2.png" />

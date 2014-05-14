@@ -33,6 +33,7 @@ namespace _30JoursDeBD
         public List<string> LesImages { get { return lesImages; } }
         private List<Commentaire> lesCommentaires = new List<Commentaire>();
         public List<Commentaire> LesCommentaires { get { return lesCommentaires; } }
+        private bool DEF_zoom = false;
 
         #region MyRegion
         /// <summary>
@@ -149,9 +150,9 @@ namespace _30JoursDeBD
         {
             AppBarTop.IsOpen = false;
             AppBarTop.Height = this.ActualHeight / 5;
-            POR_Auteur.Text = maBD.Auteur;
-            POR_Excerpt.Text = maBD.Excerpt;
-            POR_Titre.Text = maBD.Titre;
+            POR_Auteur.Text = maBD.Auteur;          DEF_Auteur.Text = maBD.Auteur;
+            POR_Excerpt.Text = maBD.Excerpt;        DEF_Excerpt.Text = maBD.Excerpt;
+            POR_Titre.Text = maBD.Titre;            DEF_Titre.Text = maBD.Titre;
             if (POR_Titre.Text.Length > 50)
             { POR_Titre.FontSize = 20; }
 
@@ -208,7 +209,28 @@ namespace _30JoursDeBD
 
         private void TouchMenu(object sender, TappedRoutedEventArgs e)
         {
+            AppBarTop.IsOpen = true;       
+        }
+
+        private void RetourText_Tapped(object sender, TappedRoutedEventArgs e)
+        {
             Frame.GoBack();
+        }
+
+        private void DEF_Zoom_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (DEF_zoom)
+            {
+                DEF_Corps_LesPlanches.ColumnDefinitions[0].Width = new GridLength(1, GridUnitType.Star);
+                DEF_Corps_LesPlanches.ColumnDefinitions[2].Width = new GridLength(1, GridUnitType.Star);
+                DEF_zoom = false;
+            }
+            else
+            {
+                DEF_Corps_LesPlanches.ColumnDefinitions[0].Width = new GridLength(0, GridUnitType.Star);
+                DEF_Corps_LesPlanches.ColumnDefinitions[2].Width = new GridLength(0, GridUnitType.Star);              
+                DEF_zoom = true;
+            }
         }
 
     }
