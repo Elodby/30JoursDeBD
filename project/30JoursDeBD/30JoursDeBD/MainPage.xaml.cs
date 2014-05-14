@@ -122,7 +122,7 @@ namespace _30JoursDeBD
                                 Nom = comment.name
                             });
                         }
-                        if (post.categories.Where(c => c.slug == "news").Count() == 0)
+                        if (post.categories.Where(c => c.slug == "strips" || c.slug == "planches").Count() != 0)
                         {
                             uneBD.Titre = HtmlUtilities.ConvertToText(post.title);
                             uneBD.Auteur = HtmlUtilities.ConvertToText(post.author.name);
@@ -132,6 +132,8 @@ namespace _30JoursDeBD
                                 || c.slug.ToUpper().Contains("BANDEAU")).url;
                             uneBD.ImagesAttachees = post.attachments.Select(a => a.url).ToList();
                             uneBD.Excerpt = HtmlUtilities.ConvertToText(post.excerpt);
+                            uneBD.Commentaires = lesCommentaires;
+                            _listeBD.Add(uneBD);
                         }
                         
                     }
@@ -143,9 +145,9 @@ namespace _30JoursDeBD
                         uneBD.Image = post.attachments.Last().url;
                         uneBD.ImagesAttachees = post.attachments.Select(a => a.url).ToList();
                         uneBD.Excerpt = HtmlUtilities.ConvertToText(post.excerpt);
+                        uneBD.Commentaires = lesCommentaires;
+                        _listeBD.Add(uneBD);
                     }
-                    uneBD.Commentaires = lesCommentaires;
-                    _listeBD.Add(uneBD);
                 }
                 //Mettre au photo un auteur aléatoire
                 var jsonStringListeAutheur = await client.GetStringAsync(new Uri("http://30joursdebd.com/?json=get_author_index"));
