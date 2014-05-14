@@ -63,6 +63,7 @@ namespace _30JoursDeBD
             this.NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
             this.POR_ComboBoxFiltre.ItemsSource = Alphabet;
             this.POR_ComboBoxFiltre.SelectedIndex = 0;
+            this.SizeChanged += Page_SizeChanged;
         }
 
         //Gestion des Visuals States en fonction de la taille de l'écran, lors de l'appel de l'event SizeChanged
@@ -147,6 +148,8 @@ namespace _30JoursDeBD
         {
             AppBarTop.IsOpen = false;
             AppBarTop.Height = this.ActualHeight / 5;
+
+            this.DataContext = this;
         }
 
         /// <summary>
