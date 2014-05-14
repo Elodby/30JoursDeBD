@@ -133,6 +133,7 @@ namespace _30JoursDeBD
                             uneBD.ImagesAttachees = post.attachments.Select(a => a.url).ToList();
                             uneBD.Excerpt = HtmlUtilities.ConvertToText(post.excerpt);
                             uneBD.Commentaires = lesCommentaires;
+                            uneBD.ImagesAttachees.Sort();
                             _listeBD.Add(uneBD);
                         }
                         
@@ -146,6 +147,7 @@ namespace _30JoursDeBD
                         uneBD.ImagesAttachees = post.attachments.Select(a => a.url).ToList();
                         uneBD.Excerpt = HtmlUtilities.ConvertToText(post.excerpt);
                         uneBD.Commentaires = lesCommentaires;
+                        uneBD.ImagesAttachees.Sort();
                         _listeBD.Add(uneBD);
                     }
                 }

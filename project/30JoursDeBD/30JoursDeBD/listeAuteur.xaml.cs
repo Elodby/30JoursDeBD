@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using Windows.UI;
 using Windows.UI.Xaml;
@@ -12,6 +13,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 
@@ -119,8 +121,11 @@ namespace _30JoursDeBD
                         auteur.Id = a.id;
                     auteur.Nom = a.name;
                     auteur.URL = a.url;
-                        auteur.Image = "http://30joursdebd.com/30jdbdv3/wp-content/themes/30jdbd/scripts/timthumb.php?src=/30jdbdv3/wp-content/themes/30jdbd/images/auteurs/" + a.name + ".jpg&w=130&h=130&zc=1&q=90";
                     auteur.Description = a.description;
+                    auteur.Image =
+                        "http://30joursdebd.com/30jdbdv3/wp-content/themes/30jdbd/scripts/timthumb.php?src=/30jdbdv3/wp-content/themes/30jdbd/images/auteurs/"
+                        + auteur.Nom + ".jpg&w=130&h=130&zc=1&q=90";
+                    
                     lstAut.Add(auteur);
                 }
 
@@ -139,6 +144,32 @@ namespace _30JoursDeBD
                 DEF_Grid_Load.Visibility = Visibility.Collapsed;
                 DEF_Engrenage_Load.Stop();
 
+                this.DataContext = this;
+                chargerLesImages();
+            }
+        }
+
+        private async void chargerLesImages()
+        {
+            HttpClient client = new HttpClient();
+            foreach(Auteur auteur in _listeAuteur)
+            {
+                try
+                {
+                    string lien = 
+                        "http://30joursdebd.com/30jdbdv3/wp-content/themes/30jdbd/scripts/timthumb.php?src=/30jdbdv3/wp-content/themes/30jdbd/images/auteurs/"
+                        + auteur.Nom + ".jpg&w=130&h=130&zc=1&q=90";
+                    HttpResponseMessage response = await
+                        client.GetAsync(lien);
+                    response.EnsureSuccessStatusCode();
+
+                    auteur.Image = lien;
+                }
+                catch (HttpRequestException)
+                {
+                    auteur.Image =
+                        "http://30joursdebd.com/30jdbdv3/wp-content/themes/30jdbd/scripts/timthumb.php?src=/30jdbdv3/wp-content/themes/30jdbd/images/auteurs/30JBDlogo.jpg&w=130&h=130&zc=1&q=90";
+                }
                 this.DataContext = this;
             }
         }

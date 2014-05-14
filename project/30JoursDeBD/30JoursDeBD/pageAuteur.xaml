@@ -20,7 +20,7 @@
 
         <!-- Data Template : pour la GridView du Corps -->
         <DataTemplate x:Key="PlanchesTemplate">
-            <Image Source="{Binding}" Width="200"/>
+            <Image Source="{Binding}" Width="200" Tapped="Image_Tapped"/>
         </DataTemplate>
 
     </Page.Resources>
@@ -510,7 +510,7 @@
                             ItemsSource="{Binding Source={StaticResource SourceListView}}"
                             ItemTemplate="{StaticResource PlanchesTemplate}"
                             SelectionMode="None"
-                            IsSwipeEnabled="false" IsItemClickEnabled="False">
+                            IsSwipeEnabled="false" IsItemClickEnabled="True">
                         <ListView.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapGrid Orientation="Horizontal" MaximumRowsOrColumns="4"/>
