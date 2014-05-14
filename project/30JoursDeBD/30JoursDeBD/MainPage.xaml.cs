@@ -131,9 +131,10 @@ namespace _30JoursDeBD
                                 || c.slug.ToUpper().Contains("BANNIERE")
                                 || c.slug.ToUpper().Contains("BANDEAU")).url;
                             uneBD.ImagesAttachees = post.attachments.Select(a => a.url).ToList();
+                            uneBD.ImagesAttachees.Sort();
+                            uneBD.NombreVues = post.custom_fields.views.First();
                             uneBD.Excerpt = HtmlUtilities.ConvertToText(post.excerpt);
                             uneBD.Commentaires = lesCommentaires;
-                            uneBD.ImagesAttachees.Sort();
                             _listeBD.Add(uneBD);
                         }
                         
@@ -145,9 +146,10 @@ namespace _30JoursDeBD
                         uneBD.Rubrique = post.categories.Single(c => c.slug == "strips" || c.slug == "planches").title;
                         uneBD.Image = post.attachments.Last().url;
                         uneBD.ImagesAttachees = post.attachments.Select(a => a.url).ToList();
+                        uneBD.ImagesAttachees.Sort();
                         uneBD.Excerpt = HtmlUtilities.ConvertToText(post.excerpt);
                         uneBD.Commentaires = lesCommentaires;
-                        uneBD.ImagesAttachees.Sort();
+                        uneBD.NombreVues = post.custom_fields.views.First();
                         _listeBD.Add(uneBD);
                     }
                 }
@@ -158,14 +160,9 @@ namespace _30JoursDeBD
                 int indexRandom = rand.Next(httpresponseListeAuteur.authors.Count);
                 string nomAuteurAleatoire = httpresponseListeAuteur.authors[indexRandom].name;
             
-                    recupererDetailsAuteurAleatoire(httpresponseListeAuteur.authors[indexRandom]);
-
-            
+                recupererDetailsAuteurAleatoire(httpresponseListeAuteur.authors[indexRandom]);
                 TrouvePremierStrip();
                 TrouvePremierePlanche();
-                IMG_POR_Corps_Auteur.Source = new BitmapImage(new Uri(
-                        auteurAleatoire.Image,
-                    UriKind.Absolute));
 
                 //Storyboard de chargement ( fin )
                 POR_Grid_Load.Visibility = Visibility.Collapsed;
@@ -179,18 +176,34 @@ namespace _30JoursDeBD
             }
         }
 
-        private void recupererDetailsAuteurAleatoire(Author randomAuthor)
+        private async void recupererDetailsAuteurAleatoire(Author randomAuthor)
         {
-            auteurAleatoire = new Auteur()
+
+            auteurAleatoire = new Auteur();
+            auteurAleatoire.Id = randomAuthor.id;
+            auteurAleatoire.Nom = randomAuthor.name;
+            auteurAleatoire.Description = randomAuthor.description;
+            auteurAleatoire.URL = randomAuthor.url;
+            try
             {
-                Id = randomAuthor.id,
-                Nom = randomAuthor.name,
-                Description = randomAuthor.description,
-                URL = randomAuthor.url,
-                Image =
-                "http://30joursdebd.com/30jdbdv3/wp-content/themes/30jdbd/scripts/timthumb.php?src=/30jdbdv3/wp-content/themes/30jdbd/images/auteurs/"
-                    + randomAuthor.name + ".jpg&w=130&h=130&zc=1&q=90"
-            };
+            HttpClient client = new HttpClient();
+                string lien = 
+                    "http://30joursdebd.com/30jdbdv3/wp-content/themes/30jdbd/scripts/timthumb.php?src=/30jdbdv3/wp-content/themes/30jdbd/images/auteurs/"
+                    + auteurAleatoire.Nom + ".jpg&w=130&h=130&zc=1&q=90";
+                HttpResponseMessage response = await
+                    client.GetAsync(lien);
+                response.EnsureSuccessStatusCode();
+
+                auteurAleatoire.Image = lien;
+            }
+            catch (HttpRequestException)
+            {
+                auteurAleatoire.Image =
+                    "http://30joursdebd.com/30jdbdv3/wp-content/themes/30jdbd/scripts/timthumb.php?src=/30jdbdv3/wp-content/themes/30jdbd/images/auteurs/30JBDlogo.jpg&w=130&h=130&zc=1&q=90";
+            }
+            IMG_POR_Corps_Auteur.Source = new BitmapImage(new Uri(
+                        auteurAleatoire.Image,
+                    UriKind.Absolute));
         }
 
 
