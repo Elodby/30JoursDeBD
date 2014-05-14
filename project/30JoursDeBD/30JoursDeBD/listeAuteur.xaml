@@ -26,7 +26,7 @@
                         </Grid.RowDefinitions>
                         <Image Source="{Binding Image}" x:Name="imageAuteur" Stretch="Uniform" Margin="10,10,10,5" Tapped="Image_Tapped"/>
                         <Grid Grid.Row="1">
-                            <TextBlock Text="{Binding Nom}" Foreground="#FFD62291" FontSize="18" TextWrapping="WrapWholeWords" Margin="20,0,20,10"/>
+                            <TextBlock Text="{Binding Nom}" Tapped="TextBlock_Tapped"  Foreground="#FFD62291" FontSize="18" TextWrapping="WrapWholeWords" Margin="20,0,20,10"/>
                         </Grid>
 
                     </Grid>
@@ -64,7 +64,7 @@
                         </Grid.RowDefinitions>
                         <Image Source="{Binding Image}" x:Name="imageAuteur" Stretch="Uniform" Margin="10,10,10,5" Tapped="Image_Tapped"/>
                         <Grid Grid.Row="1">
-                            <TextBlock Text="{Binding Nom}" Foreground="#FFD62291" FontSize="18" TextWrapping="WrapWholeWords" Margin="30,0,20,10"/>
+                            <TextBlock Text="{Binding Nom}" Tapped="TextBlock_Tapped" Foreground="#FFD62291" FontSize="18" TextWrapping="WrapWholeWords" Margin="30,0,20,10"/>
                         </Grid>
 
                     </Grid>
@@ -80,9 +80,9 @@
                             <RowDefinition Height="80*"/>
                             <RowDefinition Height="20*"/>
                         </Grid.RowDefinitions>
-                        <Image Source="{Binding Image}" x:Name="imageAuteur" Stretch="Uniform" Margin="10,10,10,5"/>
+                        <Image Source="{Binding Image}" Stretch="Uniform" Margin="10,10,10,5" Tapped="Image_Tapped"/>
                         <Grid Grid.Row="1">
-                            <TextBlock Text="{Binding Nom}" Foreground="#FFD62291" FontSize="18" TextWrapping="WrapWholeWords" Margin="30,0,20,10"/>
+                            <TextBlock Text="{Binding Nom}" Tapped="TextBlock_Tapped" Foreground="#FFD62291" FontSize="18" TextWrapping="WrapWholeWords" Margin="30,0,20,10"/>
                         </Grid>
 
                     </Grid>
@@ -477,7 +477,6 @@
             <Border x:Name="BR_DEF_Header" BorderBrush="#FFCECDCE" BorderThickness="0,0,0,2">
                 <Grid x:Name="GR_DEF_Header" Background="#FFF9F9F9" >
                     <Image Source="Assets/Header/Logo30J.png" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,2,0,2"/>
-                    <Image Name="test" Visibility="Collapsed"/>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,2,10,2">
                         <Image Source="Assets/Header/HEADER_ToutIcone_ON.png" x:Name="IMG_DEF_HEAD_TOUT"  VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,2,0,2"/>
                     </StackPanel>
@@ -532,7 +531,7 @@
                         ItemsSource="{Binding Source={StaticResource SourceGridView}}"
                         ItemTemplate="{StaticResource POR_ItemTemplate}"
                         SelectionMode="None"
-                        IsSwipeEnabled="false" IsItemClickEnabled="True" >
+                        IsSwipeEnabled="false" IsItemClickEnabled="True">
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapGrid Orientation="Horizontal" MaximumRowsOrColumns="4"/>

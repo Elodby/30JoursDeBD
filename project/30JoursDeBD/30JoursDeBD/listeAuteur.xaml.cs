@@ -336,5 +336,11 @@ namespace _30JoursDeBD
                 POR_NoAuteurs.Visibility = Visibility.Collapsed;
             }
         }
+
+        private void TextBlock_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Auteur AuteurSelectionne = ListeAuteur.Single(a => a.Nom == ((TextBlock)sender).Text);
+            Frame.Navigate(typeof(pageAuteur), AuteurSelectionne);
+        }
     }
 }

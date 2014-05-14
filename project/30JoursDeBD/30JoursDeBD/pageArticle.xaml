@@ -17,7 +17,7 @@
         <CollectionViewSource
             x:Name="SourceListViewComments"
             Source="{Binding LesCommentaires}" />
-                                
+
 
         <!-- Data Template : pour la GridView du Corps -->
         <DataTemplate x:Key="PlanchesTemplate">
@@ -25,7 +25,14 @@
         </DataTemplate>
 
         <DataTemplate x:Key="CommentsTemplate">
-            <TextBlock Text="{Binding Nom}" Foreground="Black"/>
+            <StackPanel Margin="0,0,0,20">
+                <StackPanel Margin="10,10,10,0" Orientation="Horizontal">
+                    <TextBlock Text="{Binding Nom}" Foreground="#FFB80170" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                    <TextBlock Text=" : " Foreground="#FFA9A3A6" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                    <TextBlock Text="{Binding Date}"  Foreground="#FFA9A3A6" FontSize="16" Margin="5,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                </StackPanel>
+                <TextBlock Text="{Binding Content}" TextWrapping="WrapWholeWords" Padding="20,5,10,0" Foreground="Black"/>
+            </StackPanel>
         </DataTemplate>
 
     </Page.Resources>
@@ -355,52 +362,99 @@
     <Grid x:Name="General">
         <!-- Vue par défaut -->
 
-        <Grid x:Name="DefautlView" Visibility="Collapsed">
+        <Grid x:Name="DefautlView" Background="#FFE9E7E8" Visibility="Visible">
             <Grid.RowDefinitions>
                 <RowDefinition Height="13*"/>
                 <RowDefinition Height="115*"/>
             </Grid.RowDefinitions>
 
-            <Grid x:Name="GR_DEF_Body" Grid.Row="1">
+            <Grid Grid.Row="1" x:Name="GR_Corps_Page"  >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="55*"/>
+                    <RowDefinition Height="5*" />
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-                <Grid x:Name="GR_Corps_Page" Grid.Column="1" Background="#FFE9E7E8" >
-                    <!--<GridView
-                        Padding="60,20,0,0"
-                        x:Name="itemGridView"
-                        AutomationProperties.AutomationId="ItemsGridView"
-                        AutomationProperties.Name="Items"
-                        TabIndex="1"
-                        ItemsSource="{Binding Source={StaticResource SourceGridView}}"
-                        ItemTemplate="{StaticResource GridItemTemplate}"
-                        SelectionMode="None"
-                        IsSwipeEnabled="false" IsItemClickEnabled="True"/>-->
+                <Grid x:Name="DEF_Titre_Planche" Background="White" Margin="30,10,30,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="29*"/>
+                        <RowDefinition Height="70*"/>
+                    </Grid.RowDefinitions>
 
-                    <Grid x:Name="DEF_Grid_Load" >
-                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <Image x:Name="DEF_IMG_Load_Engrenage" Source="Assets/Engrenage2.png" Stretch="None" Margin="20" RenderTransformOrigin="0.5,0.5">
-                                <Image.RenderTransform>
-                                    <CompositeTransform/>
-                                </Image.RenderTransform>
-                            </Image>
-                            <TextBlock  Text="Chargement..." FontSize="64" FontFamily="SketchFlow Print" Foreground="#FFB2016E" FontWeight="Bold" />
-                        </StackPanel>
+                    <StackPanel Orientation="Horizontal" Background="#FFF3F0F1">
+                        <TextBlock Text="Auteur(s): " Foreground="#FFA9A3A6" FontSize="16" Margin="10,0,5,0" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="DEF_Auteur" Foreground="#FFB80170" FontSize="16" Margin="0,0,10,0" VerticalAlignment="Center" />
+                    </StackPanel>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="39*"/>
+                            <ColumnDefinition Width="576*"/>
+                            <ColumnDefinition Width="38*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="4*"/>
+                            <RowDefinition Height="3*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock x:Name="DEF_Titre" Grid.ColumnSpan="3" Foreground="Black" FontSize="24" Margin="10,4,0,3" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="DEF_Excerpt" TextWrapping="WrapWholeWords" Grid.Row="1" Foreground="Black" FontSize="12" Grid.Column="1" Margin="0,5,0,0" Grid.ColumnSpan="2"/>
+                        <Image x:Name="DEF_Zoom" Source="Assets/BD_Zoom.png" Grid.Column="2" Grid.RowSpan="2" Margin="5" Tapped="DEF_Zoom_Tapped"/>
                     </Grid>
                 </Grid>
 
+                <Grid x:Name="DEF_Corps_Planche" Grid.Row="1" Background="White" Margin="30,0,30,5">
+                    <ScrollViewer HorizontalScrollMode="Disabled">
+                        <StackPanel>
+                            <Grid x:Name="DEF_Corps_LesPlanches">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="5*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <ListView
+                                    Grid.Column="1"
+                                    Grid.ColumnSpan="1"
+                                    Padding="50,2,50,2"
+                                    x:Name="DEFlistePlanches"
+                                    AutomationProperties.AutomationId="ItemsListView"
+                                    AutomationProperties.Name="Items"
+                                    ItemsSource="{Binding Source={StaticResource SourceListView}}"
+                                    ItemTemplate="{StaticResource PlanchesTemplate}"
+                                    SelectionMode="None"
+                                    IsSwipeEnabled="false" IsItemClickEnabled="False"/>
+                            </Grid>
+                            <StackPanel Orientation="Horizontal" Background="#FFF3F0F1" Margin="0,30,0,0">
+                                <TextBlock Text="Commentaire(s) :" Foreground="#FFA9A3A6" FontSize="16" Margin="10,0,10,0" Padding="3" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <ListView
+                                Padding="2,2,2,2"
+                                x:Name="DEFlisteCommentaires"
+                                AutomationProperties.AutomationId="ItemsListView"
+                                AutomationProperties.Name="Items"
+                                ItemsSource="{Binding Source={StaticResource SourceListViewComments}}"
+                                ItemTemplate="{StaticResource CommentsTemplate}"
+                                SelectionMode="None"
+                                IsSwipeEnabled="false" IsItemClickEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False" IsTapEnabled="False" Margin="0,0,1,0"/>
 
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+
+                <Border Grid.Row="2" BorderBrush="#FF9C0962" BorderThickness="0,3,0,0">
+                    <Grid x:Name="DEF_GR_Retour"  Background="#FFB80170">
+                        <TextBlock x:Name="DEF_RetourText" Text="Retour" FontFamily="SketchFlow Print" Foreground="White" FontSize="25" Margin="15,0,5,0" VerticalAlignment="Center" Tapped="RetourText_Tapped"/>
+                    </Grid>
+                </Border>
             </Grid>
+
 
             <Border x:Name="BR_DEF_Header" BorderBrush="#FFCECDCE" BorderThickness="0,0,0,2">
                 <Grid x:Name="GR_DEF_Header" Background="#FFF9F9F9" >
-                    <Image Source="Assets/Header/Logo30J.png" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,2,0,2"/>
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,2,10,2">
-                        <Image Source="Assets/Header/HEADER_ToutIcone_ON.png" x:Name="IMG_DEF_HEAD_TOUT"  VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,2,0,2"/>
-                        <Image Source="Assets/Header/HEADER_StripsIcone.png" x:Name="IMG_DEF_HEAD_STRIP" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,2,0,2"/>
-                        <Image Source="Assets/Header/HEADER_PlanchesIcone.png" x:Name="IMG_DEF_HEAD_PLANCHE" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,2,0,2"/>
-                    </StackPanel>
+                    <Image Source="Assets/Header/HEADER_MenuIcone.png" Margin="10,2,0,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Tapped="TouchMenu" />
+                    <Image Source="Assets/Header/Logo30J.png" Margin="267,2,266,2"/>
+                    <Image Source="Assets/Header/HEADER_Tuto.png" Margin="10,2,5,0" HorizontalAlignment="Right"  VerticalAlignment="Center"/>
                 </Grid>
             </Border>
 
@@ -409,23 +463,23 @@
         </Grid>
 
         <!-- Vue portrait ( height > width )-->
-        <Grid x:Name="PortraitView"  Background="#FFE9E7E8">
+        <Grid x:Name="PortraitView" Visibility="Collapsed" Background="#FFE9E7E8">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*"/>
                 <RowDefinition Height="115*"/>
             </Grid.RowDefinitions>
 
-            <!--<ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible">-->
-            <Grid Grid.Row="1" x:Name="GR_POR_Corps_Page" Background="White" Margin="30,10,30,5" >
+            <Grid Grid.Row="1" x:Name="GR_POR_Corps_Page"  >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="10*"/>
-                    <RowDefinition Height="60*"/>
+                    <RowDefinition Height="55*"/>
+                    <RowDefinition Height="5*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-                <Grid x:Name="POR_Titre_Planche">
+                <Grid x:Name="POR_Titre_Planche" Background="White" Margin="30,10,30,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="29*"/>
                         <RowDefinition Height="70*"/>
@@ -449,7 +503,7 @@
                     </Grid>
                 </Grid>
 
-                <Grid x:Name="POR_Corps_Planche" Grid.Row="1">
+                <Grid x:Name="POR_Corps_Planche" Grid.Row="1" Background="White" Margin="30,0,30,5">
                     <ScrollViewer HorizontalScrollMode="Disabled">
                         <StackPanel>
                             <ListView
@@ -472,37 +526,26 @@
                                 ItemsSource="{Binding Source={StaticResource SourceListViewComments}}"
                                 ItemTemplate="{StaticResource CommentsTemplate}"
                                 SelectionMode="None"
-                                IsSwipeEnabled="false" IsItemClickEnabled="False"/>
+                                IsSwipeEnabled="false" IsItemClickEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False" IsTapEnabled="False" Margin="0,0,1,0"/>
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>
-                <!--
-                <Grid x:Name="POR_Commentaire_Planche" Grid.Row="1">
-                    <Border Background="White" Margin="2,12,16,12">
-                        <ListView
-                            Padding="2,2,2,2"
-                            x:Name="itemListView"
-                            AutomationProperties.AutomationId="ItemsGridView"
-                            AutomationProperties.Name="Items"
-                            ItemsSource="{Binding Source={StaticResource SourceGridView}}"
-                            ItemTemplate="{StaticResource ListItemTemplate}"
-                            SelectionMode="None"
-                            IsSwipeEnabled="false" IsItemClickEnabled="True"/>
-                    </Border>
-                </Grid>-->
+
+                <Border Grid.Row="2" BorderBrush="#FF9C0962" BorderThickness="0,3,0,0">
+                    <Grid x:Name="POR_GR_Retour"  Background="#FFB80170">
+                        <TextBlock x:Name="POR_RetourText" Text="Retour" FontFamily="SketchFlow Print" Foreground="White" FontSize="25" Margin="15,0,5,0" VerticalAlignment="Center" Tapped="RetourText_Tapped"/>
+                    </Grid>
+                </Border>
 
             </Grid>
-            <!--</ScrollViewer>-->
-
 
             <Border x:Name="BR_POR_Header" BorderBrush="#FFCECDCE" BorderThickness="0,0,0,2">
                 <Grid x:Name="GR_POR_Header" Background="#FFF9F9F9" >
                     <Image Source="Assets/Header/HEADER_MenuIcone.png" Margin="10,2,0,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Tapped="TouchMenu" />
-                    <Image Source="Assets/Header/Logo30J.png" Margin="267,2,266,2"/>
+                    <Image Source="Assets/Header/Logo30J.png"  HorizontalAlignment="Center"  VerticalAlignment="Center"/>
                     <Image Source="Assets/Header/HEADER_Tuto.png" Margin="10,2,5,0" HorizontalAlignment="Right"  VerticalAlignment="Center"/>
                 </Grid>
             </Border>
-
         </Grid>
 
 
@@ -534,7 +577,7 @@
                     <Storyboard>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DefautlView" Storyboard.TargetProperty="Visibility">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
-                        </ObjectAnimationUsingKeyFrames>       
+                        </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PortraitView" Storyboard.TargetProperty="Visibility">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
                         </ObjectAnimationUsingKeyFrames>

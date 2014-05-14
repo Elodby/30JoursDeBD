@@ -358,9 +358,9 @@
 
             <Grid x:Name="GR_DEF_Body" Grid.Row="1" Background="#FFF3F0F1" Margin="30,10,30,5" >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60*"/>
-                    <ColumnDefinition Width="60*"/>
-                    <ColumnDefinition Width="60*"/>
+                    <ColumnDefinition Width="242*"/>
+                    <ColumnDefinition Width="205*"/>
+                    <ColumnDefinition Width="205*"/>
                 </Grid.ColumnDefinitions>
 
                 <Grid x:Name="GR_Titre_Planche" Grid.Column="0">
@@ -370,25 +370,25 @@
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0">
-                        <Image Source="Assets/GR_AuteurVide.png" Name="GR_ImageAuteur" Margin="20 20 10 10" Width="200" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                        <Image Source="Assets/GR_AuteurVide.png" Name="GR_ImageAuteur" Margin="30 30 10 10" Width="200" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                     </Grid>
 
                     <Grid Grid.Row="1">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="15*"/>
+                            <RowDefinition Height="5*"/>
                             <RowDefinition Height="50*"/>
                         </Grid.RowDefinitions>
 
                         <Grid Grid.Row="0">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="À propos de l'auteur... " Foreground="#FFB80170" FontSize="24" Margin="10,20,5,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                                <TextBlock x:Name="GR_Auteur" Foreground="Black" FontWeight="Bold" FontSize="24" Margin="0,20,5,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                                <TextBlock Text="À propos de l'auteur... " Foreground="#FFB80170" FontSize="24" Margin="30,20,5,0" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                                <TextBlock x:Name="GR_Auteur" Foreground="Black" FontWeight="Bold" FontSize="24" Margin="0,20,5,0" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
                             </StackPanel>
                         </Grid>
 
                         <Grid Grid.Row="1">
                             <ScrollViewer >
-                                <TextBlock x:Name="GR_AuteurDescription" Foreground="Black" FontSize="16" Text="rrrrrrrrrrr" Margin="20, 10, 30, 0" TextWrapping="WrapWholeWords"/>
+                                <TextBlock x:Name="GR_AuteurDescription" Foreground="Black" FontSize="16" Margin="30, 10, 50, 20" TextWrapping="WrapWholeWords"/>
                             </ScrollViewer>
                         </Grid>
                     </Grid>
@@ -414,7 +414,7 @@
                                     IsSwipeEnabled="false" IsItemClickEnabled="False">
                     </GridView>
                 </Grid>
-                <Grid x:Name="GR_Corps_Strip" Grid.Row="2">
+                <Grid x:Name="GR_Corps_Strip" Grid.Column="2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="15*"/>
                         <RowDefinition Height="60*"/>
@@ -434,6 +434,15 @@
                                 IsSwipeEnabled="false" IsItemClickEnabled="False">
                     </GridView>
                 </Grid>
+            </Grid>
+            <Border x:Name="BR_DEF_Header" BorderBrush="#FFCECDCE" BorderThickness="0,0,0,2">
+                <Grid x:Name="GR_DEF_Header" Background="#FFF9F9F9" >
+                    <Image Source="Assets/Header/Logo30J.png" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,2,0,2"/>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,2,10,2">
+                        <Image Source="Assets/Header/HEADER_ToutIcone_ON.png" x:Name="IMG_DEF_HEAD_TOUT"  VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,2,0,2"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
 
 <!--
             <Grid x:Name="DEF_Grid_Load" >
@@ -445,12 +454,11 @@
                     </Image>
                     <TextBlock  Text="Chargement..." FontSize="64" FontFamily="SketchFlow Print" Foreground="#FFB2016E" FontWeight="Bold" />
                 </StackPanel>
-            </Grid>-->
+            </Grid-->
         </Grid>
-    </Grid>
 
     <!-- Vue portrait ( height > width )-->
-        <Grid x:Name="PortraitView"  Background="#FFE9E7E8" Visibility="Visible">
+        <Grid x:Name="PortraitView"  Background="#FFE9E7E8" Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*"/>
                 <RowDefinition Height="115*"/>
@@ -496,15 +504,15 @@
 
                 <Grid x:Name="POR_Corps_Planche" Grid.Row="1">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="15*"/>
-                        <RowDefinition Height="60*"/>
+                        <RowDefinition Height="33*"/>
+                        <RowDefinition Height="17*"/>
+                        <RowDefinition Height="195*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="Ses planches: " FontSize="24" Foreground="Black" Margin="30 20 0 10" FontWeight="Bold" VerticalAlignment="Bottom"/>
+                    <TextBlock Grid.Row="0" Text="Ses planches: " FontSize="24" Foreground="Black" Margin="30,-10,0,10" FontWeight="Bold" VerticalAlignment="Bottom" Height="49" Grid.RowSpan="2"/>
                     <ListView
-                            Grid.Row="1"
-                            Margin="50 10 10 10"
+                            Margin="50,7,10,10"
                             Padding="2,2,2,2"
-                            x:Name="listePlanches"
+                            x:Name="POR_listePlanches"
                             AutomationProperties.AutomationId="ItemsListView"
                             AutomationProperties.Name="Items"
                             ItemsSource="{Binding Source={StaticResource SourceListView}}"
@@ -525,18 +533,17 @@
                         <RowDefinition Height="60*"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Text="Ses strips: " FontSize="24" Foreground="Black" Margin="30 20 0 10" FontWeight="Bold" VerticalAlignment="Bottom"/>
+                    <TextBlock Grid.Row="0" Text="Ses strips: " FontSize="24" Foreground="Black" Margin="30,0,0,10" FontWeight="Bold" VerticalAlignment="Bottom" Height="39"/>
                     <ListView
-                            Grid.Row="1"
-                            Margin="50 10 10 10"
+                            Margin="50,44,10,10"
                             Padding="2,2,2,2"
-                            x:Name="listeStrips"
+                            x:Name="POR_listeStrips"
                             AutomationProperties.AutomationId="ItemsListView"
                             AutomationProperties.Name="Items"
                             ItemsSource="{Binding Source={StaticResource SourceListView2}}"
                             ItemTemplate="{StaticResource PlanchesTemplate}"
                             SelectionMode="None"
-                            IsSwipeEnabled="false" IsItemClickEnabled="False">
+                            IsSwipeEnabled="false" IsItemClickEnabled="False" Grid.RowSpan="2">
                         <ListView.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapGrid Orientation="Horizontal" MaximumRowsOrColumns="4"/>
@@ -558,6 +565,106 @@
 
         </Grid>
 
+        <!-- Vue narrow ( width > 600px )-->
+        <Grid x:Name="NarrowView"  Background="#FFE9E7E8" Visibility="Visible">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="115*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="1" x:Name="NAR_Corps_Page" Background="#FFF3F0F1" Margin="30,10,30,5" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80*"/>
+                    <RowDefinition Height="60*"/>
+                    <RowDefinition Height="60*"/>
+                </Grid.RowDefinitions>
+
+                <Grid x:Name="NAR_Titre_Planche" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="80*"/>
+                        <RowDefinition Height="115*"/>
+                    </Grid.RowDefinitions>
+
+                    <Image Grid.Row="0" Source="Assets/POR_AuteurVide.png" Name="NAR_ImageAuteur" Margin="30,30,0,0" Width="100" Height="100" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10*"/>
+                            <RowDefinition Height="60*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="À propos de l'auteur... " Foreground="#FFB80170" FontSize="18" Margin="10,0,5,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                                <TextBlock x:Name="NAR_Auteur" Foreground="Black" FontWeight="Bold" FontSize="18" Margin="10,0,5,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                            </StackPanel>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <ScrollViewer >
+                                <TextBlock Name="NAR_AuteurDescription" Foreground="Black" FontSize="16" Margin="20, 10, 30, 10" TextWrapping="WrapWholeWords"/>
+                            </ScrollViewer>
+                        </Grid>
+                    </Grid>
+                </Grid>
+
+                <Grid x:Name="NAR_Corps_Planche" Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30*"/>
+                        <RowDefinition Height="175*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Ses planches: " FontSize="24" Foreground="Black" Margin="30,10,0,0" FontWeight="Bold" VerticalAlignment="Top" Height="27"/>
+                    <ListView
+                            Margin="20,0,0,0"
+                            Padding="2,2,2,2"
+                            x:Name="NAR_listePlanche"
+                            AutomationProperties.AutomationId="ItemsListView"
+                            AutomationProperties.Name="Items"
+                            ItemsSource="{Binding Source={StaticResource SourceListView}}"
+                            ItemTemplate="{StaticResource PlanchesTemplate}"
+                            SelectionMode="None"
+                            IsSwipeEnabled="false" IsItemClickEnabled="False" Grid.RowSpan="2" Grid.Row="1">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapGrid Orientation="Horizontal" MaximumRowsOrColumns="2"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                    </ListView>
+                </Grid>
+
+                <Grid x:Name="NAR_Corps_Strip" Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30*"/>
+                        <RowDefinition Height="175*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Ses strips: " FontSize="24" Foreground="Black" Margin="30,10,0,0" FontWeight="Bold" VerticalAlignment="Top" Height="27"/>
+                <ListView
+                            Margin="20,0,0,0"
+                            Padding="2,2,2,2"
+                            x:Name="NAR_listeStrips"
+                            AutomationProperties.AutomationId="ItemsListView"
+                            AutomationProperties.Name="Items"
+                            ItemsSource="{Binding Source={StaticResource SourceListView2}}"
+                            ItemTemplate="{StaticResource PlanchesTemplate}"
+                            SelectionMode="None"
+                            IsSwipeEnabled="false" IsItemClickEnabled="False" Grid.RowSpan="2" Grid.Row="1">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapGrid Orientation="Horizontal" MaximumRowsOrColumns="2"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                </ListView>
+            </Grid>
+        </Grid>
+            <Border x:Name="BR_NAR_Header" BorderBrush="#FFCECDCE" BorderThickness="0,0,0,2">
+                <Grid x:Name="GR_NAR_Header" Background="#FFF9F9F9" >
+                    <Image Source="Assets/Header/Logo30J.png" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,2,0,2"/>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,2,10,2">
+                        <Image Source="Assets/Header/HEADER_ToutIcone_ON.png" x:Name="IMG_NAR_HEAD_TOUT"  VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15,2,0,2"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+
 
         <!-- Les Visual States -->
         <VisualStateManager.VisualStateGroups>
@@ -568,6 +675,9 @@
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PortraitView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NarrowView" Storyboard.TargetProperty="Visibility">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
                         </ObjectAnimationUsingKeyFrames>
                         <!-- App Bar -->
@@ -591,6 +701,9 @@
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PortraitView" Storyboard.TargetProperty="Visibility">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
                         </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NarrowView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
                         <!-- App Bar -->
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DEF_AppBar" Storyboard.TargetProperty="Visibility">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
@@ -611,6 +724,9 @@
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PortraitView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NarrowView" Storyboard.TargetProperty="Visibility">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
                         </ObjectAnimationUsingKeyFrames>
                         <!-- App Bar -->
@@ -632,6 +748,9 @@
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DefautlView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NarrowView" Storyboard.TargetProperty="Visibility">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
                         </ObjectAnimationUsingKeyFrames>
                         <!-- App Bar -->
