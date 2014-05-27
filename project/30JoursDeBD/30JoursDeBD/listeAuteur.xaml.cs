@@ -5,7 +5,6 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using Windows.UI;
 using Windows.UI.Xaml;
@@ -13,7 +12,6 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
-using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 
@@ -63,6 +61,8 @@ namespace _30JoursDeBD
             //this.navigationHelper.LoadState += navigationHelper_LoadState;
             //this.navigationHelper.SaveState += navigationHelper_SaveState;
             this.NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
+            this.DEF_ComboBoxFiltre.ItemsSource = Alphabet;
+            this.DEF_ComboBoxFiltre.SelectedIndex = 0;
             this.POR_ComboBoxFiltre.ItemsSource = Alphabet;
             this.POR_ComboBoxFiltre.SelectedIndex = 0;
             this.SizeChanged += Page_SizeChanged;
@@ -280,6 +280,14 @@ namespace _30JoursDeBD
             }
         }
 
+        private void DEF_BoutonFiltre_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (DEF_ComboBoxFiltre.SelectedItem != null)
+            {
+                FiltreAuteurs((string)DEF_ComboBoxFiltre.SelectedValue);
+            }
+        }
+
         private void FiltreAuteurs(string carac)
         {
             _listeFiltre.Clear();
@@ -330,10 +338,12 @@ namespace _30JoursDeBD
             if (lst.Count == 0)
             {
                 POR_NoAuteurs.Visibility = Visibility.Visible;
+                DEF_NoAuteurs.Visibility = Visibility.Visible;
             }
             else
             {
                 POR_NoAuteurs.Visibility = Visibility.Collapsed;
+                DEF_NoAuteurs.Visibility = Visibility.Collapsed;
             }
         }
 
