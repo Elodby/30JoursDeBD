@@ -287,7 +287,7 @@ namespace _30JoursDeBD
                 case 0:
                     break;
                 case 1:
-                    
+                    Frame.Navigate(typeof(BestOf), ListeBD);
                     break;
                 case 2:
 
