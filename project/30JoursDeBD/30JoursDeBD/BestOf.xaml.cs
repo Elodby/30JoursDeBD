@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -63,58 +64,101 @@ namespace _30JoursDeBD
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
+            this.SizeChanged += Page_SizeChanged;
         }
-
-        /// <summary>
-        /// Remplit la page à l'aide du contenu passé lors de la navigation. Tout état enregistré est également
-        /// fourni lorsqu'une page est recréée à partir d'une session antérieure.
-        /// </summary>
-        /// <param name="sender">
-        /// La source de l'événement ; en général <see cref="NavigationHelper"/>
-        /// </param>
-        /// <param name="e">Données d'événement qui fournissent le paramètre de navigation transmis à
-        /// <see cref="Frame.Navigate(Type, Object)"/> lors de la requête initiale de cette page et
-        /// un dictionnaire d'état conservé par cette page durant une session
-        /// antérieure. L'état n'aura pas la valeur Null lors de la première visite de la page.</param>
-        private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
-        {
-            listeBD = e.NavigationParameter as List<BD>;
-            listeBD = listeBD.OrderByDescending(bd => bd.NombreVues).ToList();
-        }
-
-        /// <summary>
-        /// Conserve l'état associé à cette page en cas de suspension de l'application ou de la
-        /// suppression de la page du cache de navigation.  Les valeurs doivent être conformes aux
-        /// exigences en matière de sérialisation de <see cref="SuspensionManager.SessionState"/>.
-        /// </summary>
-        /// <param name="sender">La source de l'événement ; en général <see cref="NavigationHelper"/></param>
-        /// <param name="e">Données d'événement qui fournissent un dictionnaire vide à remplir à l'aide de
-        /// état sérialisable.</param>
-        private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
-        {
-        }
-
-        #region Inscription de NavigationHelper
-
-        /// Les méthodes fournies dans cette section sont utilisées simplement pour permettre
-        /// NavigationHelper pour répondre aux méthodes de navigation de la page.
-        /// 
-        /// La logique spécifique à la page doit être placée dans les gestionnaires d'événements pour  
-        /// <see cref="GridCS.Common.NavigationHelper.LoadState"/>
-        /// et <see cref="GridCS.Common.NavigationHelper.SaveState"/>.
-        /// Le paramètre de navigation est disponible dans la méthode LoadState 
-        /// en plus de l'état de page conservé durant une session antérieure.
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            navigationHelper.OnNavigatedTo(e);
+            listeBD = e.Parameter as List<BD>;
+            listeBD = listeBD.OrderByDescending(bd => bd.NombreVues).ToList();
+            AppBarTop.IsOpen = false;
+            this.DataContext = this;
         }
-
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            navigationHelper.OnNavigatedFrom(e);
+            AppBarTop.IsOpen = false;
+            AppBarTop.Height = this.ActualHeight / 5;
         }
 
-        #endregion
+        //Gestion des Visuals States en fonction de la taille de l'écran, lors de l'appel de l'event SizeChanged
+        private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (e.NewSize.Width < 600)
+            {
+                VisualStateManager.GoToState(this, "NarrowLayout", true);
+            }
+            else if (e.NewSize.Height > e.NewSize.Width)
+            {
+                VisualStateManager.GoToState(this, "PortraitLayout", true);
+            }
+            else if (e.NewSize.Width > 2000)
+            {
+                VisualStateManager.GoToState(this, "BigDefaultLayout", true);
+            }
+            else
+            {
+                VisualStateManager.GoToState(this, "DefaultLayout", true);
+            }
+        }
+
+        private void navigationHelper_LoadState(object sender, LoadStateEventArgs e){}
+        private void navigationHelper_SaveState(object sender, SaveStateEventArgs e){}
+
+
+
+        private void Image_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            BD laBDSelectionnee = ((Image)sender).DataContext as BD;
+            Frame.Navigate(typeof(pageArticle), laBDSelectionnee);
+        }
+
+
+        //Gestion AppBar
+        private void AppBar_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            (sender as Border).BorderBrush = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
+        }
+
+        private void AppBar_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            (sender as Border).BorderBrush = new SolidColorBrush(Color.FromArgb(255, 139, 4, 87));
+        }
+
+        private void AppBar_Tapped(object sender, TappedRoutedEventArgs e) // Navigation
+        {
+            string leNom = (sender as Border).Name;
+            string[] tabNom = { "Accueil", "BestOf", "Planches", "Strips", "Auteurs", "Participer" };
+            int i;
+            for (i = 0; i < tabNom.Length; i++)
+            {
+                if (leNom.Contains(tabNom[i]))
+                    break;
+            }
+            switch (i)
+            {
+                case 0:
+                    while (Frame.CanGoBack)
+                        Frame.GoBack();
+                    break;
+                case 1:
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    Frame.Navigate(typeof(Participer_Page));
+                    break;
+            }
+        }
+
+        private void TouchMenu(object sender, TappedRoutedEventArgs e)
+        {
+            AppBarTop.IsOpen = true;
+        }
     }
 }

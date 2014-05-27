@@ -245,7 +245,7 @@ namespace _30JoursDeBD
                         Frame.GoBack();
                     break;
                 case 1:
-                    
+
                     break;
                 case 2:
                     
