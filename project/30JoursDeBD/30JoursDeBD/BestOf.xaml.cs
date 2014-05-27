@@ -1,4 +1,5 @@
 ﻿using _30JoursDeBD.Common;
+using _30JoursDeBD.testmodel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,9 +22,10 @@ namespace _30JoursDeBD
     /// <summary>
     /// Page de base qui inclut des caractéristiques communes à la plupart des applications.
     /// </summary>
-    public sealed partial class BasicPage1 : Page
+    public sealed partial class BestOf : Page
     {
 
+        #region navigationHelper / DefaultViewModel
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
@@ -42,12 +44,22 @@ namespace _30JoursDeBD
         public NavigationHelper NavigationHelper
         {
             get { return this.navigationHelper; }
+        } 
+        #endregion
+
+        private List<BD> listeBD;
+        public List<BD> ListeBD
+        {
+            get
+            {
+                return this.listeBD;
+            }
         }
 
-
-        public BasicPage1()
+        public BestOf()
         {
             this.InitializeComponent();
+            this.listeBD = new List<BD>();
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
@@ -66,6 +78,8 @@ namespace _30JoursDeBD
         /// antérieure. L'état n'aura pas la valeur Null lors de la première visite de la page.</param>
         private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+            listeBD = e.NavigationParameter as List<BD>;
+            listeBD = listeBD.OrderByDescending(bd => bd.NombreVues).ToList();
         }
 
         /// <summary>

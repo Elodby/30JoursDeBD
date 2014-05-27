@@ -105,8 +105,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BasicPage1.xaml.cs">
-      <DependentUpon>BasicPage1.xaml</DependentUpon>
+    <Compile Include="BestOf.xaml.cs">
+      <DependentUpon>BestOf.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\NavigationHelper.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />
@@ -116,9 +116,6 @@
     <Compile Include="Common\testmodel\Commentaire.cs" />
     <Compile Include="listeAuteur.xaml.cs">
       <DependentUpon>listeAuteur.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Liste_Auteur_Page.xaml.cs">
-      <DependentUpon>Liste_Auteur_Page.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -178,6 +175,10 @@
     <Content Include="Assets\TEST_auteur.png" />
     <Content Include="Assets\TEST_planche.png" />
     <Content Include="Assets\TEST_strip.png" />
+    <Page Include="BestOf.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Content Include="Common\ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -185,21 +186,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="BasicPage1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="BestOf.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="listeAuteur.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Liste_Auteur_Page.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
