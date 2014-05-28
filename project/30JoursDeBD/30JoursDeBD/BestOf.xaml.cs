@@ -1,4 +1,5 @@
 ﻿using _30JoursDeBD.Common;
+using _30JoursDeBD.Common.testmodel;
 using _30JoursDeBD.testmodel;
 using System;
 using System.Collections.Generic;
@@ -47,20 +48,17 @@ namespace _30JoursDeBD
             get { return this.navigationHelper; }
         } 
         #endregion
-
-        private List<BD> listeBD;
         public List<BD> ListeBD
         {
             get
             {
-                return this.listeBD;
+                return BDRecuperees.ListeBD;
             }
         }
 
         public BestOf()
         {
             this.InitializeComponent();
-            this.listeBD = new List<BD>();
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
@@ -69,8 +67,6 @@ namespace _30JoursDeBD
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            listeBD = e.Parameter as List<BD>;
-            listeBD = listeBD.OrderByDescending(bd => bd.NombreVues).ToList();
             AppBarTop.IsOpen = false;
             this.DataContext = this;
         }
@@ -151,6 +147,7 @@ namespace _30JoursDeBD
 
                     break;
                 case 4:
+                    Frame.Navigate(typeof(listeAuteur));
                     break;
                 case 5:
                     Frame.Navigate(typeof(Participer_Page));
