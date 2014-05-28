@@ -20,7 +20,7 @@
 
         <!-- Data Template : pour la GridView du Corps -->
         <DataTemplate x:Key="PlanchesTemplate">
-            <Image Source="{Binding}" Width="200" Tapped="Image_Tapped"/>
+            <Image Source="{Binding}" Width="200" Height="200" Tapped="Image_Tapped"/>
         </DataTemplate>
 
     </Page.Resources>
@@ -441,7 +441,7 @@
                 </Grid>
             </Border>
 
-<!--
+            <!--
             <Grid x:Name="DEF_Grid_Load" >
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                     <Image x:Name="DEF_IMG_Load_Engrenage" Source="Assets/Engrenage2.png" Stretch="None" Margin="20" RenderTransformOrigin="0.5,0.5">
@@ -454,8 +454,8 @@
             </Grid-->
         </Grid>
 
-    <!-- Vue portrait ( height > width )-->
-        <Grid x:Name="PortraitView"  Background="#FFE9E7E8" Visibility="Collapsed">
+        <!-- Vue portrait ( height > width )-->
+        <Grid x:Name="PortraitView"  Background="#FFE9E7E8" Visibility="Visible">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*"/>
                 <RowDefinition Height="115*"/>
@@ -474,11 +474,11 @@
 
                 <Grid x:Name="POR_Titre_Planche" >
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="40*"/>
+                        <ColumnDefinition Width="50*"/>
                         <ColumnDefinition Width="100*"/>
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
-                        <Image Source="Assets/POR_AuteurVide.png" Name="POR_ImageAuteur" Margin="20 20 10 10" Width="200" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                        <Image Source="Assets/POR_AuteurVide.png" Name="POR_ImageAuteur" Margin="20 20 0 10" Width="200" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                     </Grid>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
@@ -501,13 +501,12 @@
 
                 <Grid x:Name="POR_Corps_Planche" Grid.Row="1">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="33*"/>
-                        <RowDefinition Height="17*"/>
-                        <RowDefinition Height="195*"/>
+                        <RowDefinition Height="15*"/>
+                        <RowDefinition Height="60*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="Ses planches: " FontSize="24" Foreground="Black" Margin="30,-10,0,10" FontWeight="Bold" VerticalAlignment="Bottom" Height="49" Grid.RowSpan="2"/>
+                    <TextBlock Grid.Row="0" Text="Ses planches: " FontSize="24" Foreground="Black" Margin="30,0,0,10" FontWeight="Bold" VerticalAlignment="Bottom" Height="39"/>
                     <ListView
-                            Margin="50,7,10,10"
+                            Margin="50,10,50,10"
                             Padding="2,2,2,2"
                             x:Name="POR_listePlanches"
                             AutomationProperties.AutomationId="ItemsListView"
@@ -515,7 +514,7 @@
                             ItemsSource="{Binding Source={StaticResource SourceListView}}"
                             ItemTemplate="{StaticResource PlanchesTemplate}"
                             SelectionMode="None"
-                            IsSwipeEnabled="false" IsItemClickEnabled="True">
+                            IsSwipeEnabled="false" IsItemClickEnabled="True" Grid.Row="1">
                         <ListView.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapGrid Orientation="Horizontal" MaximumRowsOrColumns="4"/>
@@ -523,7 +522,7 @@
                         </ListView.ItemsPanel>
                     </ListView>
                 </Grid>
-                
+
                 <Grid x:Name="POR_Corps_Strip" Grid.Row="2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="15*"/>
@@ -562,7 +561,7 @@
         </Grid>
 
         <!-- Vue narrow ( width > 600px )-->
-        <Grid x:Name="NarrowView"  Background="#FFE9E7E8" Visibility="Visible">
+        <Grid x:Name="NarrowView"  Background="#FFE9E7E8" Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*"/>
                 <RowDefinition Height="115*"/>
@@ -608,9 +607,9 @@
                         <RowDefinition Height="30*"/>
                         <RowDefinition Height="175*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="Ses planches: " FontSize="24" Foreground="Black" Margin="30,10,0,0" FontWeight="Bold" VerticalAlignment="Top" Height="27"/>
-                    <ListView
-                            Margin="20,0,0,0"
+                    <TextBlock Grid.Row="0" Text="Ses planches: " FontSize="24" Foreground="Black" Margin="30,0,0,0" FontWeight="Bold" VerticalAlignment="Top" Height="27"/>
+                    <ListView 
+                            Margin="20,2,0,-2"
                             Padding="2,2,2,2"
                             x:Name="NAR_listePlanche"
                             AutomationProperties.AutomationId="ItemsListView"
@@ -618,7 +617,7 @@
                             ItemsSource="{Binding Source={StaticResource SourceListView}}"
                             ItemTemplate="{StaticResource PlanchesTemplate}"
                             SelectionMode="None"
-                            IsSwipeEnabled="false" IsItemClickEnabled="False" Grid.RowSpan="2" Grid.Row="1">
+                            IsSwipeEnabled="false" IsItemClickEnabled="False" Grid.Row="1">
                         <ListView.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapGrid Orientation="Horizontal" MaximumRowsOrColumns="2"/>
@@ -633,7 +632,7 @@
                         <RowDefinition Height="175*"/>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Text="Ses strips: " FontSize="24" Foreground="Black" Margin="30,10,0,0" FontWeight="Bold" VerticalAlignment="Top" Height="27"/>
-                <ListView
+                    <ListView
                             Margin="20,0,0,0"
                             Padding="2,2,2,2"
                             x:Name="NAR_listeStrips"
@@ -642,15 +641,15 @@
                             ItemsSource="{Binding Source={StaticResource SourceListView2}}"
                             ItemTemplate="{StaticResource PlanchesTemplate}"
                             SelectionMode="None"
-                            IsSwipeEnabled="false" IsItemClickEnabled="False" Grid.RowSpan="2" Grid.Row="1">
-                    <ListView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapGrid Orientation="Horizontal" MaximumRowsOrColumns="2"/>
-                        </ItemsPanelTemplate>
-                    </ListView.ItemsPanel>
-                </ListView>
+                            IsSwipeEnabled="false" IsItemClickEnabled="False" Grid.Row="1"> 
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapGrid Orientation="Horizontal" MaximumRowsOrColumns="2"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                    </ListView>
+                </Grid>
             </Grid>
-        </Grid>
             <Border x:Name="BR_NAR_Header" BorderBrush="#FFCECDCE" BorderThickness="0,0,0,2">
                 <Grid x:Name="GR_NAR_Header" Background="#FFF9F9F9" >
                     <Image Source="Assets/Header/HEADER_MenuIcone.png" Margin="10,2,0,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Tapped="TouchMenu" />

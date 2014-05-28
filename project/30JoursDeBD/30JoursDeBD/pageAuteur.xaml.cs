@@ -236,5 +236,6 @@ namespace _30JoursDeBD
         {
             AppBarTop.IsOpen = true;
         }
+
     }
 }
