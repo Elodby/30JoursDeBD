@@ -172,6 +172,7 @@ namespace _30JoursDeBD
                 NAR_Grid_Load.Visibility = Visibility.Collapsed;
                 NAR_Engrenage_Load.Stop();
 
+                itemNarrowListView.ItemsSource = ListeBD;
                 this.DataContext = this;
             }
         }
@@ -257,6 +258,18 @@ namespace _30JoursDeBD
                     IMG_POR_Corps_Strip.Source = new BitmapImage(new Uri(laBDSelectionnee.Image, UriKind.RelativeOrAbsolute));
             }*/
             Frame.Navigate(typeof(pageArticle), laBDSelectionnee);
+        }
+
+        private void itemNarrowListView_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            var x = ((ListView)sender).ItemsSource;
+            ((ListView)sender).ItemsSource = null;
+            ((ListView)sender).ItemsSource = x;
+        }
+
+        private void itemNarrowListView_Loaded(object sender, RoutedEventArgs e)
+        {
+            itemNarrowListView.SizeChanged += itemNarrowListView_SizeChanged;
         }
 
 

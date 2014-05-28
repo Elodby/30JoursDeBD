@@ -175,6 +175,7 @@
     <Content Include="Assets\TEST_auteur.png" />
     <Content Include="Assets\TEST_planche.png" />
     <Content Include="Assets\TEST_strip.png" />
+    <Compile Include="Common\converter.cs" />
     <Page Include="BestOf.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

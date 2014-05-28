@@ -14,6 +14,7 @@
         <CollectionViewSource
             x:Name="SourceGridView"
             Source="{Binding ListeBD}" />
+        <common:ListViewLargerSizeFitConverter x:Key="listViewWidthConv"/>
 
         <!-- Data Template : pour la GridView du Corps -->
         <DataTemplate x:Key="GridItemTemplate">
@@ -78,7 +79,7 @@
 
         <DataTemplate x:Key="NarrowListItemTemplate" x:Name="Plop">
             <Border BorderBrush="#FFCECDCE" BorderThickness="2,0,0,2">
-                <Grid Background="#FFF9F9F9">
+                <Grid Background="#FFF9F9F9" Width="{Binding ElementName=itemNarrowListView, Converter={StaticResource listViewWidthConv}}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
@@ -591,7 +592,8 @@
                         ItemsSource="{Binding Source={StaticResource SourceGridView}}"
                         ItemTemplate="{StaticResource NarrowListItemTemplate}"
                         SelectionMode="None"
-                        IsSwipeEnabled="false" IsItemClickEnabled="True"/>
+                        IsSwipeEnabled="false" IsItemClickEnabled="True"
+                        Loaded="itemNarrowListView_Loaded"/>
                 </Grid>
 
                 <Grid x:Name="NAR_Grid_Load" Grid.RowSpan="2" Grid.ColumnSpan="3" >

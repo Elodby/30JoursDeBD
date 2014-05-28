@@ -6,6 +6,7 @@
     xmlns:common="using:_30JoursDeBD.Common"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:_30JoursDeBD="using:_30JoursDeBD.Common"
     mc:Ignorable="d" SizeChanged="Page_SizeChanged" Loaded="Page_Loaded">
 
     <Page.Resources>
@@ -13,6 +14,7 @@
         <CollectionViewSource
         x:Name="SourceGridView"
         Source="{Binding ListeBD}" />
+        <common:ListViewLargerSizeFitConverter x:Key="listViewWidthConv"/>
 
         <!-- Data Template : pour la GridView du Corps -->
         <DataTemplate x:Key="GridItemTemplate">
@@ -40,9 +42,9 @@
                 </Grid>
             </Border>
         </DataTemplate>
-        <DataTemplate x:Key="ItemTemplate" >
-            <Border BorderBrush="#FFCECDCE" BorderThickness="2,0,0,2">
-                <Grid Background="#FFF9F9F9" Width="300" Height="195">
+        <DataTemplate x:Key="PORListItemTemplate" >
+            <Border BorderBrush="#FFCECDCE" BorderThickness="2,0,0,2" Margin="0 5 0 5">
+                <Grid Background="#FFF9F9F9" Width="280" Height="195">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="3*"/>
@@ -64,6 +66,25 @@
                     </Grid>
                 </Grid>
             </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="NarrowListItemTemplate">
+            <Border BorderBrush="#FFCECDCE" BorderThickness="2,0,0,2">
+                <Grid Background="#FFF9F9F9" Width="{Binding ElementName=NARitemListView, Converter={StaticResource listViewWidthConv}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="{Binding Image}" Stretch="Uniform" Margin="15,15,10,15" Tapped="Image_Tapped"/>
+                    <Grid Grid.Column="1">
+                        <StackPanel VerticalAlignment="Center" Margin="20,0,20,0">
+                            <TextBlock Text="{Binding Titre}" Foreground="#FFD62291" FontSize="20" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="{Binding Auteur}" Foreground="#FFD62291" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="{Binding Rubrique}" Foreground="#FFD62291" TextWrapping="WrapWholeWords"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Border>
+
         </DataTemplate>
 
     </Page.Resources>
@@ -470,7 +491,7 @@
                         AutomationProperties.Name="POR_Items"
                         TabIndex="1"
                         ItemsSource="{Binding Source={StaticResource SourceGridView}}"
-                        ItemTemplate="{StaticResource ItemTemplate}"
+                        ItemTemplate="{StaticResource PORListItemTemplate}"
                         SelectionMode="None"
                         IsSwipeEnabled="false" IsItemClickEnabled="True">
                     <ListView.ItemsPanel>
@@ -490,6 +511,52 @@
 
         </Grid>
 
+        <!-- Vue portrait ( height > width )-->
+        <Grid x:Name="NarrowView"  Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="115*"/>
+            </Grid.RowDefinitions>
+
+            <Grid x:Name="GR_NAR_Body" Grid.Row="1" Background="#FFE9E7E8" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25*"/>
+                    <RowDefinition Height="210*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Margin="20 8 20 8" Background="#FFD8C7C7">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Margin="10,11,0,11" Source="Assets/Menu/Menu_BestOf.png" VerticalAlignment="Center" HorizontalAlignment="Left" Height="37" Width="40"/>
+                    <TextBlock Grid.Column="1" Margin="15,13,0,12" VerticalAlignment="Center" Text="Le Top du Top" FontSize="32" FontFamily="SketchFlow Print" Foreground="#FFB2016E" FontWeight="Bold" Height="34"/>
+                </Grid>
+
+                <ListView
+                        Grid.Row="1"
+                        Padding="20,20,0,0"
+                        x:Name="NARitemListView"
+                        AutomationProperties.AutomationId="ItemsListView"
+                        AutomationProperties.Name="POR_Items"
+                        TabIndex="1"
+                        ItemsSource="{Binding Source={StaticResource SourceGridView}}"
+                        ItemTemplate="{StaticResource NarrowListItemTemplate}"
+                        SelectionMode="None"
+                        IsSwipeEnabled="false" IsItemClickEnabled="True"
+                        Loaded="NARitemListView_Loaded">
+                </ListView>
+            </Grid>
+
+            <Border x:Name="BR_NAR_Header" BorderBrush="#FFCECDCE" BorderThickness="0,0,0,2">
+                <Grid x:Name="GR_NAR_Header" Background="#FFF9F9F9" >
+                    <Image Source="Assets/Header/HEADER_MenuIcone.png" Margin="10,2,0,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Tapped="TouchMenu" />
+                    <Image Source="Assets/Header/Logo30J.png"  HorizontalAlignment="Center"  VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+
+        </Grid>
+
         <!-- Les Visual States -->
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
@@ -502,6 +569,9 @@
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource GridItemTemplate}"/>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PortraitView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NarrowView" Storyboard.TargetProperty="Visibility">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
                         </ObjectAnimationUsingKeyFrames>
                         <!-- App Bar -->
@@ -528,6 +598,9 @@
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PortraitView" Storyboard.TargetProperty="Visibility">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
                         </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NarrowView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
                         <!-- App Bar -->
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DEF_AppBar" Storyboard.TargetProperty="Visibility">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
@@ -547,9 +620,12 @@
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DefautlView" Storyboard.TargetProperty="Visibility">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
                         </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PortraitView" Storyboard.TargetProperty="Visibility">
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NarrowView" Storyboard.TargetProperty="Visibility">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
                         </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PortraitView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>                    
                         <!-- App Bar -->
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DEF_AppBar" Storyboard.TargetProperty="Visibility">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
@@ -569,6 +645,9 @@
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DefautlView" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NarrowView" Storyboard.TargetProperty="Visibility">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
                         </ObjectAnimationUsingKeyFrames>
                         <!-- App Bar -->

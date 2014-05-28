@@ -78,6 +78,8 @@ namespace _30JoursDeBD
         {
             AppBarTop.IsOpen = false;
             AppBarTop.Height = this.ActualHeight / 5;
+            DataContext = this;
+            NARitemListView.ItemsSource = ListeBD;
         }
 
         //Gestion des Visuals States en fonction de la taille de l'écran, lors de l'appel de l'event SizeChanged
@@ -159,6 +161,18 @@ namespace _30JoursDeBD
         private void TouchMenu(object sender, TappedRoutedEventArgs e)
         {
             AppBarTop.IsOpen = true;
+        }
+
+        private void NARitemListView_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            var x = ((ListView)sender).ItemsSource;
+            ((ListView)sender).ItemsSource = null;
+            ((ListView)sender).ItemsSource = x;
+        }
+
+        private void NARitemListView_Loaded(object sender, RoutedEventArgs e)
+        {
+            NARitemListView.SizeChanged += NARitemListView_SizeChanged;
         }
     }
 }
