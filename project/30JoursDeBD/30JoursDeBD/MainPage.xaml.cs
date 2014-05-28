@@ -63,7 +63,8 @@ namespace _30JoursDeBD
             this.SizeChanged += Page_SizeChanged;
             this.NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
             AppBarTop.IsOpen = false;
-            this.AppBarTop.IsEnabled = false;
+            AppBarTop.IsEnabled = false;
+            AppBarTop.Visibility = Visibility.Collapsed;
         }
 
 
@@ -124,7 +125,9 @@ namespace _30JoursDeBD
 
                 itemNarrowListView.ItemsSource = ListeBD;
                 this.DataContext = this;
-                this.AppBarTop.IsEnabled = true;
+                AppBarTop.IsEnabled = true;
+                AppBarTop.IsOpen = false;
+                AppBarTop.Visibility = Visibility.Visible;
             }
         }
 
@@ -239,7 +242,7 @@ namespace _30JoursDeBD
                     Frame.Navigate(typeof(BestOf));
                     break;
                 case 2:
-
+                    Frame.Navigate(typeof(PagePlanches));
                     break;
                 case 3:
                     

@@ -24,7 +24,7 @@ namespace _30JoursDeBD
     /// <summary>
     /// Page de base qui inclut des caractéristiques communes à la plupart des applications.
     /// </summary>
-    public sealed partial class BestOf : Page
+    public sealed partial class PagePlanches : Page
     {
 
         #region navigationHelper / DefaultViewModel
@@ -48,15 +48,15 @@ namespace _30JoursDeBD
             get { return this.navigationHelper; }
         } 
         #endregion
-        public List<BD> ListeBD
+        public List<BD> ListePlanches
         {
             get
             {
-                return BDRecuperees.ListeBD.OrderByDescending(bd => bd.NombreVues).ToList();
+                return BDRecuperees.ListeBD.Where( bd => bd.Rubrique == "Planches").ToList();
             }
         }
 
-        public BestOf()
+        public PagePlanches()
         {
             this.InitializeComponent();
             this.navigationHelper = new NavigationHelper(this);
@@ -75,7 +75,7 @@ namespace _30JoursDeBD
             AppBarTop.IsOpen = false;
             AppBarTop.Height = this.ActualHeight / 5;
             DataContext = this;
-            NARitemListView.ItemsSource = ListeBD;
+            NARitemListView.ItemsSource = ListePlanches;
         }
 
         //Gestion des Visuals States en fonction de la taille de l'écran, lors de l'appel de l'event SizeChanged
@@ -139,9 +139,9 @@ namespace _30JoursDeBD
                         Frame.GoBack();
                     break;
                 case 1:
+                        Frame.Navigate(typeof(BestOf));
                     break;
                 case 2:
-
                     break;
                 case 3:
 
