@@ -34,9 +34,7 @@
             </Border>
         </DataTemplate>
 
-        <!--
-        Storyboards
-    -->
+        <!--  Storyboards  -->
         <Storyboard x:Name="POR_Engrenage_Load">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="POR_IMG_Load_Engrenage">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="90"/>
@@ -56,9 +54,7 @@
     </Page.Resources>
 
 
-    <!--
-        Barre d'application. Contient les liens vers les autres pages
-    -->
+    <!--   Barre d'application. Contient les liens vers les autres pages -->
     <Page.TopAppBar>
         <AppBar Padding="10,0,10,0" x:Name="AppBarTop" Background="#FFB2016E" BorderBrush="White" Height="160">
             <Grid>
@@ -379,7 +375,7 @@
     <Grid x:Name="General">
         
         <!-- Vue par défaut -->
-        <Grid x:Name="DefautlView">
+        <Grid x:Name="DefautlView" Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition Height="13*"/>
                 <RowDefinition Height="115*"/>
@@ -456,7 +452,7 @@
 
         
         <!-- Vue portrait ( height > width )-->
-        <Grid x:Name="PortraitView"  Visibility="Collapsed">
+        <Grid x:Name="PortraitView"  Visibility="Visible">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*"/>
                 <RowDefinition Height="115*"/>
