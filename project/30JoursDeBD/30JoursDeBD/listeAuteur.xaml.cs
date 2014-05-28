@@ -231,7 +231,7 @@ namespace _30JoursDeBD
         private void AppBar_Tapped(object sender, TappedRoutedEventArgs e) // Navigation
         {
             string leNom = (sender as Border).Name;
-            string[] tabNom = { "Accueil", "BestOf", "Planches", "Strips", "Auteurs", "Participer" };
+            string[] tabNom = { "Accueil", "BestOf", "Planches", "Strip", "Auteurs", "Participer" };
             int i;
             for (i = 0; i < tabNom.Length; i++)
             {
@@ -248,10 +248,10 @@ namespace _30JoursDeBD
                     Frame.Navigate(typeof(BestOf));
                     break;
                 case 2:
-                    
+                    Frame.Navigate(typeof(PagePlanches));
                     break;
                 case 3:
-                    
+                    Frame.Navigate(typeof(PageStrips));
                     break;
                 case 4:
                     break;

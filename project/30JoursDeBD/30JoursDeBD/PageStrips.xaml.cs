@@ -24,7 +24,7 @@ namespace _30JoursDeBD
     /// <summary>
     /// Page de base qui inclut des caractéristiques communes à la plupart des applications.
     /// </summary>
-    public sealed partial class PagePlanches : Page
+    public sealed partial class PageStrips : Page
     {
 
         #region navigationHelper / DefaultViewModel
@@ -48,15 +48,15 @@ namespace _30JoursDeBD
             get { return this.navigationHelper; }
         } 
         #endregion
-        public List<BD> ListePlanches
+        public List<BD> ListeStrips
         {
             get
             {
-                return BDRecuperees.ListeBD.Where( bd => bd.Rubrique == "Planches").ToList();
+                return BDRecuperees.ListeBD.Where( bd => bd.Rubrique == "Strips").ToList();
             }
         }
 
-        public PagePlanches()
+        public PageStrips()
         {
             this.InitializeComponent();
             this.navigationHelper = new NavigationHelper(this);
@@ -75,7 +75,7 @@ namespace _30JoursDeBD
             AppBarTop.IsOpen = false;
             AppBarTop.Height = this.ActualHeight / 5;
             DataContext = this;
-            NARitemListView.ItemsSource = ListePlanches;
+            NARitemListView.ItemsSource = ListeStrips;
         }
 
         //Gestion des Visuals States en fonction de la taille de l'écran, lors de l'appel de l'event SizeChanged
@@ -142,15 +142,15 @@ namespace _30JoursDeBD
                         Frame.Navigate(typeof(BestOf));
                     break;
                 case 2:
+                        Frame.Navigate(typeof(PagePlanches));
                     break;
                 case 3:
-                    Frame.Navigate(typeof(PageStrips));
                     break;
                 case 4:
-                    Frame.Navigate(typeof(listeAuteur));
+                        Frame.Navigate(typeof(listeAuteur));
                     break;
                 case 5:
-                    Frame.Navigate(typeof(Participer_Page));
+                        Frame.Navigate(typeof(Participer_Page));
                     break;
             }
         }
