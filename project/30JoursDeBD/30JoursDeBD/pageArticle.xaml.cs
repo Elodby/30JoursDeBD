@@ -196,7 +196,7 @@ namespace _30JoursDeBD
                         Frame.GoBack();
                     break;
                 case 1:
-
+                    Frame.Navigate(typeof(BestOf));
                     break;
                 case 2:
 

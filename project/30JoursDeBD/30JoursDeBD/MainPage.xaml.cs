@@ -63,7 +63,8 @@ namespace _30JoursDeBD
             this.SizeChanged += Page_SizeChanged;
             this.NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
             AppBarTop.IsOpen = false;
-            this.AppBarTop.IsEnabled = false;
+            AppBarTop.IsEnabled = false;
+            AppBarTop.Visibility = Visibility.Collapsed;
         }
 
 
@@ -122,8 +123,11 @@ namespace _30JoursDeBD
                 NAR_Grid_Load.Visibility = Visibility.Collapsed;
                 NAR_Engrenage_Load.Stop();
 
+                itemNarrowListView.ItemsSource = ListeBD;
                 this.DataContext = this;
-                this.AppBarTop.IsEnabled = true;
+                AppBarTop.IsEnabled = true;
+                AppBarTop.IsOpen = false;
+                AppBarTop.Visibility = Visibility.Visible;
             }
         }
 
@@ -195,6 +199,18 @@ namespace _30JoursDeBD
             Frame.Navigate(typeof(pageArticle), laBDSelectionnee);
         }
 
+        private void itemNarrowListView_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            var x = ((ListView)sender).ItemsSource;
+            ((ListView)sender).ItemsSource = null;
+            ((ListView)sender).ItemsSource = x;
+        }
+
+        private void itemNarrowListView_Loaded(object sender, RoutedEventArgs e)
+        {
+            itemNarrowListView.SizeChanged += itemNarrowListView_SizeChanged;
+        }
+
 
         #region appbar
         //Gestion AppBar
@@ -226,7 +242,7 @@ namespace _30JoursDeBD
                     Frame.Navigate(typeof(BestOf));
                     break;
                 case 2:
-
+                    Frame.Navigate(typeof(PagePlanches));
                     break;
                 case 3:
                     

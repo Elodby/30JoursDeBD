@@ -105,6 +105,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PagePlanches.xaml.cs">
+      <DependentUpon>PagePlanches.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BestOf.xaml.cs">
       <DependentUpon>BestOf.xaml</DependentUpon>
     </Compile>
@@ -176,6 +179,11 @@
     <Content Include="Assets\TEST_auteur.png" />
     <Content Include="Assets\TEST_planche.png" />
     <Content Include="Assets\TEST_strip.png" />
+    <Compile Include="Common\converter.cs" />
+    <Page Include="PagePlanches.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="BestOf.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

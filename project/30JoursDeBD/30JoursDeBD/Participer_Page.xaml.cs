@@ -108,7 +108,7 @@ namespace _30JoursDeBD
                         Frame.GoBack();
                     break;
                 case 1:
-                    
+                    Frame.Navigate(typeof(BestOf));
                     break;
                 case 2:
                     
@@ -120,6 +120,7 @@ namespace _30JoursDeBD
                     Frame.Navigate(typeof(listeAuteur));
                     break;
                 case 5:
+                    Frame.Navigate(typeof(Participer_Page));
                     break;
             }
         }
