@@ -145,6 +145,7 @@ namespace _30JoursDeBD
 
                     break;
                 case 4:
+                    Frame.Navigate(typeof(listeAuteur));
                     break;
                 case 5:
                     Frame.Navigate(typeof(Participer_Page));
