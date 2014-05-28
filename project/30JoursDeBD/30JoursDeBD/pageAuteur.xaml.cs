@@ -97,7 +97,10 @@ namespace _30JoursDeBD
                             {
                                 if (article.ImagesAttachees == null)
                                     article.ImagesAttachees = new List<string>();
-                                    article.ImagesAttachees.Add("http://30joursdebd.com" + match.Groups["href"].Value);
+                                    if(match.Groups["href"].Value.Contains("30joursdebd.com"))
+                                        article.ImagesAttachees.Add(match.Groups["href"].Value);
+                                    else
+                                        article.ImagesAttachees.Add("http://30joursdebd.com" + match.Groups["href"].Value);
                             }
                             article.Image = article.ImagesAttachees.First();
                         }
@@ -107,7 +110,10 @@ namespace _30JoursDeBD
                                 {
                                     if (article.ImagesAttachees == null)
                                         article.ImagesAttachees = new List<string>();
-                                    article.ImagesAttachees.Add("http://30joursdebd.com" + match.Groups["src"].Value);
+                                    if(match.Groups["src"].Value.Contains("30joursdebd.com"))
+                                        article.ImagesAttachees.Add(match.Groups["src"].Value);
+                                    else
+                                        article.ImagesAttachees.Add("http://30joursdebd.com" + match.Groups["src"].Value);
                                 }
                                 article.Image = article.ImagesAttachees.First();
                             }
