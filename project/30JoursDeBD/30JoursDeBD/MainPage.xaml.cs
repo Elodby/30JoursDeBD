@@ -52,9 +52,7 @@ namespace _30JoursDeBD
 
         private Auteur auteurAleatoire;
 
-        private List<BD> _listeBD = new List<BD>();
-
-        public List<BD> ListeBD { get { return _listeBD; } }
+        public List<BD> ListeBD { get { return BDRecuperees.ListeBD; } }
 
         public MainPage()
         {
@@ -64,6 +62,8 @@ namespace _30JoursDeBD
             //this.navigationHelper.SaveState += navigationHelper_SaveState;
             this.SizeChanged += Page_SizeChanged;
             this.NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
+            AppBarTop.IsOpen = false;
+            this.AppBarTop.IsEnabled = false;
         }
 
 
@@ -90,8 +90,7 @@ namespace _30JoursDeBD
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            AppBarTop.IsOpen = false;
-            if (_listeBD.Count == 0)
+            if (ListeBD.Count == 0)
             {
                 //Storyboard de chargement
                 POR_Engrenage_Load.Begin();
@@ -102,57 +101,8 @@ namespace _30JoursDeBD
                 NAR_Engrenage_Load.RepeatBehavior = RepeatBehavior.Forever;
 
                 HttpClient client = new HttpClient();
-                var jsonString = await client.GetStringAsync(new Uri("http://30joursdebd.com/?json=get_recent_post&count=30"));
-                var httpresponse = JsonConvert.DeserializeObject<RootObject>(jsonString.ToString());
-
-                BD uneBD;
-
-                foreach (Post post in httpresponse.posts)
-                {
-                    List<Commentaire> lesCommentaires = new List<Commentaire>();
-                    uneBD = new BD();
-                    try
-                    {
-                        foreach(Comment comment in post.comments)
-                        {
-                            lesCommentaires.Add(new Commentaire()
-                            {
-                                Content = HtmlUtilities.ConvertToText(comment.content),
-                                Date = comment.date,
-                                Nom = comment.name
-                            });
-                        }
-                        if (post.categories.Where(c => c.slug == "strips" || c.slug == "planches").Count() != 0)
-                        {
-                            uneBD.Titre = HtmlUtilities.ConvertToText(post.title);
-                            uneBD.Auteur = HtmlUtilities.ConvertToText(post.author.name);
-                            uneBD.Rubrique = post.categories.Single(c => c.slug == "strips" || c.slug == "planches").title;
-                            uneBD.Image = post.attachments.Single(c => c.slug.ToUpper().Contains("PREVIEW") 
-                                || c.slug.ToUpper().Contains("BANNIERE")
-                                || c.slug.ToUpper().Contains("BANDEAU")).url;
-                            uneBD.ImagesAttachees = post.attachments.Select(a => a.url).ToList();
-                            uneBD.ImagesAttachees.Sort();
-                            uneBD.NombreVues = post.custom_fields.views.First();
-                            uneBD.Excerpt = HtmlUtilities.ConvertToText(post.excerpt);
-                            uneBD.Commentaires = lesCommentaires;
-                            _listeBD.Add(uneBD);
-                        }
-                        
-                    }
-                    catch
-                    {
-                        uneBD.Titre = HtmlUtilities.ConvertToText(post.title);
-                        uneBD.Auteur = HtmlUtilities.ConvertToText(post.author.name);
-                        uneBD.Rubrique = post.categories.Single(c => c.slug == "strips" || c.slug == "planches").title;
-                        uneBD.Image = post.attachments.Last().url;
-                        uneBD.ImagesAttachees = post.attachments.Select(a => a.url).ToList();
-                        uneBD.ImagesAttachees.Sort();
-                        uneBD.Excerpt = HtmlUtilities.ConvertToText(post.excerpt);
-                        uneBD.Commentaires = lesCommentaires;
-                        uneBD.NombreVues = post.custom_fields.views.First();
-                        _listeBD.Add(uneBD);
-                    }
-                }
+                await BDRecuperees.initialiserLaListe(client);
+                
                 //Mettre au photo un auteur aléatoire
                 var jsonStringListeAutheur = await client.GetStringAsync(new Uri("http://30joursdebd.com/?json=get_author_index"));
                 var httpresponseListeAuteur = JsonConvert.DeserializeObject<AuthorIndex>(jsonStringListeAutheur.ToString());
@@ -173,6 +123,7 @@ namespace _30JoursDeBD
                 NAR_Engrenage_Load.Stop();
 
                 this.DataContext = this;
+                this.AppBarTop.IsEnabled = true;
             }
         }
 
@@ -241,21 +192,6 @@ namespace _30JoursDeBD
         private void Image_Tapped(object sender, TappedRoutedEventArgs e)
         {
             BD laBDSelectionnee = ((Image)sender).DataContext as BD;
-            
-            /*if ( laBDSelectionnee.Rubrique == "Planches" )
-            {
-                if (laBDSelectionnee.ImagesAttachees != null)
-                    IMG_POR_Corps_Planche.Source = new BitmapImage(new Uri(laBDSelectionnee.ImagesAttachees.First(), UriKind.RelativeOrAbsolute));
-                else
-                    IMG_POR_Corps_Planche.Source = new BitmapImage(new Uri(laBDSelectionnee.Image, UriKind.RelativeOrAbsolute));
-            }
-            else if (laBDSelectionnee.Rubrique == "Strips" )
-            {
-                //if (laBDSelectionnee.ImagesAttachees != null)
-                   // IMG_POR_Corps_Strip.Source = new BitmapImage(new Uri(laBDSelectionnee.ImagesAttachees.First(), UriKind.RelativeOrAbsolute));
-                //else
-                    IMG_POR_Corps_Strip.Source = new BitmapImage(new Uri(laBDSelectionnee.Image, UriKind.RelativeOrAbsolute));
-            }*/
             Frame.Navigate(typeof(pageArticle), laBDSelectionnee);
         }
 
@@ -287,7 +223,7 @@ namespace _30JoursDeBD
                 case 0:
                     break;
                 case 1:
-                    Frame.Navigate(typeof(BestOf), ListeBD);
+                    Frame.Navigate(typeof(BestOf));
                     break;
                 case 2:
 
